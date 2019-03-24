@@ -1,3 +1,6 @@
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Line Model Object.
  *
@@ -215,5 +218,28 @@ public class Line {
         Line b = new Line(point, line.getEnd());
 
         return Math.floor(line.length()) == Math.floor(a.length() + b.length());
+    }
+
+
+    // If this line does not intersect with the rectangle, return null.
+    // Otherwise, return the closest intersection point to the
+    // start of the line.
+    public Point closestIntersectionToStartOfLine(Rectangle rect) {
+        List points = rect.intersectionPoints(this);
+
+        if (points.isEmpty()) {
+            return null;
+        } else {
+            Point closestPoint = (Point) points.get(0);
+            double closestDistance = this.start.distance(closestPoint);
+
+            for (Object p : points) {
+                double distance = this.start.distance((Point) p);
+                if (distance < closestDistance) {
+                    closestPoint = (Point) p;
+                }
+            }
+            return closestPoint;
+        }
     }
 }
