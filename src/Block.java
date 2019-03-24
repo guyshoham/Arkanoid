@@ -1,5 +1,10 @@
+import java.awt.*;
+
 public class Block implements Collidable {
 
+    private Rectangle rectangle;
+    private Color color;
+    private int numberOfHits;
 
     public Block() {
         //todo: implement method
@@ -7,8 +12,7 @@ public class Block implements Collidable {
 
     @Override
     public Rectangle getCollisionRectangle() {
-        //todo: implement method
-        return null;
+        return rectangle;
     }
 
     @Override

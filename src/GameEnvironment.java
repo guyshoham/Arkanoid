@@ -7,7 +7,6 @@ public class GameEnvironment {
     // add the given collidable to the environment.
     public void addCollidable(Collidable c) {
         collidables.add(c);
-        //todo: implement method
     }
 
     // Assume an object moving from line.start() to line.end().
@@ -15,8 +14,14 @@ public class GameEnvironment {
     // in this collection, return null. Else, return the information
     // about the closest collision that is going to occur.
     public CollisionInfo getClosestCollision(Line trajectory) {
-        //todo: implement method
+
+        for (Collidable collidable : collidables) {
+            Rectangle rect = collidable.getCollisionRectangle();
+            Point collidePoint = trajectory.closestIntersectionToStartOfLine(rect);
+            if (collidePoint != null) {
+                return new CollisionInfo(collidePoint, collidable);
+            }
+        }
         return null;
     }
-
 }

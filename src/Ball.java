@@ -15,6 +15,7 @@ public class Ball {
     private int size; //the size of the ball (radius)
     private Velocity velocity; //the velocity of the ball
     private Point topLeftCorner, bottomRightCorner; //the position of the corners of the frame of the ball
+    private GameEnvironment gameEnvironment;
 
     /**
      * Class constructor.
@@ -28,6 +29,7 @@ public class Ball {
         this.size = r;
         this.color = color;
         this.velocity = new Velocity(0, 0);
+        this.gameEnvironment = new GameEnvironment();
     }
 
     /**

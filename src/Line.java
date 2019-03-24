@@ -220,7 +220,6 @@ public class Line {
         return Math.floor(line.length()) == Math.floor(a.length() + b.length());
     }
 
-
     // If this line does not intersect with the rectangle, return null.
     // Otherwise, return the closest intersection point to the
     // start of the line.
