@@ -11,7 +11,6 @@ class Rectangle {
         this.upperLeft = upperLeft;
         this.width = width;
         this.height = height;
-
     }
 
     // Return a (possibly empty) List of intersection points
@@ -22,37 +21,44 @@ class Rectangle {
         Point upperRight = new Point(upperLeft.getX() + width, upperLeft.getY());
         Point lowerLeft = new Point(upperLeft.getX(), upperLeft.getY() + height);
         Point lowerRight = new Point(upperLeft.getX() + width, upperLeft.getY() + height);
-        Line top = new Line(upperLeft, upperRight);
-        Line bottom = new Line(lowerLeft, lowerRight);
-        Line left = new Line(upperLeft, lowerLeft);
-        Line right = new Line(upperRight, lowerRight);
+        Line topEdge = new Line(upperLeft, upperRight);
+        Line bottomEdge = new Line(lowerLeft, lowerRight);
+        Line leftEdge = new Line(upperLeft, lowerLeft);
+        Line rightEdge = new Line(upperRight, lowerRight);
 
-        if (line.isIntersecting(top)) {
-            points.add(line.intersectionWith(top));
+        if (line.isIntersecting(topEdge)) {
+            points.add(line.intersectionWith(topEdge));
         }
-        if (line.isIntersecting(bottom)) {
-            points.add(line.intersectionWith(bottom));
+        if (line.isIntersecting(bottomEdge)) {
+            points.add(line.intersectionWith(bottomEdge));
         }
-        if (line.isIntersecting(left)) {
-            points.add(line.intersectionWith(left));
+        if (line.isIntersecting(leftEdge)) {
+            points.add(line.intersectionWith(leftEdge));
         }
-        if (line.isIntersecting(right)) {
-            points.add(line.intersectionWith(right));
+        if (line.isIntersecting(rightEdge)) {
+            points.add(line.intersectionWith(rightEdge));
         }
 
         return points;
     }
 
-    // Return the width and height of the rectangle
+    /**
+     * @return the width of the rectangle
+     */
     public double getWidth() {
         return this.width;
     }
 
+    /**
+     * @return the height of the rectangle
+     */
     public double getHeight() {
         return this.height;
     }
 
-    // Returns the upper-left point of the rectangle.
+    /**
+     * @return the upper left point of the rectangle
+     */
     public Point getUpperLeft() {
         return this.upperLeft;
     }

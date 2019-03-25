@@ -227,6 +227,7 @@ public class Line {
         List points = rect.intersectionPoints(this);
 
         if (points.isEmpty()) {
+            //line does not intersect with the rectangle.
             return null;
         } else {
             Point closestPoint = (Point) points.get(0);

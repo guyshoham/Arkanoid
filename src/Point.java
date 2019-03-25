@@ -9,6 +9,7 @@ public class Point {
 
     /**
      * Class constructor.
+     *
      * @param x the x position of the points.
      * @param y the y position of the points.
      */
@@ -47,5 +48,10 @@ public class Point {
      */
     public double getY() {
         return this.y;
+    }
+
+    @Override
+    public String toString() {
+        return "Point[" + x + "," + y + ']';
     }
 }
