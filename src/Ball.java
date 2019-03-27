@@ -167,20 +167,26 @@ public class Ball {
                 setVelocity(velocity.getDx(), velocity.getDy() * -1);
             }
             //modify the location of the ball
-            center = this.getVelocity().applyToPoint(center);
+            //center = this.getVelocity().applyToPoint(center);
         }
     }
 
-    private Line computeTrajectory() {
+    public Line computeTrajectory() {
         Point currentPos = center;
+        Line retVal = new Line(center, currentPos);
         while (true) {
-
-            currentPos = this.getVelocity().applyToPoint(center);
+            currentPos = this.getVelocity().applyToPoint(currentPos);
             if (!currentPos.isInRect(topLeftCorner, bottomRightCorner)) {
                 //hit!
-                return new Line(center, currentPos);
+                return retVal;
+            } else {
+                retVal = new Line(center, currentPos);
             }
         }
+    }
+
+    public void addToGameEnv(Collidable c) {
+        gameEnvironment.addCollidable(c);
     }
 
 

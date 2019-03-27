@@ -1,3 +1,5 @@
+import biuoop.DrawSurface;
+
 import java.awt.Color;
 
 public class Block implements Collidable {
@@ -6,8 +8,10 @@ public class Block implements Collidable {
     private Color color;
     private int numberOfHits;
 
-    public Block() {
-        //todo: implement constructor?
+    public Block(Rectangle rectangle, Color color) {
+        this.rectangle = rectangle;
+        this.color = color;
+        this.numberOfHits = 0; //todo: need to be repaired
     }
 
     @Override
@@ -17,6 +21,7 @@ public class Block implements Collidable {
 
     @Override
     public Velocity hit(Point collisionPoint, Velocity currentVelocity) {
+        numberOfHits--;
         //check on which edge is the point colliding
         if (Line.isPointInLine(rectangle.getTopEdge(), collisionPoint)) {
             currentVelocity.setDy(currentVelocity.getDy() * -1);
@@ -30,7 +35,12 @@ public class Block implements Collidable {
         if (Line.isPointInLine(rectangle.getRightEdge(), collisionPoint)) {
             currentVelocity.setDx(currentVelocity.getDx() * -1);
         }
-
         return currentVelocity;
+    }
+
+    public void drawOn(DrawSurface surface) {
+        surface.setColor(color);
+        surface.fillRectangle((int) rectangle.getUpperLeft().getX(), (int) rectangle.getUpperLeft().getY(),
+                (int) rectangle.getWidth(), (int) rectangle.getHeight());
     }
 }

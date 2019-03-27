@@ -122,6 +122,27 @@ public class Line {
             return null;
         }
 
+        if (this.getStart().getX() == this.getEnd().getX()) {
+            //this (line) is parallel to Y axis
+            double x = this.getStart().getX();
+            if ((other.getStart().getX() < x && other.getEnd().getX() > x)
+                    || other.getStart().getX() > x && other.getEnd().getX() < x) {
+                double y = other.getSlope() * x + other.getIntercept();
+                return new Point(x, y);
+            }
+
+        }
+
+        if (other.getStart().getX() == other.getEnd().getX()) {
+            //other line is parallel to Y axis
+            double x = other.getStart().getX();
+            if ((this.getStart().getX() < x && this.getEnd().getX() > x)
+                    || this.getStart().getX() > x && this.getEnd().getX() < x) {
+                double y = this.getSlope() * x + this.getIntercept();
+                return new Point(x, y);
+            }
+        }
+
         double x, y;
         double x1, y1, z1, x2, y2, z2; //variables for the two equations (y = mx + b)
 
@@ -217,7 +238,10 @@ public class Line {
         Line a = new Line(line.getStart(), point);
         Line b = new Line(point, line.getEnd());
 
-        return Math.floor(line.length()) == Math.floor(a.length() + b.length());
+        double whole = Math.floor(line.length());
+        double sumParts = Math.floor(a.length() + b.length());
+
+        return whole - sumParts == 0 || whole - sumParts == 1 || whole - sumParts == -1;
     }
 
     // If this line does not intersect with the rectangle, return null.
@@ -237,6 +261,7 @@ public class Line {
                 double distance = this.start.distance((Point) p);
                 if (distance < closestDistance) {
                     closestPoint = (Point) p;
+                    closestDistance = this.start.distance(closestPoint);
                 }
             }
             return closestPoint;

@@ -19,14 +19,31 @@ public class GameEnvironment {
     // about the closest collision that is going to occur.
     public CollisionInfo getClosestCollision(Line trajectory) {
 
+        List<CollisionInfo> collisionInfos = new ArrayList<>();
+
         for (Collidable collidable : collidables) {
             Rectangle rect = collidable.getCollisionRectangle();
             Point collidePoint = trajectory.closestIntersectionToStartOfLine(rect);
             if (collidePoint != null) {
                 //collision
-                return new CollisionInfo(collidePoint, collidable);
+                collisionInfos.add(new CollisionInfo(collidePoint, collidable));
             }
         }
-        return null;
+
+        if (collisionInfos.isEmpty()) {
+            return null;
+        }
+
+        CollisionInfo closest = collisionInfos.get(0);
+        double minDistance = collisionInfos.get(0).collisionPoint().distance(trajectory.getStart());
+
+        for (CollisionInfo collisionInfo : collisionInfos) {
+            double newDistance = collisionInfo.collisionPoint().distance(trajectory.getStart());
+            if (collisionInfo.collisionPoint().distance(trajectory.getStart()) < minDistance) {
+                closest = collisionInfo;
+                minDistance = newDistance;
+            }
+        }
+        return closest;
     }
 }
