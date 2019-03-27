@@ -8,14 +8,14 @@ import java.awt.Color;
  *
  * @author Guy Shoham
  */
-public class Ball {
+public class Ball implements Sprite {
 
     private Color color; //the color of the ball
     private Point center; //the location of the ball
     private int size; //the size of the ball (radius)
     private Velocity velocity; //the velocity of the ball
     private Point topLeftCorner, bottomRightCorner; //the position of the corners of the frame of the ball
-    private GameEnvironment gameEnvironment;
+    private GameEnvironment environment;
 
     /**
      * Class constructor.
@@ -29,7 +29,7 @@ public class Ball {
         this.size = r;
         this.color = color;
         this.velocity = new Velocity(0, 0);
-        this.gameEnvironment = new GameEnvironment();
+        this.environment = new GameEnvironment();
     }
 
     /**
@@ -69,7 +69,7 @@ public class Ball {
     /**
      * @return the color of the ball.
      */
-    public java.awt.Color getColor() {
+    public Color getColor() {
         return color;
     }
 
@@ -78,9 +78,23 @@ public class Ball {
      *
      * @param surface the surface which the ball is drawn in.
      */
+    @Override
     public void drawOn(DrawSurface surface) {
         surface.setColor(color);
         surface.fillCircle(getX(), getY(), size);
+    }
+
+    @Override
+    public void timePassed() {
+        moveOneStep();
+    }
+
+    public void addToGame(Game g) {
+        g.addSprite(this);
+    }
+
+    public void setEnvironment(GameEnvironment environment) {
+        this.environment = environment;
     }
 
     /**
@@ -135,7 +149,7 @@ public class Ball {
     public void moveOneStep() {
         //compute trajectory
         Line trajectory = computeTrajectory();
-        CollisionInfo collisionInfo = gameEnvironment.getClosestCollision(trajectory);
+        CollisionInfo collisionInfo = environment.getClosestCollision(trajectory);
         if (collisionInfo == null) {
             //no collision. move ball to trajectory.end
             center = trajectory.getEnd();
@@ -144,7 +158,7 @@ public class Ball {
             center = this.getVelocity().applyToPointBackward(collisionInfo.collisionPoint());
 
             //notify the hit object (using its hit() method) that a collision occurred.
-            collisionInfo.collisionObject().hit(collisionInfo.collisionPoint(), velocity);
+            Velocity v = collisionInfo.collisionObject().hit(collisionInfo.collisionPoint(), velocity);
 
             //check if the ball meet the right wall
             if (center.getX() + velocity.getDx() + size > bottomRightCorner.getX() && velocity.getDx() > 0) {
@@ -186,7 +200,7 @@ public class Ball {
     }
 
     public void addToGameEnv(Collidable c) {
-        gameEnvironment.addCollidable(c);
+        environment.addCollidable(c);
     }
 
 

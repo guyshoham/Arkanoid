@@ -33,6 +33,9 @@ public class GameEnvironment {
         if (collisionInfos.isEmpty()) {
             return null;
         }
+        if (collisionInfos.size() == 1) {
+            return collisionInfos.get(0);
+        }
 
         CollisionInfo closest = collisionInfos.get(0);
         double minDistance = collisionInfos.get(0).collisionPoint().distance(trajectory.getStart());

@@ -8,7 +8,7 @@ import java.util.List;
 public class UnitTests {
 
     public static void main(String[] args) {
-        checkPart1();
+        runGame();
     }
 
     public static void checkRectangle() {
@@ -88,4 +88,11 @@ public class UnitTests {
         }
         //todo: fix bug (angle 120, speed 1, sleep 5, after ~700 steps)
     }
+
+    public static void runGame() {
+        Game game = new Game();
+        game.initialize();
+        game.run();
+    }
 }
+
