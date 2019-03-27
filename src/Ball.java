@@ -10,6 +10,7 @@ import java.awt.Color;
  */
 public class Ball {
 
+    //test comment
     private Color color; //the color of the ball
     private Point center; //the location of the ball
     private int size; //the size of the ball (radius)
