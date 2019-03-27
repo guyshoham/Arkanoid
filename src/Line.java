@@ -213,7 +213,7 @@ public class Line {
      * @param point the point.
      * @return true if the points is in line, false otherwise.
      */
-    public boolean isPointInLine(Line line, Point point) {
+    public static boolean isPointInLine(Line line, Point point) {
         Line a = new Line(line.getStart(), point);
         Line b = new Line(point, line.getEnd());
 

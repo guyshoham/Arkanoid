@@ -50,6 +50,12 @@ public class Point {
         return this.y;
     }
 
+    public boolean isInRect(Point topLeftCorner, Point bottomRightCorner) {
+        return x >= topLeftCorner.getX() && x <= bottomRightCorner.getX() &&
+                y >= topLeftCorner.getY() && y <= bottomRightCorner.getY();
+
+    }
+
     @Override
     public String toString() {
         return "Point[" + x + "," + y + ']';

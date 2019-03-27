@@ -7,7 +7,7 @@ public class Block implements Collidable {
     private int numberOfHits;
 
     public Block() {
-        //todo: implement method
+        //todo: implement constructor?
     }
 
     @Override
@@ -17,7 +17,20 @@ public class Block implements Collidable {
 
     @Override
     public Velocity hit(Point collisionPoint, Velocity currentVelocity) {
-        //todo: implement method
-        return null;
+        //check on which edge is the point colliding
+        if (Line.isPointInLine(rectangle.getTopEdge(), collisionPoint)) {
+            currentVelocity.setDy(currentVelocity.getDy() * -1);
+        }
+        if (Line.isPointInLine(rectangle.getBottomEdge(), collisionPoint)) {
+            currentVelocity.setDy(currentVelocity.getDy() * -1);
+        }
+        if (Line.isPointInLine(rectangle.getLeftEdge(), collisionPoint)) {
+            currentVelocity.setDx(currentVelocity.getDx() * -1);
+        }
+        if (Line.isPointInLine(rectangle.getRightEdge(), collisionPoint)) {
+            currentVelocity.setDx(currentVelocity.getDx() * -1);
+        }
+
+        return currentVelocity;
     }
 }

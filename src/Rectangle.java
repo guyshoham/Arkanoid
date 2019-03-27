@@ -3,7 +3,8 @@ import java.util.List;
 
 class Rectangle {
 
-    private Point upperLeft;
+    private Point upperLeft, upperRight, lowerLeft, lowerRight;
+    private Line topEdge, bottomEdge, leftEdge, rightEdge;
     private double width, height;
 
     // Create a new rectangle with location and width/height.
@@ -11,20 +12,55 @@ class Rectangle {
         this.upperLeft = upperLeft;
         this.width = width;
         this.height = height;
+
+        this.upperRight = new Point(upperLeft.getX() + width, upperLeft.getY());
+        this.lowerLeft = new Point(upperLeft.getX(), upperLeft.getY() + height);
+        this.lowerRight = new Point(upperLeft.getX() + width, upperLeft.getY() + height);
+        this.topEdge = new Line(upperLeft, upperRight);
+        this.bottomEdge = new Line(lowerLeft, lowerRight);
+        this.leftEdge = new Line(upperLeft, lowerLeft);
+        this.rightEdge = new Line(upperRight, lowerRight);
     }
 
+    /**
+     * @return the upper left point of the rectangle
+     */
+    public Point getUpperLeft() {
+        return this.upperLeft;
+    }
+
+    public Point getUpperRight() {
+        return upperRight;
+    }
+
+    public Point getLowerLeft() {
+        return lowerLeft;
+    }
+
+    public Point getLowerRight() {
+        return lowerRight;
+    }
+
+    public Line getTopEdge() {
+        return topEdge;
+    }
+
+    public Line getBottomEdge() {
+        return bottomEdge;
+    }
+
+    public Line getLeftEdge() {
+        return leftEdge;
+    }
+
+    public Line getRightEdge() {
+        return rightEdge;
+    }
     // Return a (possibly empty) List of intersection points
     // with the specified line.
+
     public List intersectionPoints(Line line) {
         List<Point> points = new ArrayList<>();
-
-        Point upperRight = new Point(upperLeft.getX() + width, upperLeft.getY());
-        Point lowerLeft = new Point(upperLeft.getX(), upperLeft.getY() + height);
-        Point lowerRight = new Point(upperLeft.getX() + width, upperLeft.getY() + height);
-        Line topEdge = new Line(upperLeft, upperRight);
-        Line bottomEdge = new Line(lowerLeft, lowerRight);
-        Line leftEdge = new Line(upperLeft, lowerLeft);
-        Line rightEdge = new Line(upperRight, lowerRight);
 
         if (line.isIntersecting(topEdge)) {
             points.add(line.intersectionWith(topEdge));
@@ -54,12 +90,5 @@ class Rectangle {
      */
     public double getHeight() {
         return this.height;
-    }
-
-    /**
-     * @return the upper left point of the rectangle
-     */
-    public Point getUpperLeft() {
-        return this.upperLeft;
     }
 }

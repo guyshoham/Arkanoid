@@ -133,6 +133,25 @@ public class Ball {
      * this method change the direction of the ball if the ball is about to hit one of the walls.
      */
     public void moveOneStep() {
+
+        Line trajectory = computeTrajectory();
+        CollisionInfo collisionInfo = gameEnvironment.getClosestCollision(trajectory);
+        if (collisionInfo == null) {
+            //move ball to trajectory.end
+            center = trajectory.getEnd();
+        } else {
+            //move ball to "almost" the hit point, but just slightly before it.
+            center = collisionInfo.collisionPoint();
+
+            //notify the hit object (using its hit() method) that a collision occurred.
+            collisionInfo.collisionObject().hit(collisionInfo.collisionPoint(), velocity);
+
+            //todo: update the velocity to the new velocity returned by the hit() method.
+        }
+
+        //todo: new implementation above
+
+
         //check if the ball meet the right wall
         if (center.getX() + velocity.getDx() + size > bottomRightCorner.getX() && velocity.getDx() > 0) {
             //change ball from moving right to move left
@@ -155,6 +174,18 @@ public class Ball {
         }
         //modify the location of the ball
         center = this.getVelocity().applyToPoint(center);
+    }
+
+    private Line computeTrajectory() {
+        Point currentPos = center;
+        while (true) {
+
+            currentPos = this.getVelocity().applyToPoint(center);
+            if (!currentPos.isInRect(topLeftCorner, bottomRightCorner)) {
+                //hit!
+                return new Line(center, currentPos);
+            }
+        }
     }
 
 

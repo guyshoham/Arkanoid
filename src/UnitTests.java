@@ -28,5 +28,16 @@ public class UnitTests {
         for (Object o : list) {
             System.out.println(o.toString());
         }
+
+        Point insideRect = new Point(10, 5);
+        Point outsideRect = new Point(12, 5);
+
+        if (!insideRect.isInRect(upperLeft, rect.getLowerRight())) {
+            System.out.println("Error: Point.isInRect when point inside");
+        }
+        if (outsideRect.isInRect(upperLeft, rect.getLowerRight())) {
+            System.out.println("Error: Point.isInRect when point outside");
+        }
+
     }
 }
