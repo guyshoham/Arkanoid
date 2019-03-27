@@ -29,30 +29,51 @@ class Rectangle {
         return this.upperLeft;
     }
 
+    /**
+     * @return the upper right point of the rectangle
+     */
     public Point getUpperRight() {
         return upperRight;
     }
 
+    /**
+     * @return the lower left point of the rectangle
+     */
     public Point getLowerLeft() {
         return lowerLeft;
     }
 
+    /**
+     * @return the lower right point of the rectangle
+     */
     public Point getLowerRight() {
         return lowerRight;
     }
 
+    /**
+     * @return the top edge line of the rectangle
+     */
     public Line getTopEdge() {
         return topEdge;
     }
 
+    /**
+     * @return the bottom edge line of the rectangle
+     */
     public Line getBottomEdge() {
         return bottomEdge;
     }
 
+    /**
+     * @return the left edge line of the rectangle
+     */
     public Line getLeftEdge() {
         return leftEdge;
     }
 
+    /**
+     * @return the right edge line of the rectangle
+     */
     public Line getRightEdge() {
         return rightEdge;
     }

@@ -69,4 +69,8 @@ public class Velocity {
     public Point applyToPoint(Point point) {
         return new Point(point.getX() + dx, point.getY() + dy);
     }
+
+    public Point applyToPointBackward(Point point) {
+        return new Point(point.getX() - dx, point.getY() - dy);
+    }
 }

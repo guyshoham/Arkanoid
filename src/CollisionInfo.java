@@ -8,7 +8,6 @@ public class CollisionInfo {
         this.collisionObject = object;
     }
 
-
     // the point at which the collision occurs.
     public Point collisionPoint() {
         return this.collisionPoint;

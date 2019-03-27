@@ -23,6 +23,7 @@ public class GameEnvironment {
             Rectangle rect = collidable.getCollisionRectangle();
             Point collidePoint = trajectory.closestIntersectionToStartOfLine(rect);
             if (collidePoint != null) {
+                //collision
                 return new CollisionInfo(collidePoint, collidable);
             }
         }

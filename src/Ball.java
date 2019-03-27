@@ -133,47 +133,42 @@ public class Ball {
      * this method change the direction of the ball if the ball is about to hit one of the walls.
      */
     public void moveOneStep() {
-
+        //compute trajectory
         Line trajectory = computeTrajectory();
         CollisionInfo collisionInfo = gameEnvironment.getClosestCollision(trajectory);
         if (collisionInfo == null) {
-            //move ball to trajectory.end
+            //no collision. move ball to trajectory.end
             center = trajectory.getEnd();
         } else {
-            //move ball to "almost" the hit point, but just slightly before it.
-            center = collisionInfo.collisionPoint();
+            //collision. move ball to "almost" the hit point, but just slightly before it.
+            center = this.getVelocity().applyToPointBackward(collisionInfo.collisionPoint());
 
             //notify the hit object (using its hit() method) that a collision occurred.
             collisionInfo.collisionObject().hit(collisionInfo.collisionPoint(), velocity);
 
-            //todo: update the velocity to the new velocity returned by the hit() method.
+            //check if the ball meet the right wall
+            if (center.getX() + velocity.getDx() + size > bottomRightCorner.getX() && velocity.getDx() > 0) {
+                //change ball from moving right to move left
+                setVelocity(velocity.getDx() * -1, velocity.getDy());
+            }
+            //check if the ball meet the bottom wall
+            if (center.getY() + velocity.getDy() + size > bottomRightCorner.getY() && velocity.getDy() > 0) {
+                //change ball from moving down to move up
+                setVelocity(velocity.getDx(), velocity.getDy() * -1);
+            }
+            //check if the ball meet the left wall
+            if (center.getX() + velocity.getDx() - size < topLeftCorner.getX() && velocity.getDx() < 0) {
+                //change ball from moving left to move right
+                setVelocity(velocity.getDx() * -1, velocity.getDy());
+            }
+            //check if the ball meet the top wall
+            if (center.getY() + velocity.getDy() - size < topLeftCorner.getY() && velocity.getDy() < 0) {
+                //change ball from moving up to move down
+                setVelocity(velocity.getDx(), velocity.getDy() * -1);
+            }
+            //modify the location of the ball
+            center = this.getVelocity().applyToPoint(center);
         }
-
-        //todo: new implementation above
-
-
-        //check if the ball meet the right wall
-        if (center.getX() + velocity.getDx() + size > bottomRightCorner.getX() && velocity.getDx() > 0) {
-            //change ball from moving right to move left
-            setVelocity(velocity.getDx() * -1, velocity.getDy());
-        }
-        //check if the ball meet the bottom wall
-        if (center.getY() + velocity.getDy() + size > bottomRightCorner.getY() && velocity.getDy() > 0) {
-            //change ball from moving down to move up
-            setVelocity(velocity.getDx(), velocity.getDy() * -1);
-        }
-        //check if the ball meet the left wall
-        if (center.getX() + velocity.getDx() - size < topLeftCorner.getX() && velocity.getDx() < 0) {
-            //change ball from moving left to move right
-            setVelocity(velocity.getDx() * -1, velocity.getDy());
-        }
-        //check if the ball meet the top wall
-        if (center.getY() + velocity.getDy() - size < topLeftCorner.getY() && velocity.getDy() < 0) {
-            //change ball from moving up to move down
-            setVelocity(velocity.getDx(), velocity.getDy() * -1);
-        }
-        //modify the location of the ball
-        center = this.getVelocity().applyToPoint(center);
     }
 
     private Line computeTrajectory() {
