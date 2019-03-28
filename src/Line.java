@@ -125,8 +125,8 @@ public class Line {
         if (this.getStart().getX() == this.getEnd().getX()) {
             //this (line) is parallel to Y axis
             double x = this.getStart().getX();
-            if ((other.getStart().getX() < x && other.getEnd().getX() > x)
-                    || other.getStart().getX() > x && other.getEnd().getX() < x) {
+            if ((other.getStart().getX() <= x && other.getEnd().getX() >= x)
+                    || other.getStart().getX() >= x && other.getEnd().getX() <= x) {
                 double y = other.getSlope() * x + other.getIntercept();
                 return new Point(x, y);
             }
@@ -136,8 +136,8 @@ public class Line {
         if (other.getStart().getX() == other.getEnd().getX()) {
             //other line is parallel to Y axis
             double x = other.getStart().getX();
-            if ((this.getStart().getX() < x && this.getEnd().getX() > x)
-                    || this.getStart().getX() > x && this.getEnd().getX() < x) {
+            if ((this.getStart().getX() <= x && this.getEnd().getX() >= x)
+                    || this.getStart().getX() >= x && this.getEnd().getX() <= x) {
                 double y = this.getSlope() * x + this.getIntercept();
                 return new Point(x, y);
             }

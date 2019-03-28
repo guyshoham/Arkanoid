@@ -21,7 +21,7 @@ public class Block implements Collidable, Sprite {
 
     @Override
     public Velocity hit(Point collisionPoint, Velocity currentVelocity) {
-        numberOfHits--;
+        //numberOfHits--;
         //check on which edge is the point colliding
         if (Line.isPointInLine(rectangle.getTopEdge(), collisionPoint)) {
             currentVelocity.setDy(currentVelocity.getDy() * -1);

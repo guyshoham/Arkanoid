@@ -45,11 +45,11 @@ public class Game {
         blockLeft.addToGame(this);
         blockRight.addToGame(this);
 
-        /*for (int i = 0; i < 30; i++) {
+        for (int i = 0; i < 30; i++) {
             Rectangle rect = new Rectangle(new Point(25 + i * 25, 25), 25, 25);
             Block block = new Block(rect, Color.BLUE);
             block.addToGame(this);
-        }*/
+        }
 
         ball.setEnvironment(environment);
     }

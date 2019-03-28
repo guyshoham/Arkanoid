@@ -15,7 +15,7 @@ public class Ball implements Sprite {
     private int size; //the size of the ball (radius)
     private Velocity velocity; //the velocity of the ball
     private Point topLeftCorner, bottomRightCorner; //the position of the corners of the frame of the ball
-    private GameEnvironment environment;
+    private static GameEnvironment environment;
 
     /**
      * Class constructor.
@@ -29,7 +29,7 @@ public class Ball implements Sprite {
         this.size = r;
         this.color = color;
         this.velocity = new Velocity(0, 0);
-        this.environment = new GameEnvironment();
+        //this.environment = new GameEnvironment();
     }
 
     /**
@@ -94,7 +94,7 @@ public class Ball implements Sprite {
     }
 
     public void setEnvironment(GameEnvironment environment) {
-        this.environment = environment;
+        Ball.environment = environment;
     }
 
     /**
