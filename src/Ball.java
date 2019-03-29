@@ -93,7 +93,7 @@ public class Ball implements Sprite {
         g.addSprite(this);
     }
 
-    public void setEnvironment(GameEnvironment environment) {
+    public static void setEnvironment(GameEnvironment environment) {
         Ball.environment = environment;
     }
 
@@ -178,33 +178,38 @@ public class Ball implements Sprite {
             //there is a collision with object. check if next step is the collision point.
             Point collisionPoint = collisionInfo.collisionPoint();
             Point nextPos = new Point(center.getX() + velocity.getDx(), center.getY() + velocity.getDy());
+            Velocity newVelocity = velocity;
 
             if (nextPos.getX() + velocity.getDx() >= collisionPoint.getX()
                     && nextPos.getY() + velocity.getDy() >= collisionPoint.getY()
                     && velocity.getDx() >= 0 && velocity.getDy() >= 0) {
                 //the ball is coming from top left
-                Velocity newVelocity = collisionInfo.collisionObject().hit(collisionInfo.collisionPoint(), velocity);
+                newVelocity = collisionInfo.collisionObject().hit(collisionInfo.collisionPoint(), velocity);
                 setVelocity(newVelocity);
             } else if (nextPos.getX() + velocity.getDx() <= collisionPoint.getX()
                     && nextPos.getY() + velocity.getDy() >= collisionPoint.getY()
                     && velocity.getDx() <= 0 && velocity.getDy() >= 0) {
                 //the ball is coming from top right
-                Velocity newVelocity = collisionInfo.collisionObject().hit(collisionInfo.collisionPoint(), velocity);
+                newVelocity = collisionInfo.collisionObject().hit(collisionInfo.collisionPoint(), velocity);
                 setVelocity(newVelocity);
             } else if (nextPos.getX() + velocity.getDx() >= collisionPoint.getX()
                     && nextPos.getY() + velocity.getDy() <= collisionPoint.getY()
                     && velocity.getDx() >= 0 && velocity.getDy() <= 0) {
                 //the ball is coming from bottom left
-                Velocity newVelocity = collisionInfo.collisionObject().hit(collisionInfo.collisionPoint(), velocity);
+                newVelocity = collisionInfo.collisionObject().hit(collisionInfo.collisionPoint(), velocity);
                 setVelocity(newVelocity);
             } else if (nextPos.getX() + velocity.getDx() <= collisionPoint.getX()
                     && nextPos.getY() + velocity.getDy() <= collisionPoint.getY()
                     && velocity.getDx() <= 0 && velocity.getDy() <= 0) {
                 //the ball is coming from bottom right
-                Velocity newVelocity = collisionInfo.collisionObject().hit(collisionInfo.collisionPoint(), velocity);
+                newVelocity = collisionInfo.collisionObject().hit(collisionInfo.collisionPoint(), velocity);
                 setVelocity(newVelocity);
-            } else {
+            }
+
+            if (velocity.equal(newVelocity)) {
                 center = this.getVelocity().applyToPoint(center);
+            } else {
+                setVelocity(newVelocity);
             }
         }
     }
