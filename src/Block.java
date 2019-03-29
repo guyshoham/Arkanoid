@@ -22,24 +22,22 @@ public class Block implements Collidable, Sprite {
     @Override
     public Velocity hit(Point collisionPoint, Velocity currentVelocity) {
         //numberOfHits--;
+        Velocity retVal = new Velocity(currentVelocity.getDx(), currentVelocity.getDy());
+
         //check on which edge is the point colliding
         if (Line.isPointInLine(rectangle.getTopEdge(), collisionPoint)) {
-            currentVelocity.setDy(currentVelocity.getDy() * -1);
-            return currentVelocity;
+            retVal.setDy(currentVelocity.getDy() * -1);
         }
         if (Line.isPointInLine(rectangle.getBottomEdge(), collisionPoint)) {
-            currentVelocity.setDy(currentVelocity.getDy() * -1);
-            return currentVelocity;
+            retVal.setDy(currentVelocity.getDy() * -1);
         }
         if (Line.isPointInLine(rectangle.getLeftEdge(), collisionPoint)) {
-            currentVelocity.setDx(currentVelocity.getDx() * -1);
-            return currentVelocity;
+            retVal.setDx(currentVelocity.getDx() * -1);
         }
         if (Line.isPointInLine(rectangle.getRightEdge(), collisionPoint)) {
-            currentVelocity.setDx(currentVelocity.getDx() * -1);
-            return currentVelocity;
+            retVal.setDx(currentVelocity.getDx() * -1);
         }
-        return currentVelocity;
+        return retVal;
     }
 
     @Override
@@ -50,7 +48,6 @@ public class Block implements Collidable, Sprite {
         surface.setColor(Color.BLACK);
         surface.drawRectangle((int) rectangle.getUpperLeft().getX(), (int) rectangle.getUpperLeft().getY(),
                 (int) rectangle.getWidth(), (int) rectangle.getHeight());
-
     }
 
     @Override

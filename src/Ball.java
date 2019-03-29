@@ -150,38 +150,62 @@ public class Ball implements Sprite {
         //compute trajectory
         Line trajectory = computeTrajectory();
         CollisionInfo collisionInfo = environment.getClosestCollision(trajectory);
+
         if (collisionInfo == null) {
-            //no collision. move ball to trajectory.end
-            center = trajectory.getEnd();
-        } else {
-            //collision. move ball to "almost" the hit point, but just slightly before it.
-            center = this.getVelocity().applyToPointBackward(collisionInfo.collisionPoint());
-
-            //notify the hit object (using its hit() method) that a collision occurred.
-            Velocity v = collisionInfo.collisionObject().hit(collisionInfo.collisionPoint(), velocity);
-
             //check if the ball meet the right wall
-            if (center.getX() + velocity.getDx() + size > bottomRightCorner.getX() && velocity.getDx() > 0) {
+            if (center.getX() + velocity.getDx() > bottomRightCorner.getX() && velocity.getDx() > 0) {
                 //change ball from moving right to move left
                 setVelocity(velocity.getDx() * -1, velocity.getDy());
             }
             //check if the ball meet the bottom wall
-            if (center.getY() + velocity.getDy() + size > bottomRightCorner.getY() && velocity.getDy() > 0) {
+            if (center.getY() + velocity.getDy() > bottomRightCorner.getY() && velocity.getDy() > 0) {
                 //change ball from moving down to move up
                 setVelocity(velocity.getDx(), velocity.getDy() * -1);
             }
             //check if the ball meet the left wall
-            if (center.getX() + velocity.getDx() - size < topLeftCorner.getX() && velocity.getDx() < 0) {
+            if (center.getX() + velocity.getDx() < topLeftCorner.getX() && velocity.getDx() < 0) {
                 //change ball from moving left to move right
                 setVelocity(velocity.getDx() * -1, velocity.getDy());
             }
             //check if the ball meet the top wall
-            if (center.getY() + velocity.getDy() - size < topLeftCorner.getY() && velocity.getDy() < 0) {
+            if (center.getY() + velocity.getDy() < topLeftCorner.getY() && velocity.getDy() < 0) {
                 //change ball from moving up to move down
                 setVelocity(velocity.getDx(), velocity.getDy() * -1);
             }
             //modify the location of the ball
-            //center = this.getVelocity().applyToPoint(center);
+            center = this.getVelocity().applyToPoint(center);
+        } else {
+            //there is a collision with object. check if next step is the collision point.
+            Point collisionPoint = collisionInfo.collisionPoint();
+            Point nextPos = new Point(center.getX() + velocity.getDx(), center.getY() + velocity.getDy());
+
+            if (nextPos.getX() + velocity.getDx() >= collisionPoint.getX()
+                    && nextPos.getY() + velocity.getDy() >= collisionPoint.getY()
+                    && velocity.getDx() >= 0 && velocity.getDy() >= 0) {
+                //the ball is coming from top left
+                Velocity newVelocity = collisionInfo.collisionObject().hit(collisionInfo.collisionPoint(), velocity);
+                setVelocity(newVelocity);
+            } else if (nextPos.getX() + velocity.getDx() <= collisionPoint.getX()
+                    && nextPos.getY() + velocity.getDy() >= collisionPoint.getY()
+                    && velocity.getDx() <= 0 && velocity.getDy() >= 0) {
+                //the ball is coming from top right
+                Velocity newVelocity = collisionInfo.collisionObject().hit(collisionInfo.collisionPoint(), velocity);
+                setVelocity(newVelocity);
+            } else if (nextPos.getX() + velocity.getDx() >= collisionPoint.getX()
+                    && nextPos.getY() + velocity.getDy() <= collisionPoint.getY()
+                    && velocity.getDx() >= 0 && velocity.getDy() <= 0) {
+                //the ball is coming from bottom left
+                Velocity newVelocity = collisionInfo.collisionObject().hit(collisionInfo.collisionPoint(), velocity);
+                setVelocity(newVelocity);
+            } else if (nextPos.getX() + velocity.getDx() <= collisionPoint.getX()
+                    && nextPos.getY() + velocity.getDy() <= collisionPoint.getY()
+                    && velocity.getDx() <= 0 && velocity.getDy() <= 0) {
+                //the ball is coming from bottom right
+                Velocity newVelocity = collisionInfo.collisionObject().hit(collisionInfo.collisionPoint(), velocity);
+                setVelocity(newVelocity);
+            } else {
+                center = this.getVelocity().applyToPoint(center);
+            }
         }
     }
 

@@ -1,3 +1,6 @@
+import biuoop.DrawSurface;
+
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -6,6 +9,7 @@ class Rectangle {
     private Point upperLeft, upperRight, lowerLeft, lowerRight;
     private Line topEdge, bottomEdge, leftEdge, rightEdge;
     private double width, height;
+    private Color color;
 
     // Create a new rectangle with location and width/height.
     public Rectangle(Point upperLeft, double width, double height) {
@@ -20,6 +24,12 @@ class Rectangle {
         this.bottomEdge = new Line(lowerLeft, lowerRight);
         this.leftEdge = new Line(upperLeft, lowerLeft);
         this.rightEdge = new Line(upperRight, lowerRight);
+    }
+
+    public void drawOn(DrawSurface surface) {
+        surface.setColor(color);
+        surface.fillRectangle((int) upperLeft.getX(), (int) upperLeft.getY(),
+                (int) (upperRight.getX() - upperLeft.getX()), (int) (upperRight.getX() - lowerRight.getX()));
     }
 
     /**
@@ -111,5 +121,9 @@ class Rectangle {
      */
     public double getHeight() {
         return this.height;
+    }
+
+    public void setColor(Color color) {
+        this.color = color;
     }
 }

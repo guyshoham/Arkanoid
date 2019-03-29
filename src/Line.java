@@ -241,7 +241,9 @@ public class Line {
         double whole = Math.floor(line.length());
         double sumParts = Math.floor(a.length() + b.length());
 
-        return whole - sumParts == 0 || whole - sumParts == 1 || whole - sumParts == -1;
+        return Math.abs(whole - sumParts) <= 0;
+        //todo: delete comment below if function is working
+        //return whole - sumParts == 0 || whole - sumParts == 1 || whole - sumParts == -1;
     }
 
     // If this line does not intersect with the rectangle, return null.
