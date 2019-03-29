@@ -8,7 +8,15 @@ import java.util.List;
 public class UnitTests {
 
     public static void main(String[] args) {
-        runGame();
+        calculateSpeed(8.660254037844386, 10);
+    }
+
+    private static void calculateSpeed(double dx, double dy) {
+        double angle = Math.atan((-1 * dx / dy));
+        double speed = dy / Math.cos(angle);
+
+        System.out.println("angle = " + angle);
+        System.out.println("speed = " + speed);
     }
 
     public static void checkRectangle() {

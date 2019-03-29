@@ -66,6 +66,7 @@ public class Paddle implements Sprite, Collidable {
         Velocity retVal = new Velocity(currentVelocity.getDx(), currentVelocity.getDy());
 
         double hitX = collisionPoint.getX();
+        //double hitY = collisionPoint.getY();
 
         double region1 = rect.getUpperLeft().getX() + (rect.getWidth() / 5 * 0);
         double region2 = rect.getUpperLeft().getX() + (rect.getWidth() / 5 * 1);
@@ -76,27 +77,42 @@ public class Paddle implements Sprite, Collidable {
 
         //region 1
         if (hitX >= region1 && hitX < region2) {
-            retVal.setDy(currentVelocity.getDy() * -1);
-            retVal.setDx(currentVelocity.getDy() * -1.3);
+            if (!collisionPoint.isInRect(this.rect)) {
+                retVal.setDy(currentVelocity.getDy() * -1);
+                retVal.setDx(Math.sin(Math.toRadians(300)) * 10);
+            }
+            return retVal;
         }
         //region 2
         if (hitX >= region2 && hitX < region3) {
-            retVal.setDy(currentVelocity.getDy() * -1);
-            retVal.setDx(currentVelocity.getDy() * -1.15);
+            if (!collisionPoint.isInRect(this.rect)) {
+                retVal.setDy(currentVelocity.getDy() * -1);
+                retVal.setDx(Math.sin(Math.toRadians(330)) * 10);
+            }
+            return retVal;
         }
         //region 3
         if (hitX >= region3 && hitX < region4) {
-            retVal.setDy(currentVelocity.getDy() * -1);
+            if (!collisionPoint.isInRect(this.rect)) {
+                retVal.setDy(currentVelocity.getDy() * -1);
+            }
+            return retVal;
         }
         //region 4
         if (hitX >= region4 && hitX < region5) {
-            retVal.setDy(currentVelocity.getDy() * -1);
-            retVal.setDx(currentVelocity.getDy() * 1.15);
+            if (!collisionPoint.isInRect(this.rect)) {
+                retVal.setDy(currentVelocity.getDy() * -1);
+                retVal.setDx(Math.sin(Math.toRadians(30)) * 10);
+            }
+            return retVal;
         }
         //region 5
-        if (hitX >= region5 && hitX < region6) {
-            retVal.setDx(currentVelocity.getDy() * 1.3);
-            retVal.setDy(currentVelocity.getDy() * -1);
+        if (hitX >= region5 && hitX <= region6) {
+            if (!collisionPoint.isInRect(this.rect)) {
+                retVal.setDy(currentVelocity.getDy() * -1);
+                retVal.setDx(Math.sin(Math.toRadians(60)) * 10);
+            }
+            return retVal;
         }
 
         return retVal;

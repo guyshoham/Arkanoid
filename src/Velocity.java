@@ -73,4 +73,8 @@ public class Velocity {
     public Point applyToPointBackward(Point point) {
         return new Point(point.getX() - dx, point.getY() - dy);
     }
+
+    public boolean equal(Velocity other) {
+        return dx == other.dx && dy == other.dy;
+    }
 }

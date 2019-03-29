@@ -96,7 +96,7 @@ public class Game {
         Paddle paddle = new Paddle(new Rectangle(new Point(350, 750), 100, 25), Color.GRAY, keyboard);
         paddle.addToGame(this);
 
-        ball1.setEnvironment(environment);
+        Ball.setEnvironment(environment);
     }
 
     // Run the game -- start the animation loop.
