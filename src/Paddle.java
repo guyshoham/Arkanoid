@@ -118,4 +118,11 @@ public class Paddle implements Sprite, Collidable {
         g.addCollidable(this);
         g.addSprite(this);
     }
+
+    @Override
+    public String toString() {
+        return "Paddle{" +
+                ", rect=" + rect +
+                '}';
+    }
 }

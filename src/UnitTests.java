@@ -15,7 +15,9 @@ public class UnitTests {
         Line rightEdge = new Line(new Point(25, 0), new Point(25, 800));
         Line trajectory = new Line(new Point(320, 591.4359353944892), new Point(4.999999999999935, 45.83993101029296));
 
-        System.out.println(trajectory.isIntersecting(rightEdge));
+        if (!trajectory.isIntersecting(rightEdge)) {
+            System.out.println("Test Failed: intersectionPointsTest");
+        }
     }
 
     private static void checkWalls() {

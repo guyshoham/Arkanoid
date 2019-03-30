@@ -144,7 +144,7 @@ public class Ball implements Sprite {
     }
 
     /**
-     * this method change the direction of the ball if the ball is about to hit one of the walls.
+     * this method change the direction of the ball if the ball is about to hit a collidable object.
      */
     public void moveOneStep() {
         //compute trajectory
@@ -152,6 +152,8 @@ public class Ball implements Sprite {
         CollisionInfo collisionInfo = environment.getClosestCollision(trajectory);
 
         if (collisionInfo == null) {
+            System.out.println("collisionInfo == null");
+            //todo: maybe all this condition will be removed in the future (because ball cannot hit the walls)
             //check if the ball meet the right wall
             if (center.getX() + velocity.getDx() > bottomRightCorner.getX() && velocity.getDx() > 0) {
                 //change ball from moving right to move left
@@ -207,6 +209,7 @@ public class Ball implements Sprite {
             }
 
             if (velocity.equal(newVelocity)) {
+                //velocity did not change after all, move ball
                 center = this.getVelocity().applyToPoint(center);
             } else {
                 setVelocity(newVelocity);
