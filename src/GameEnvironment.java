@@ -31,6 +31,8 @@ public class GameEnvironment {
         }
 
         if (collisionInfos.isEmpty()) {
+            System.out.print(collidables.get(2));
+            System.out.println("trajectory = " + trajectory);
             return null;
         }
         if (collisionInfos.size() == 1) {

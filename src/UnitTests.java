@@ -8,15 +8,20 @@ import java.util.List;
 public class UnitTests {
 
     public static void main(String[] args) {
-        calculateSpeed(8.660254037844386, 10);
+        runGame();
     }
 
-    private static void calculateSpeed(double dx, double dy) {
-        double angle = Math.atan((-1 * dx / dy));
-        double speed = dy / Math.cos(angle);
+    private static void intersectionPointsTest() {
+        Line rightEdge = new Line(new Point(25, 0), new Point(25, 800));
+        Line trajectory = new Line(new Point(320, 591.4359353944892), new Point(4.999999999999935, 45.83993101029296));
 
-        System.out.println("angle = " + angle);
-        System.out.println("speed = " + speed);
+        System.out.println(trajectory.isIntersecting(rightEdge));
+    }
+
+    private static void checkWalls() {
+        Game game = new Game();
+        game.initializeWalls();
+        game.run();
     }
 
     public static void checkRectangle() {
@@ -51,7 +56,6 @@ public class UnitTests {
         if (outsideRect.isInRect(upperLeft, rect.getLowerRight())) {
             System.out.println("Error: Point.isInRect when point outside");
         }
-
     }
 
     public static void checkPart1() {

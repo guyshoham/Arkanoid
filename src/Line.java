@@ -241,7 +241,7 @@ public class Line {
         double whole = Math.floor(line.length());
         double sumParts = Math.floor(a.length() + b.length());
 
-        return Math.abs(whole - sumParts) <= 0;
+        return Math.abs(whole - sumParts) <= 1;
         //todo: delete comment below if function is working
         //return whole - sumParts == 0 || whole - sumParts == 1 || whole - sumParts == -1;
     }
@@ -268,5 +268,13 @@ public class Line {
             }
             return closestPoint;
         }
+    }
+
+    @Override
+    public String toString() {
+        return "Line{" +
+                "start=" + start +
+                ", end=" + end +
+                '}';
     }
 }

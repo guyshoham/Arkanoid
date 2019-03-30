@@ -126,4 +126,20 @@ class Rectangle {
     public void setColor(Color color) {
         this.color = color;
     }
+
+    @Override
+    public String toString() {
+        return "Rectangle{" +
+                "upperLeft=" + upperLeft +
+                ", upperRight=" + upperRight +
+                ", lowerLeft=" + lowerLeft +
+                ", lowerRight=" + lowerRight +
+                ", topEdge=" + topEdge +
+                ", bottomEdge=" + bottomEdge +
+                ", leftEdge=" + leftEdge +
+                ", rightEdge=" + rightEdge +
+                ", width=" + width +
+                ", height=" + height +
+                '}';
+    }
 }

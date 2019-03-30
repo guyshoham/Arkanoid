@@ -10,7 +10,7 @@ public class Paddle implements Sprite, Collidable {
     private KeyboardSensor keyboard;
     private Rectangle rect;
     private Color color;
-    private static final int SPEED = 5;
+    private static final int SPEED = 10;
     private static final double LEFT_CORNER = 25;
     private static final double RIGHT_CORNER = 775;
 

@@ -77,4 +77,11 @@ public class Block implements Collidable, Sprite {
         g.addCollidable(this);
         g.addSprite(this);
     }
+
+    @Override
+    public String toString() {
+        return "Block{" +
+                "rect=" + rect +
+                "}\n";
+    }
 }

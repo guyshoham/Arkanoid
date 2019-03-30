@@ -17,4 +17,12 @@ public class CollisionInfo {
     public Collidable collisionObject() {
         return this.collisionObject;
     }
+
+    @Override
+    public String toString() {
+        return "CollisionInfo{" +
+                "collisionPoint=" + collisionPoint +
+                ", collisionObject=" + collisionObject +
+                '}';
+    }
 }
