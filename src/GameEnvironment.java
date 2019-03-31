@@ -40,11 +40,11 @@ public class GameEnvironment {
         }
 
         CollisionInfo closest = collisionInfos.get(0);
-        double minDistance = collisionInfos.get(0).collisionPoint().distance(trajectory.getStart());
+        double minDistance = collisionInfos.get(0).collisionPoint().distance(trajectory.start());
 
         for (CollisionInfo collisionInfo : collisionInfos) {
-            double newDistance = collisionInfo.collisionPoint().distance(trajectory.getStart());
-            if (collisionInfo.collisionPoint().distance(trajectory.getStart()) < minDistance) {
+            double newDistance = collisionInfo.collisionPoint().distance(trajectory.start());
+            if (collisionInfo.collisionPoint().distance(trajectory.start()) < minDistance) {
                 closest = collisionInfo;
                 minDistance = newDistance;
             }

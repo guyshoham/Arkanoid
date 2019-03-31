@@ -10,7 +10,6 @@ public class PointTest {
         Point p2 = new Point(5, 0);
         int result = (int) p1.distance(p2);
         assertEquals(13, result);
-
     }
 
     @Test

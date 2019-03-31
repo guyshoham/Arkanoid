@@ -18,7 +18,7 @@ public class LineTest {
         Point end = new Point(5, 0);
         Line line = new Line(start, end);
 
-        assertEquals(start, line.getStart());
+        assertEquals(start, line.start());
     }
 
     @Test
@@ -27,7 +27,7 @@ public class LineTest {
         Point end = new Point(5, 0);
         Line line = new Line(start, end);
 
-        assertEquals(end, line.getEnd());
+        assertEquals(end, line.end());
     }
 
     @Test
@@ -99,26 +99,38 @@ public class LineTest {
     }
 
     @Test
-    public void getStart() {
-    }
-
-    @Test
-    public void getEnd() {
-    }
-
-    @Test
     public void calcSlope() {
+        Point start = new Point(10, 20);
+        Point end = new Point(5, 5);
+        Line line = new Line(start, end);
+
+        assertEquals(3, (int) line.calcSlope());
     }
 
     @Test
     public void calcIntercept() {
+        Point start = new Point(10, 20);
+        Point end = new Point(5, 5);
+        Line line = new Line(start, end);
+
+        assertEquals(-10, (int) line.calcIntercept());
     }
 
     @Test
     public void calcDet() {
+        double a = 1, b = 2, c = 3, d = 4;
+        assertEquals(-2, (int) Line.calcDet(a, b, c, d));
     }
 
     @Test
     public void closestIntersectionToStartOfLine() {
+        Rectangle rect = new Rectangle(new Point(0, 0), 10, 10);
+        Line line = new Line(new Point(5, 5), new Point(15, 15));
+        assertEquals(10, (int) line.closestIntersectionToStartOfLine(rect).getX());
+        assertEquals(10, (int) line.closestIntersectionToStartOfLine(rect).getY());
+
+        line = new Line(new Point(5, 15), new Point(5, -5));
+        assertEquals(5, (int) line.closestIntersectionToStartOfLine(rect).getX());
+        assertEquals(10, (int) line.closestIntersectionToStartOfLine(rect).getY());
     }
 }

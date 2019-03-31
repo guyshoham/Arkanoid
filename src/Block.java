@@ -63,7 +63,7 @@ public class Block implements Collidable, Sprite {
         }
         surface.setColor(Color.WHITE);
         surface.drawText((int) (rect.getUpperLeft().getX() + (rect.getWidth() / 2)),
-                (int) (rect.getUpperLeft().getY() + (rect.getHeight() / 2)), text, 15);
+                (int) (rect.getUpperLeft().getY() + (rect.getHeight() / 10 * 7)), text, 15);
 
 
     }

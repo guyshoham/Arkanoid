@@ -20,8 +20,8 @@ public class Line {
     public Line(Point start, Point end) {
         this.start = start;
         this.end = end;
-        this.slope = calcSlope(this);
-        this.intercept = calcIntercept(start, slope);
+        this.slope = calcSlope();
+        this.intercept = calcIntercept();
     }
 
     /**
@@ -121,22 +121,22 @@ public class Line {
             return null;
         }
 
-        if (this.getStart().getX() == this.getEnd().getX()) {
+        if (this.start().getX() == this.end().getX()) {
             //this (line) is parallel to Y axis
-            double x = this.getStart().getX();
-            if ((other.getStart().getX() <= x && other.getEnd().getX() >= x)
-                    || other.getStart().getX() >= x && other.getEnd().getX() <= x) {
+            double x = this.start().getX();
+            if ((other.start().getX() <= x && other.end().getX() >= x)
+                    || other.start().getX() >= x && other.end().getX() <= x) {
                 double y = other.getSlope() * x + other.getIntercept();
                 return new Point(x, y);
             }
 
         }
 
-        if (other.getStart().getX() == other.getEnd().getX()) {
+        if (other.start().getX() == other.end().getX()) {
             //other line is parallel to Y axis
-            double x = other.getStart().getX();
-            if ((this.getStart().getX() <= x && this.getEnd().getX() >= x)
-                    || this.getStart().getX() >= x && this.getEnd().getX() <= x) {
+            double x = other.start().getX();
+            if ((this.start().getX() <= x && this.end().getX() >= x)
+                    || this.start().getX() >= x && this.end().getX() <= x) {
                 double y = this.getSlope() * x + this.getIntercept();
                 return new Point(x, y);
             }
@@ -173,46 +173,29 @@ public class Line {
      * @return true if the lines equal, false otherwise.
      */
     public boolean equals(Line other) {
-        if (start.equals(other.getStart()) && end.equals(other.getEnd())) {
+        if (start.equals(other.start()) && end.equals(other.end())) {
             return true;
         } else {
-            return start.equals(other.getEnd()) && end.equals(other.getStart());
+            return start.equals(other.end()) && end.equals(other.start());
         }
-    }
-
-    /**
-     * @return the start point of the line
-     */
-    public Point getStart() {
-        return start;
-    }
-
-    /**
-     * @return the end point of the line
-     */
-    public Point getEnd() {
-        return end;
     }
 
     /**
      * this method calculates the slope (m) of the line equation.
      *
-     * @param line the line we want to calculate the slope for.
      * @return the slope of the line equation.
      */
-    public double calcSlope(Line line) {
-        return ((line.getEnd().getY() - line.getStart().getY()) / (line.getEnd().getX() - line.getStart().getX()));
+    public double calcSlope() {
+        return ((this.end().getY() - this.start().getY()) / (this.end().getX() - this.start().getX()));
     }
 
     /**
      * this method calculates the intercept (b) of the line equation.
      *
-     * @param p1 point of the line (no matter which).
-     * @param m  the slope of the line equation.
      * @return the intercept of the line equation.
      */
-    public double calcIntercept(Point p1, double m) {
-        return p1.getY() - m * p1.getX();
+    public double calcIntercept() {
+        return start.getY() - slope * start.getX();
     }
 
     /**
@@ -224,7 +207,7 @@ public class Line {
      * @param d forth parameter.
      * @return the determinant of the 2x2 matrix.
      */
-    public double calcDet(double a, double b, double c, double d) {
+    public static double calcDet(double a, double b, double c, double d) {
         return a * d - b * c;
     }
 
@@ -234,15 +217,13 @@ public class Line {
      * @return true if the points is in line, false otherwise.
      */
     public static boolean isPointInLine(Line line, Point point) {
-        Line a = new Line(line.getStart(), point);
-        Line b = new Line(point, line.getEnd());
+        Line a = new Line(line.start(), point);
+        Line b = new Line(point, line.end());
 
         double whole = Math.floor(line.length());
         double sumParts = Math.floor(a.length() + b.length());
 
         return Math.abs(whole - sumParts) <= 1;
-        //todo: delete comment below if function is working
-        //return whole - sumParts == 0 || whole - sumParts == 1 || whole - sumParts == -1;
     }
 
     // If this line does not intersect with the rectangle, return null.
