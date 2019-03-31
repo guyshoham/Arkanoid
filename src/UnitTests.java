@@ -6,14 +6,7 @@ public class UnitTests {
         runGame();
     }
 
-    private static void intersectionPointsTest() {
-        Line rightEdge = new Line(new Point(25, 0), new Point(25, 800));
-        Line trajectory = new Line(new Point(320, 591.4359353944892), new Point(4.999999999999935, 45.83993101029296));
 
-        if (!trajectory.isIntersecting(rightEdge)) {
-            System.out.println("Test Failed: intersectionPointsTest");
-        }
-    }
 
     public static void checkRectangle() {
         Point upperLeft = new Point(0, 0);

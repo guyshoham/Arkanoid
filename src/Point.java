@@ -1,5 +1,3 @@
-import org.w3c.dom.css.Rect;
-
 /**
  * Point Model Object.
  *
