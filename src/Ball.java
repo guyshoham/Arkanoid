@@ -29,7 +29,7 @@ public class Ball implements Sprite {
         this.size = r;
         this.color = color;
         this.velocity = new Velocity(0, 0);
-        //this.environment = new GameEnvironment();
+        this.environment = new GameEnvironment();
     }
 
     /**
@@ -93,8 +93,8 @@ public class Ball implements Sprite {
         g.addSprite(this);
     }
 
-    public static void setEnvironment(GameEnvironment environment) {
-        Ball.environment = environment;
+    public static void setEnvironment(GameEnvironment env) {
+        Ball.environment = env;
     }
 
     /**
@@ -230,10 +230,5 @@ public class Ball implements Sprite {
             }
         }
     }
-
-    public void addToGameEnv(Collidable c) {
-        environment.addCollidable(c);
-    }
-
 
 }

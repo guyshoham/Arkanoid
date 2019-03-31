@@ -20,9 +20,6 @@ public class CollisionInfo {
 
     @Override
     public String toString() {
-        return "CollisionInfo{" +
-                "collisionPoint=" + collisionPoint +
-                ", collisionObject=" + collisionObject +
-                '}';
+        return "CollisionInfo{" + "collisionPoint=" + collisionPoint + ", collisionObject=" + collisionObject + '}';
     }
 }

@@ -80,8 +80,6 @@ public class Block implements Collidable, Sprite {
 
     @Override
     public String toString() {
-        return "Block{" +
-                "rect=" + rect +
-                "}\n";
+        return "Block{" + "rect=" + rect + "}\n";
     }
 }

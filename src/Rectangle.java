@@ -1,6 +1,6 @@
 import biuoop.DrawSurface;
 
-import java.awt.*;
+import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -123,23 +123,15 @@ class Rectangle {
         return this.height;
     }
 
-    public void setColor(Color color) {
-        this.color = color;
+    public void setColor(Color newColor) {
+        this.color = newColor;
     }
 
     @Override
     public String toString() {
-        return "Rectangle{" +
-                "upperLeft=" + upperLeft +
-                ", upperRight=" + upperRight +
-                ", lowerLeft=" + lowerLeft +
-                ", lowerRight=" + lowerRight +
-                ", topEdge=" + topEdge +
-                ", bottomEdge=" + bottomEdge +
-                ", leftEdge=" + leftEdge +
-                ", rightEdge=" + rightEdge +
-                ", width=" + width +
-                ", height=" + height +
-                '}';
+        return "Rectangle{" + "upperLeft=" + upperLeft + ", upperRight=" + upperRight + ", lowerLeft=" + lowerLeft
+                + ", lowerRight=" + lowerRight + ", topEdge=" + topEdge + ", bottomEdge=" + bottomEdge
+                + ", leftEdge=" + leftEdge + ", rightEdge=" + rightEdge + ", width=" + width
+                + ", height=" + height + '}';
     }
 }

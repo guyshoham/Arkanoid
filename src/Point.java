@@ -53,9 +53,8 @@ public class Point {
     }
 
     public boolean isInRect(Point topLeftCorner, Point bottomRightCorner) {
-        return x > topLeftCorner.getX() && x < bottomRightCorner.getX() &&
-                y > topLeftCorner.getY() && y < bottomRightCorner.getY();
-
+        return x > topLeftCorner.getX() && x < bottomRightCorner.getX()
+                && y > topLeftCorner.getY() && y < bottomRightCorner.getY();
     }
 
     public boolean isInRect(Rectangle rect) {

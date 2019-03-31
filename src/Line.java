@@ -272,9 +272,6 @@ public class Line {
 
     @Override
     public String toString() {
-        return "Line{" +
-                "start=" + start +
-                ", end=" + end +
-                '}';
+        return "Line{" + "start=" + start + ", end=" + end + '}';
     }
 }

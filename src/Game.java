@@ -100,50 +100,6 @@ public class Game {
         Ball.setEnvironment(environment);
     }
 
-    public void initializeWalls() {
-        Ball ball1 = new Ball(new Point(400, 700), BALL_RADIUS, Color.BLACK);
-        Velocity v1 = Velocity.fromAngleAndSpeed(0, BALL_SPEED);
-        ball1.setVelocity(v1);
-        ball1.setTopLeftCorner(new Point(0, 0));
-        ball1.setBottomRightCorner(new Point(800, 800));
-        ball1.addToGame(this);
-
-        Ball ball2 = new Ball(new Point(400, 700), BALL_RADIUS, Color.BLUE);
-        Velocity v2 = Velocity.fromAngleAndSpeed(70, BALL_SPEED);
-        ball2.setVelocity(v2);
-        ball2.setTopLeftCorner(new Point(0, 0));
-        ball2.setBottomRightCorner(new Point(800, 800));
-        ball2.addToGame(this);
-
-        //init walls
-        Rectangle rectTop = new Rectangle(new Point(0, 0), 800, 25);
-        Rectangle rectBottom = new Rectangle(new Point(0, 775), 800, 25);
-        Rectangle rectLeft = new Rectangle(new Point(0, 0), 25, 800);
-        Rectangle rectRight = new Rectangle(new Point(775, 0), 25, 800);
-        Block blockTop = new Block(rectTop, Color.BLACK);
-        Block blockBottom = new Block(rectBottom, Color.BLACK);
-        Block blockLeft = new Block(rectLeft, Color.BLACK);
-        Block blockRight = new Block(rectRight, Color.BLACK);
-        blockTop.addToGame(this);
-        blockBottom.addToGame(this);
-        blockLeft.addToGame(this);
-        blockRight.addToGame(this);
-
-        //init blocks
-        for (int i = 0; i < 15; i++) {
-            Rectangle rect = new Rectangle(new Point(25 + i * BLOCK_WIDTH, 600), BLOCK_WIDTH, BLOCK_HEIGHT);
-            Block block = new Block(rect, Color.GRAY, 2);
-            block.addToGame(this);
-        }
-
-
-        //init paddle
-        Paddle paddle = new Paddle(new Rectangle(new Point(350, 750), 100, 25), Color.GRAY, keyboard);
-        paddle.addToGame(this);
-
-        Ball.setEnvironment(environment);
-    }
-
     // Run the game -- start the animation loop.
     public void run() {
         Sleeper sleeper = new Sleeper();

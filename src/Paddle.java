@@ -121,8 +121,6 @@ public class Paddle implements Sprite, Collidable {
 
     @Override
     public String toString() {
-        return "Paddle{" +
-                ", rect=" + rect +
-                '}';
+        return "Paddle{" + ", rect=" + rect + '}';
     }
 }
