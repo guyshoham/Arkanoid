@@ -100,7 +100,7 @@ test:
     - tags
   except:
     variables:
-      - $TEST_DISABLED
+      - BUILDPACK_URL
 
 code_quality:
   stage: test
