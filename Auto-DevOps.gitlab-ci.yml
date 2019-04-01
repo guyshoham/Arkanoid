@@ -75,7 +75,7 @@ stages:
 
 build:
   stage: build
-  image: "registry.gitlab.com/gitlab-org/cluster-integration/auto-build-image/master:stable"
+  image: "registry.gitlab.com/guyshoham/arkanoid/master"
   services:
     - docker:stable-dind
   script:
@@ -83,8 +83,7 @@ build:
   only:
     - branches
     - tags
-  variables:
-    - BUILDPACK_URL
+  variables: BUILDPACK_URL
 
 test:
   services:
