@@ -38,34 +38,37 @@ public class GameEnvironment {
 
         List<CollisionInfo> collisionInfos = new ArrayList<>();
 
+        //checks for each collidable if the trajectory has intersection point with the object
         for (Collidable collidable : collidables) {
             Rectangle rect = collidable.getCollisionRectangle();
             Point collidePoint = trajectory.closestIntersectionToStartOfLine(rect);
             if (collidePoint != null) {
-                //collision
+                //there is a collision
                 collisionInfos.add(new CollisionInfo(collidePoint, collidable));
             }
         }
 
+        //if list is empty, return null
         if (collisionInfos.isEmpty()) {
-            System.out.print(collidables.get(2));
-            System.out.println("trajectory = " + trajectory);
             return null;
         }
+        //if list has one object, return the only object
         if (collisionInfos.size() == 1) {
             return collisionInfos.get(0);
         }
 
-        CollisionInfo closest = collisionInfos.get(0);
+        CollisionInfo closestCollision = collisionInfos.get(0);
         double minDistance = collisionInfos.get(0).collisionPoint().distance(trajectory.start());
 
+        //check for the closest collision from list
         for (CollisionInfo collisionInfo : collisionInfos) {
+            //compute the distance, and compare with min distance so far
             double newDistance = collisionInfo.collisionPoint().distance(trajectory.start());
             if (collisionInfo.collisionPoint().distance(trajectory.start()) < minDistance) {
-                closest = collisionInfo;
+                closestCollision = collisionInfo;
                 minDistance = newDistance;
             }
         }
-        return closest;
+        return closestCollision;
     }
 }

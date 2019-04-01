@@ -16,7 +16,6 @@ public class Game {
     private GUI gui = new GUI("Game Run", 800, 800);
     private KeyboardSensor keyboard = gui.getKeyboardSensor();
 
-
     private static final int BALL_SPEED = 10;
     private static final int BALL_RADIUS = 5;
     private static final int BLOCK_WIDTH = 50;
@@ -53,6 +52,7 @@ public class Game {
      * and add them to the game.
      */
     public void initialize() {
+        //init 2 balls
         Ball ball1 = new Ball(new Point(400, 700), BALL_RADIUS, Color.BLACK);
         Velocity v1 = Velocity.fromAngleAndSpeed(300, BALL_SPEED);
         ball1.setVelocity(v1);

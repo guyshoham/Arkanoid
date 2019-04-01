@@ -15,9 +15,9 @@ public class Paddle implements Sprite, Collidable {
     private KeyboardSensor keyboard;
     private Rectangle rect;
     private Color color;
-    private static final int SPEED = 10;
-    private static final double LEFT_CORNER = 25;
-    private static final double RIGHT_CORNER = 775;
+    private static final int SPEED = 10; //speed of the paddle
+    private static final double LEFT_CORNER = 25; //min X value paddle can go
+    private static final double RIGHT_CORNER = 775; //max X value paddle can go
 
     /**
      * Class constructor.
@@ -73,13 +73,8 @@ public class Paddle implements Sprite, Collidable {
      * @param surface surface.
      */
     public void drawOn(DrawSurface surface) {
-        surface.setColor(color);
-        surface.fillRectangle((int) rect.getUpperLeft().getX(), (int) rect.getUpperLeft().getY(),
-                (int) rect.getWidth(), (int) rect.getHeight());
-        surface.setColor(Color.BLACK);
-        surface.drawRectangle((int) rect.getUpperLeft().getX(), (int) rect.getUpperLeft().getY(),
-                (int) rect.getWidth(), (int) rect.getHeight());
-
+        rect.setColor(color);
+        rect.drawOn(surface);
     }
 
     /**
@@ -108,35 +103,35 @@ public class Paddle implements Sprite, Collidable {
         double region5 = rect.getUpperLeft().getX() + (rect.getWidth() / 5 * 4); //start of region 5
         double region6 = rect.getUpperLeft().getX() + (rect.getWidth() / 5 * 5); //end of region 5
 
-        //region 1
+        //check hit with region 1
         if (hitX >= region1 && hitX < region2) {
             if (!collisionPoint.isInRect(this.rect)) {
                 retVal = Velocity.fromAngleAndSpeed(300, speed);
             }
             return retVal;
         }
-        //region 2
+        //check hit with region 2
         if (hitX >= region2 && hitX < region3) {
             if (!collisionPoint.isInRect(this.rect)) {
                 retVal = Velocity.fromAngleAndSpeed(330, speed);
             }
             return retVal;
         }
-        //region 3
+        //check hit with region 3
         if (hitX >= region3 && hitX < region4) {
             if (!collisionPoint.isInRect(this.rect)) {
                 retVal = Velocity.fromAngleAndSpeed(0, speed);
             }
             return retVal;
         }
-        //region 4
+        //check hit with region 4
         if (hitX >= region4 && hitX < region5) {
             if (!collisionPoint.isInRect(this.rect)) {
                 retVal = Velocity.fromAngleAndSpeed(30, speed);
             }
             return retVal;
         }
-        //region 5
+        //check hit with region 5
         if (hitX >= region5 && hitX <= region6) {
             if (!collisionPoint.isInRect(this.rect)) {
                 retVal = Velocity.fromAngleAndSpeed(60, speed);

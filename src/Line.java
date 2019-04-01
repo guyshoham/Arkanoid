@@ -242,6 +242,7 @@ public class Line {
             double closestDistance = this.start.distance(closestPoint);
 
             for (Object p : points) {
+                //compute distance and compare with min distance so far
                 double distance = this.start.distance((Point) p);
                 if (distance < closestDistance) {
                     closestPoint = (Point) p;

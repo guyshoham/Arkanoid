@@ -45,8 +45,9 @@ class Rectangle {
      */
     public void drawOn(DrawSurface surface) {
         surface.setColor(color);
-        surface.fillRectangle((int) upperLeft.getX(), (int) upperLeft.getY(),
-                (int) (upperRight.getX() - upperLeft.getX()), (int) (upperRight.getX() - lowerRight.getX()));
+        surface.fillRectangle((int) upperLeft.getX(), (int) upperLeft.getY(), (int) (width), (int) (height));
+        surface.setColor(Color.BLACK);
+        surface.drawRectangle((int) upperLeft.getX(), (int) upperLeft.getY(), (int) (width), (int) (height));
     }
 
     /**
@@ -113,6 +114,7 @@ class Rectangle {
     public List intersectionPoints(Line line) {
         List<Point> points = new ArrayList<>();
 
+        //check intersection point with each edge of the rectangle
         if (line.isIntersecting(topEdge)) {
             points.add(line.intersectionWith(topEdge));
         }

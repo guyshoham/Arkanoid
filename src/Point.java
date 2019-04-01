@@ -4,7 +4,6 @@
  * @author Guy Shoham
  */
 public class Point {
-    // constructor
     private double x, y; //the x and y position of the points.
 
     /**

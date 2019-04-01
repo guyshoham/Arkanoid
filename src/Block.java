@@ -73,13 +73,8 @@ public class Block implements Collidable, Sprite {
     @Override
 
     public void drawOn(DrawSurface surface) {
-        surface.setColor(color);
-        surface.fillRectangle((int) rect.getUpperLeft().getX(), (int) rect.getUpperLeft().getY(),
-                (int) rect.getWidth(), (int) rect.getHeight());
-
-        surface.setColor(Color.BLACK);
-        surface.drawRectangle((int) rect.getUpperLeft().getX(), (int) rect.getUpperLeft().getY(),
-                (int) rect.getWidth(), (int) rect.getHeight());
+        rect.setColor(color);
+        rect.drawOn(surface);
 
         String text = "x";
         if (numberOfHits != 0) {
