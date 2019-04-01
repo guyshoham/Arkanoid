@@ -7,6 +7,7 @@ public class Ass3Game {
 
     /**
      * this main method calls runGame method.
+     *
      * @param args ignored
      */
     public static void main(String[] args) {
