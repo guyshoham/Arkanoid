@@ -70,10 +70,11 @@ public class LineTest {
 
     @Test
     public void isIntersecting() {
-        Line line1 = new Line(new Point(0, 0), new Point(10, 10));
-        Line line2 = new Line(new Point(10, 0), new Point(0, 10));
+        Line l1 = new Line(12, 2, 9, -2);
+        Line l2 = new Line(0, 0, 20, 0);
 
-        assertTrue(line1.isIntersecting(line2));
+        assertTrue(l1.isIntersecting(l2));
+        assertFalse(l1.isIntersecting(new Line(0, 0, 1, 1)));
     }
 
     @Test
