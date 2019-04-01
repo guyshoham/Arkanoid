@@ -6,6 +6,11 @@ import java.awt.Color;
 import static biuoop.KeyboardSensor.LEFT_KEY;
 import static biuoop.KeyboardSensor.RIGHT_KEY;
 
+/**
+ * Paddle Model Object.
+ *
+ * @author Guy Shoham
+ */
 public class Paddle implements Sprite, Collidable {
     private KeyboardSensor keyboard;
     private Rectangle rect;
@@ -14,12 +19,22 @@ public class Paddle implements Sprite, Collidable {
     private static final double LEFT_CORNER = 25;
     private static final double RIGHT_CORNER = 775;
 
+    /**
+     * Class constructor.
+     *
+     * @param rectangle the rectangle of the paddle.
+     * @param color     the color of the paddle.
+     * @param keyboard  the keyboard moving the paddle.
+     */
     public Paddle(Rectangle rectangle, Color color, KeyboardSensor keyboard) {
         this.rect = rectangle;
         this.color = color;
         this.keyboard = keyboard;
     }
 
+    /**
+     * moves the paddle one step to the left.
+     */
     public void moveLeft() {
         Point newUpperLeft = new Point(rect.getUpperLeft().getX() - SPEED, rect.getUpperLeft().getY());
         //check if the rectangle new position is in borders
@@ -29,6 +44,9 @@ public class Paddle implements Sprite, Collidable {
         }
     }
 
+    /**
+     * move the paddle one step to the right.
+     */
     public void moveRight() {
         Point newUpperLeft = new Point(rect.getUpperLeft().getX() + SPEED, rect.getUpperLeft().getY());
         //check if the rectangle new position is in borders
@@ -38,7 +56,9 @@ public class Paddle implements Sprite, Collidable {
         }
     }
 
-    // Sprite
+    /**
+     * notify the paddle that time has passed.
+     */
     public void timePassed() {
         if (keyboard.isPressed(LEFT_KEY)) {
             moveLeft();
@@ -47,21 +67,35 @@ public class Paddle implements Sprite, Collidable {
         }
     }
 
-    public void drawOn(DrawSurface d) {
-        d.setColor(color);
-        d.fillRectangle((int) rect.getUpperLeft().getX(), (int) rect.getUpperLeft().getY(),
+    /**
+     * draw the paddle on the drawSurface.
+     *
+     * @param surface surface.
+     */
+    public void drawOn(DrawSurface surface) {
+        surface.setColor(color);
+        surface.fillRectangle((int) rect.getUpperLeft().getX(), (int) rect.getUpperLeft().getY(),
                 (int) rect.getWidth(), (int) rect.getHeight());
-        d.setColor(Color.BLACK);
-        d.drawRectangle((int) rect.getUpperLeft().getX(), (int) rect.getUpperLeft().getY(),
+        surface.setColor(Color.BLACK);
+        surface.drawRectangle((int) rect.getUpperLeft().getX(), (int) rect.getUpperLeft().getY(),
                 (int) rect.getWidth(), (int) rect.getHeight());
 
     }
 
-    // Collidable
+    /**
+     * @return the rectangle of the paddle.
+     */
     public Rectangle getCollisionRectangle() {
         return rect;
     }
 
+    /**
+     * this method handle the paddle when it got hit.
+     *
+     * @param collisionPoint  the collision point of the collidable object and the ball.
+     * @param currentVelocity current velocity of the hitting ball.
+     * @return new Velocity to the hitting object.
+     */
     public Velocity hit(Point collisionPoint, Velocity currentVelocity) {
         Velocity retVal = new Velocity(currentVelocity.getDx(), currentVelocity.getDy());
 
@@ -113,7 +147,11 @@ public class Paddle implements Sprite, Collidable {
         return retVal;
     }
 
-    // Add this paddle to the game.
+    /**
+     * Add this paddle to the game.
+     *
+     * @param g game.
+     */
     public void addToGame(Game g) {
         g.addCollidable(this);
         g.addSprite(this);

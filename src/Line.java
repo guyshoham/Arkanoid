@@ -226,9 +226,11 @@ public class Line {
         return Math.abs(whole - sumParts) <= 1;
     }
 
-    // If this line does not intersect with the rectangle, return null.
-    // Otherwise, return the closest intersection point to the
-    // start of the line.
+    /**
+     * @param rect the rectangle.
+     * @return null if the line does not intersect with the rectangle.
+     * Otherwise, the closest intersection point between the start of the line.
+     */
     public Point closestIntersectionToStartOfLine(Rectangle rect) {
         List points = rect.intersectionPoints(this);
 

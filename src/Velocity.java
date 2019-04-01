@@ -70,10 +70,10 @@ public class Velocity {
         return new Point(point.getX() + dx, point.getY() + dy);
     }
 
-    public Point applyToPointBackward(Point point) {
-        return new Point(point.getX() - dx, point.getY() - dy);
-    }
-
+    /**
+     * @param other other velocity.
+     * @return true if velocities are equal, false otherwise.
+     */
     public boolean equal(Velocity other) {
         return dx == other.dx && dy == other.dy;
     }

@@ -4,6 +4,11 @@ import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Point Model Object.
+ *
+ * @author Guy Shoham
+ */
 class Rectangle {
 
     private Point upperLeft, upperRight, lowerLeft, lowerRight;
@@ -11,8 +16,15 @@ class Rectangle {
     private double width, height;
     private Color color;
 
-    // Create a new rectangle with location and width/height.
-    public Rectangle(Point upperLeft, double width, double height) {
+    /**
+     * Class Constructor.
+     * Creates a new rectangle with location and width/height.
+     *
+     * @param upperLeft the upper left point of the rectangle.
+     * @param width     the width of the rectangle.
+     * @param height    the height of the rectangle.
+     */
+    Rectangle(Point upperLeft, double width, double height) {
         this.upperLeft = upperLeft;
         this.width = width;
         this.height = height;
@@ -26,6 +38,11 @@ class Rectangle {
         this.rightEdge = new Line(upperRight, lowerRight);
     }
 
+    /**
+     * draw the rectangle on the drawSurface.
+     *
+     * @param surface surface.
+     */
     public void drawOn(DrawSurface surface) {
         surface.setColor(color);
         surface.fillRectangle((int) upperLeft.getX(), (int) upperLeft.getY(),
@@ -87,9 +104,12 @@ class Rectangle {
     public Line getRightEdge() {
         return rightEdge;
     }
-    // Return a (possibly empty) List of intersection points
-    // with the specified line.
 
+
+    /**
+     * @param line line.
+     * @return a (possibly empty) List of intersection points with the specified line.
+     */
     public List intersectionPoints(Line line) {
         List<Point> points = new ArrayList<>();
 
@@ -123,6 +143,11 @@ class Rectangle {
         return this.height;
     }
 
+    /**
+     * sets the color of the rectangle.
+     *
+     * @param newColor color
+     */
     public void setColor(Color newColor) {
         this.color = newColor;
     }

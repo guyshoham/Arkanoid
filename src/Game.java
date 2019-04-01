@@ -5,6 +5,11 @@ import biuoop.Sleeper;
 
 import java.awt.Color;
 
+/**
+ * class Game.
+ *
+ * @author Guy Shoham
+ */
 public class Game {
     private SpriteCollection sprites;
     private GameEnvironment environment;
@@ -17,21 +22,36 @@ public class Game {
     private static final int BLOCK_WIDTH = 50;
     private static final int BLOCK_HEIGHT = 25;
 
+    /**
+     * class Constructor.
+     */
     public Game() {
         this.sprites = new SpriteCollection();
         this.environment = new GameEnvironment();
     }
 
+    /**
+     * add the collidable object to the game environment.
+     *
+     * @param c collidable.
+     */
     public void addCollidable(Collidable c) {
         environment.addCollidable(c);
     }
 
+    /**
+     * add the sprite object to the sprite collection.
+     *
+     * @param s sprite.
+     */
     public void addSprite(Sprite s) {
         sprites.addSprite(s);
     }
 
-    // Initialize a new game: create the Blocks and Ball (and Paddle)
-    // and add them to the game.
+    /**
+     * Initialize a new game: create the Blocks and Ball (and Paddle)
+     * and add them to the game.
+     */
     public void initialize() {
         Ball ball1 = new Ball(new Point(400, 700), BALL_RADIUS, Color.BLACK);
         Velocity v1 = Velocity.fromAngleAndSpeed(300, BALL_SPEED);
@@ -100,7 +120,9 @@ public class Game {
         Ball.setEnvironment(environment);
     }
 
-    // Run the game -- start the animation loop.
+    /**
+     * Run the game -- start the animation loop.
+     */
     public void run() {
         Sleeper sleeper = new Sleeper();
 

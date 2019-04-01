@@ -2,12 +2,24 @@ import biuoop.DrawSurface;
 
 import java.awt.Color;
 
+/**
+ * class Block.
+ *
+ * @author Guy Shoham
+ */
 public class Block implements Collidable, Sprite {
 
     private Rectangle rect;
     private Color color;
     private int numberOfHits;
 
+    /**
+     * Class constructor.
+     *
+     * @param rectangle    the rectangle of the block.
+     * @param color        the color of the block.
+     * @param numberOfHits the number of hits before block disappears.
+     */
     public Block(Rectangle rectangle, Color color, int numberOfHits) {
         this.rect = rectangle;
         this.color = color;
@@ -15,6 +27,12 @@ public class Block implements Collidable, Sprite {
     }
 
 
+    /**
+     * Class constructor.
+     *
+     * @param rectangle the rectangle of the block.
+     * @param color     the color of the block.
+     */
     public Block(Rectangle rectangle, Color color) {
         this(rectangle, color, 0);
     }
@@ -47,7 +65,13 @@ public class Block implements Collidable, Sprite {
         return retVal;
     }
 
+    /**
+     * draw the block on the drawSurface.
+     *
+     * @param surface surface.
+     */
     @Override
+
     public void drawOn(DrawSurface surface) {
         surface.setColor(color);
         surface.fillRectangle((int) rect.getUpperLeft().getX(), (int) rect.getUpperLeft().getY(),
@@ -68,11 +92,20 @@ public class Block implements Collidable, Sprite {
 
     }
 
+    /**
+     * notify the block that time has passed.
+     * currently do nothing.
+     */
     @Override
     public void timePassed() {
 
     }
 
+    /**
+     * add the block to the game.
+     *
+     * @param g game
+     */
     public void addToGame(Game g) {
         g.addCollidable(this);
         g.addSprite(this);

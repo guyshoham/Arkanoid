@@ -76,7 +76,7 @@ public class Ball implements Sprite {
     /**
      * this draw the ball on the given DrawSurface.
      *
-     * @param surface the surface which the ball is drawn in.
+     * @param surface surface.
      */
     @Override
     public void drawOn(DrawSurface surface) {
@@ -84,15 +84,28 @@ public class Ball implements Sprite {
         surface.fillCircle(getX(), getY(), size);
     }
 
+    /**
+     * notify the ball that time has passed. called moveOneStep method.
+     */
     @Override
     public void timePassed() {
         moveOneStep();
     }
 
+    /**
+     * adds the ball to the game.
+     *
+     * @param g game
+     */
     public void addToGame(Game g) {
         g.addSprite(this);
     }
 
+    /**
+     * this method sets the gameEnvironment of the ball.
+     *
+     * @param env the gameEnvironment.
+     */
     public static void setEnvironment(GameEnvironment env) {
         Ball.environment = env;
     }
@@ -217,6 +230,13 @@ public class Ball implements Sprite {
         }
     }
 
+    /**
+     * this method compute trajectory of the ball.
+     * the trajectory is "how the ball will move without any obstacles" -- its a line starting at current location,
+     * and ending where the velocity will take the ball if no collisions will occur.
+     *
+     * @return the trajectory line
+     */
     public Line computeTrajectory() {
         Point currentPos = center;
         Line retVal = new Line(center, currentPos);

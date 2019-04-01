@@ -1,22 +1,39 @@
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * class GameEnvironment.
+ *
+ * @author Guy Shoham
+ */
 public class GameEnvironment {
     private List<Collidable> collidables;
 
+    /**
+     * Class constructor.
+     */
     public GameEnvironment() {
         this.collidables = new ArrayList<>();
     }
 
-    // add the given collidable to the environment.
+    /**
+     * add the given collidable to the environment.
+     *
+     * @param c collidable.
+     */
     public void addCollidable(Collidable c) {
         collidables.add(c);
     }
 
-    // Assume an object moving from line.start() to line.end().
-    // If this object will not collide with any of the collidables
-    // in this collection, return null. Else, return the information
-    // about the closest collision that is going to occur.
+    /**
+     * Assume an object moving from line.start() to line.end().
+     * If this object will not collide with any of the collidables
+     * in this collection, return null. Else, return the information
+     * about the closest collision that is going to occur
+     *
+     * @param trajectory trajectory line.
+     * @return the closest collision, as CollisionInfo.
+     */
     public CollisionInfo getClosestCollision(Line trajectory) {
 
         List<CollisionInfo> collisionInfos = new ArrayList<>();
