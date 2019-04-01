@@ -83,6 +83,8 @@ build:
   only:
     - branches
     - tags
+  variables:
+    - BUILDPACK_URL
 
 test:
   services:
@@ -100,7 +102,7 @@ test:
     - tags
   except:
     variables:
-      - BUILDPACK_URL
+      - $TEST_DISABLED
 
 code_quality:
   stage: test
