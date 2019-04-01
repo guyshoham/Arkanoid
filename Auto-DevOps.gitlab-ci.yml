@@ -56,7 +56,6 @@ variables:
   DOCKER_DRIVER: overlay2
 
   ROLLOUT_RESOURCE_TYPE: deployment
-  BUILDPACK_URL: https://github:com/heroku/java-buildpack
 
 stages:
   - build
