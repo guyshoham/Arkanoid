@@ -56,6 +56,7 @@ variables:
   DOCKER_DRIVER: overlay2
 
   ROLLOUT_RESOURCE_TYPE: deployment
+  BUILDPACK_URL: https://github.com/heroku/heroku-buildpack-ruby.git#v142
 
 stages:
   - build
