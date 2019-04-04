@@ -9,7 +9,7 @@ import java.util.List;
  *
  * @author Guy Shoham
  */
-class Rectangle {
+class Rectangle implements Sprite {
 
     private Point upperLeft, upperRight, lowerLeft, lowerRight;
     private Line topEdge, bottomEdge, leftEdge, rightEdge;
@@ -43,11 +43,21 @@ class Rectangle {
      *
      * @param surface surface.
      */
+    @Override
     public void drawOn(DrawSurface surface) {
         surface.setColor(color);
         surface.fillRectangle((int) upperLeft.getX(), (int) upperLeft.getY(), (int) (width), (int) (height));
         surface.setColor(Color.BLACK);
         surface.drawRectangle((int) upperLeft.getX(), (int) upperLeft.getY(), (int) (width), (int) (height));
+    }
+
+    /**
+     * notify the rectangle that time has passed.
+     * currently do nothing.
+     */
+    @Override
+    public void timePassed() {
+
     }
 
     /**
@@ -160,5 +170,14 @@ class Rectangle {
                 + ", lowerRight=" + lowerRight + ", topEdge=" + topEdge + ", bottomEdge=" + bottomEdge
                 + ", leftEdge=" + leftEdge + ", rightEdge=" + rightEdge + ", width=" + width
                 + ", height=" + height + '}';
+    }
+
+    /**
+     * add the block to the game.
+     *
+     * @param g game
+     */
+    public void addToGame(Game g) {
+        g.addSprite(this);
     }
 }

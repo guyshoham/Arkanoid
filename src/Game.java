@@ -52,15 +52,20 @@ public class Game {
      * and add them to the game.
      */
     public void initialize() {
+        //init background
+        Rectangle background = new Rectangle(new Point(0, 0), 800, 800);
+        background.setColor(Color.BLUE.darker());
+        background.addToGame(this);
+
         //init 2 balls
-        Ball ball1 = new Ball(new Point(400, 700), BALL_RADIUS, Color.BLACK);
+        Ball ball1 = new Ball(new Point(400, 700), BALL_RADIUS, Color.YELLOW);
         Velocity v1 = Velocity.fromAngleAndSpeed(300, BALL_SPEED);
         ball1.setVelocity(v1);
         ball1.setTopLeftCorner(new Point(0, 0));
         ball1.setBottomRightCorner(new Point(800, 800));
         ball1.addToGame(this);
 
-        Ball ball2 = new Ball(new Point(400, 700), BALL_RADIUS, Color.BLUE);
+        Ball ball2 = new Ball(new Point(400, 700), BALL_RADIUS, Color.CYAN);
         Velocity v2 = Velocity.fromAngleAndSpeed(60, BALL_SPEED);
         ball2.setVelocity(v2);
         ball2.setTopLeftCorner(new Point(0, 0));
