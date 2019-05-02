@@ -49,6 +49,10 @@ public class Game {
         environment.addCollidable(c);
     }
 
+    public void removeCollidable(Collidable c) {
+        environment.removeCollidable(c);
+    }
+
     /**
      * add the sprite object to the sprite collection.
      *
@@ -56,6 +60,15 @@ public class Game {
      */
     public void addSprite(Sprite s) {
         sprites.addSprite(s);
+    }
+
+    /**
+     * remove the sprite object from the sprite collection.
+     *
+     * @param s sprite.
+     */
+    public void removeSprite(Sprite s) {
+        sprites.removeSprite(s);
     }
 
     /**

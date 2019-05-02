@@ -115,6 +115,16 @@ public class Block implements Collidable, Sprite {
         g.addSprite(this);
     }
 
+    /**
+     * remove the block from the game.
+     *
+     * @param g game
+     */
+    public void removeFromGame(Game g) {
+        g.removeCollidable(this);
+        g.removeSprite(this);
+    }
+
     @Override
     public String toString() {
         return "Block{" + "rect=" + rect + "}\n";
