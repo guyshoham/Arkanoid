@@ -1,5 +1,6 @@
 package collisions;
 
+import gameObjects.Ball;
 import geometry.Velocity;
 import geometry.Point;
 import geometry.Rectangle;
@@ -22,5 +23,5 @@ public interface Collidable {
      * @param currentVelocity current velocity of the hitting ball.
      * @return the new velocity expected after the hit (based on the force the object inflicted on us).
      */
-    Velocity hit(Point collisionPoint, Velocity currentVelocity);
+    Velocity hit(Ball hitter, Point collisionPoint, Velocity currentVelocity);
 }

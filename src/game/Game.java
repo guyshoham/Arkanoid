@@ -1,5 +1,8 @@
 package game;
 
+import Listeners.BlockRemover;
+import Listeners.Counter;
+import Listeners.PrintingHitListener;
 import biuoop.DrawSurface;
 import biuoop.GUI;
 import biuoop.KeyboardSensor;
@@ -26,6 +29,8 @@ public class Game {
     private GameEnvironment environment;
     private GUI gui = new GUI("Game Run", 800, 600);
     private KeyboardSensor keyboard = gui.getKeyboardSensor();
+    private Counter counter;
+    private BlockRemover br;
 
     private static final int BALL_SPEED = 10;
     private static final int BALL_RADIUS = 5;
@@ -38,6 +43,8 @@ public class Game {
     public Game() {
         this.sprites = new SpriteCollection();
         this.environment = new GameEnvironment();
+        this.counter = new Counter();
+        this.br = new BlockRemover(this, counter);
     }
 
     /**
@@ -76,6 +83,8 @@ public class Game {
      * and add them to the game.
      */
     public void initialize() {
+        PrintingHitListener phl = new PrintingHitListener();
+
         //init background
         Rectangle background = new Rectangle(new Point(0, 0), 800, 600);
         background.setColor(Color.BLUE.darker());
@@ -115,31 +124,49 @@ public class Game {
             Rectangle rect = new Rectangle(new Point(25 + i * BLOCK_WIDTH, 100), BLOCK_WIDTH, BLOCK_HEIGHT);
             Block block = new Block(rect, Color.GRAY, 2);
             block.addToGame(this);
+            block.addHitListener(phl);
+            block.addHitListener(br);
+            counter.increase(1);
         }
         for (int i = 4; i < 15; i++) {
             Rectangle rect = new Rectangle(new Point(25 + i * BLOCK_WIDTH, 125), BLOCK_WIDTH, BLOCK_HEIGHT);
             Block block = new Block(rect, Color.RED, 1);
             block.addToGame(this);
+            block.addHitListener(phl);
+            block.addHitListener(br);
+            counter.increase(1);
         }
         for (int i = 5; i < 15; i++) {
             Rectangle rect = new Rectangle(new Point(25 + i * BLOCK_WIDTH, 150), BLOCK_WIDTH, BLOCK_HEIGHT);
             Block block = new Block(rect, Color.YELLOW, 1);
             block.addToGame(this);
+            block.addHitListener(phl);
+            block.addHitListener(br);
+            counter.increase(1);
         }
         for (int i = 6; i < 15; i++) {
             Rectangle rect = new Rectangle(new Point(25 + i * BLOCK_WIDTH, 175), BLOCK_WIDTH, BLOCK_HEIGHT);
             Block block = new Block(rect, Color.BLUE, 1);
             block.addToGame(this);
+            block.addHitListener(phl);
+            block.addHitListener(br);
+            counter.increase(1);
         }
         for (int i = 7; i < 15; i++) {
             Rectangle rect = new Rectangle(new Point(25 + i * BLOCK_WIDTH, 200), BLOCK_WIDTH, BLOCK_HEIGHT);
             Block block = new Block(rect, Color.PINK, 1);
             block.addToGame(this);
+            block.addHitListener(phl);
+            block.addHitListener(br);
+            counter.increase(1);
         }
         for (int i = 8; i < 15; i++) {
             Rectangle rect = new Rectangle(new Point(25 + i * BLOCK_WIDTH, 225), BLOCK_WIDTH, BLOCK_HEIGHT);
             Block block = new Block(rect, Color.GREEN, 1);
             block.addToGame(this);
+            block.addHitListener(phl);
+            block.addHitListener(br);
+            counter.increase(1);
         }
 
         //init paddle
@@ -164,6 +191,11 @@ public class Game {
             this.sprites.drawAllOn(d);
             gui.show(d);
             this.sprites.notifyAllTimePassed();
+
+            if (counter.getValue() == 0) {
+                gui.close();
+                return;
+            }
 
             // timing
             long usedTime = System.currentTimeMillis() - startTime;

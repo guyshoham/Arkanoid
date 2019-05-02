@@ -207,25 +207,25 @@ public class Ball implements Sprite {
                     && nextPos.getY() + velocity.getDy() >= collisionPoint.getY()
                     && velocity.getDx() >= 0 && velocity.getDy() >= 0) {
                 //the ball is coming from top left
-                newVelocity = collisionInfo.collisionObject().hit(collisionInfo.collisionPoint(), velocity);
+                newVelocity = collisionInfo.collisionObject().hit(this, collisionInfo.collisionPoint(), velocity);
                 setVelocity(newVelocity);
             } else if (nextPos.getX() + velocity.getDx() <= collisionPoint.getX()
                     && nextPos.getY() + velocity.getDy() >= collisionPoint.getY()
                     && velocity.getDx() <= 0 && velocity.getDy() >= 0) {
                 //the ball is coming from top right
-                newVelocity = collisionInfo.collisionObject().hit(collisionInfo.collisionPoint(), velocity);
+                newVelocity = collisionInfo.collisionObject().hit(this, collisionInfo.collisionPoint(), velocity);
                 setVelocity(newVelocity);
             } else if (nextPos.getX() + velocity.getDx() >= collisionPoint.getX()
                     && nextPos.getY() + velocity.getDy() <= collisionPoint.getY()
                     && velocity.getDx() >= 0 && velocity.getDy() <= 0) {
                 //the ball is coming from bottom left
-                newVelocity = collisionInfo.collisionObject().hit(collisionInfo.collisionPoint(), velocity);
+                newVelocity = collisionInfo.collisionObject().hit(this, collisionInfo.collisionPoint(), velocity);
                 setVelocity(newVelocity);
             } else if (nextPos.getX() + velocity.getDx() <= collisionPoint.getX()
                     && nextPos.getY() + velocity.getDy() <= collisionPoint.getY()
                     && velocity.getDx() <= 0 && velocity.getDy() <= 0) {
                 //the ball is coming from bottom right
-                newVelocity = collisionInfo.collisionObject().hit(collisionInfo.collisionPoint(), velocity);
+                newVelocity = collisionInfo.collisionObject().hit(this, collisionInfo.collisionPoint(), velocity);
                 setVelocity(newVelocity);
             }
 
