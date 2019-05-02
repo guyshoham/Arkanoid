@@ -1,3 +1,9 @@
+package collisions;
+
+import geometry.Velocity;
+import geometry.Point;
+import geometry.Rectangle;
+
 /**
  * interface Collidable.
  *

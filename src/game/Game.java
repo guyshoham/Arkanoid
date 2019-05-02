@@ -1,7 +1,18 @@
+package game;
+
 import biuoop.DrawSurface;
 import biuoop.GUI;
 import biuoop.KeyboardSensor;
 import biuoop.Sleeper;
+import collisions.Collidable;
+import gameObjects.Ball;
+import gameObjects.Block;
+import gameObjects.Paddle;
+import geometry.Velocity;
+import geometry.Point;
+import geometry.Rectangle;
+import sprites.Sprite;
+import sprites.SpriteCollection;
 
 import java.awt.Color;
 

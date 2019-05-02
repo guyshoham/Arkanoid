@@ -1,5 +1,13 @@
+package gameObjects;
+
 import biuoop.DrawSurface;
 import biuoop.KeyboardSensor;
+import collisions.Collidable;
+import game.Game;
+import geometry.Point;
+import geometry.Rectangle;
+import geometry.Velocity;
+import sprites.Sprite;
 
 import java.awt.Color;
 

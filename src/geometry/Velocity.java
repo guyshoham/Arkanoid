@@ -1,3 +1,5 @@
+package geometry;
+
 /**
  * Velocity Model Object.
  *

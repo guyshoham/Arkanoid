@@ -1,4 +1,8 @@
+package geometry;
+
 import biuoop.DrawSurface;
+import game.Game;
+import sprites.Sprite;
 
 import java.awt.Color;
 import java.util.ArrayList;
@@ -9,7 +13,7 @@ import java.util.List;
  *
  * @author Guy Shoham
  */
-class Rectangle implements Sprite {
+public class Rectangle implements Sprite {
 
     private Point upperLeft, upperRight, lowerLeft, lowerRight;
     private Line topEdge, bottomEdge, leftEdge, rightEdge;
@@ -24,7 +28,7 @@ class Rectangle implements Sprite {
      * @param width     the width of the rectangle.
      * @param height    the height of the rectangle.
      */
-    Rectangle(Point upperLeft, double width, double height) {
+    public Rectangle(Point upperLeft, double width, double height) {
         this.upperLeft = upperLeft;
         this.width = width;
         this.height = height;

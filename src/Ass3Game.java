@@ -1,3 +1,5 @@
+import game.Game;
+
 /**
  * class ass3Game.
  *

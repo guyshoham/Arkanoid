@@ -1,3 +1,5 @@
+package geometry;
+
 /**
  * Point Model Object.
  *

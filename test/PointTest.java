@@ -1,3 +1,5 @@
+import geometry.Point;
+import geometry.Rectangle;
 import org.junit.Test;
 
 import static org.junit.Assert.*;

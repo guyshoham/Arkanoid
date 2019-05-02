@@ -1,5 +1,13 @@
+package gameObjects;
 
 import biuoop.DrawSurface;
+import collisions.CollisionInfo;
+import game.Game;
+import game.GameEnvironment;
+import geometry.Line;
+import geometry.Point;
+import geometry.Velocity;
+import sprites.Sprite;
 
 import java.awt.Color;
 
@@ -29,7 +37,7 @@ public class Ball implements Sprite {
         this.size = r;
         this.color = color;
         this.velocity = new Velocity(0, 0);
-        this.environment = new GameEnvironment();
+        environment = new GameEnvironment();
     }
 
     /**

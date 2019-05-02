@@ -1,3 +1,5 @@
+package geometry;
+
 import java.util.List;
 
 /**
@@ -255,6 +257,6 @@ public class Line {
 
     @Override
     public String toString() {
-        return "Line{" + "start=" + start + ", end=" + end + '}';
+        return "geometry.Line{" + "start=" + start + ", end=" + end + '}';
     }
 }
