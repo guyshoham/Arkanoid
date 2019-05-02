@@ -13,7 +13,7 @@ import java.awt.Color;
 public class Game {
     private SpriteCollection sprites;
     private GameEnvironment environment;
-    private GUI gui = new GUI("Game Run", 800, 800);
+    private GUI gui = new GUI("Game Run", 800, 600);
     private KeyboardSensor keyboard = gui.getKeyboardSensor();
 
     private static final int BALL_SPEED = 10;
@@ -53,30 +53,30 @@ public class Game {
      */
     public void initialize() {
         //init background
-        Rectangle background = new Rectangle(new Point(0, 0), 800, 800);
+        Rectangle background = new Rectangle(new Point(0, 0), 800, 600);
         background.setColor(Color.BLUE.darker());
         background.addToGame(this);
 
         //init 2 balls
-        Ball ball1 = new Ball(new Point(400, 700), BALL_RADIUS, Color.YELLOW);
+        Ball ball1 = new Ball(new Point(400, 500), BALL_RADIUS, Color.YELLOW);
         Velocity v1 = Velocity.fromAngleAndSpeed(300, BALL_SPEED);
         ball1.setVelocity(v1);
         ball1.setTopLeftCorner(new Point(0, 0));
-        ball1.setBottomRightCorner(new Point(800, 800));
+        ball1.setBottomRightCorner(new Point(800, 600));
         ball1.addToGame(this);
 
-        Ball ball2 = new Ball(new Point(400, 700), BALL_RADIUS, Color.CYAN);
+        Ball ball2 = new Ball(new Point(400, 500), BALL_RADIUS, Color.CYAN);
         Velocity v2 = Velocity.fromAngleAndSpeed(60, BALL_SPEED);
         ball2.setVelocity(v2);
         ball2.setTopLeftCorner(new Point(0, 0));
-        ball2.setBottomRightCorner(new Point(800, 800));
+        ball2.setBottomRightCorner(new Point(800, 600));
         ball2.addToGame(this);
 
         //init walls
         Rectangle rectTop = new Rectangle(new Point(0, 0), 800, 25);
-        Rectangle rectBottom = new Rectangle(new Point(0, 775), 800, 25);
-        Rectangle rectLeft = new Rectangle(new Point(0, 0), 25, 800);
-        Rectangle rectRight = new Rectangle(new Point(775, 0), 25, 800);
+        Rectangle rectBottom = new Rectangle(new Point(0, 575), 800, 25);
+        Rectangle rectLeft = new Rectangle(new Point(0, 0), 25, 600);
+        Rectangle rectRight = new Rectangle(new Point(775, 0), 25, 600);
         Block blockTop = new Block(rectTop, Color.BLACK);
         Block blockBottom = new Block(rectBottom, Color.BLACK);
         Block blockLeft = new Block(rectLeft, Color.BLACK);
@@ -119,7 +119,7 @@ public class Game {
         }
 
         //init paddle
-        Paddle paddle = new Paddle(new Rectangle(new Point(350, 750), 100, 25), Color.GRAY, keyboard);
+        Paddle paddle = new Paddle(new Rectangle(new Point(350, 550), 100, 25), Color.GRAY, keyboard);
         paddle.addToGame(this);
 
         Ball.setEnvironment(environment);
