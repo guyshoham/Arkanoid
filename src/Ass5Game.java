@@ -5,7 +5,7 @@ import game.Game;
  *
  * @author Guy Shoham
  */
-public class Ass3Game {
+public class Ass5Game {
 
     /**
      * this main method calls runGame method.
