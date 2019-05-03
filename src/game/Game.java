@@ -227,6 +227,7 @@ public class Game {
 
             if (blocksCounter.getValue() == 0) {
                 score.increase(100);
+                System.out.println(score.getValue());
                 return 1;
             }
             if (ballsCounter.getValue() == 0) {
