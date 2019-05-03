@@ -1,5 +1,6 @@
 package game;
 
+import Listeners.BallRemover;
 import Listeners.BlockRemover;
 import Listeners.Counter;
 import Listeners.PrintingHitListener;
@@ -29,8 +30,9 @@ public class Game {
     private GameEnvironment environment;
     private GUI gui = new GUI("Game Run", 800, 600);
     private KeyboardSensor keyboard = gui.getKeyboardSensor();
-    private Counter counter;
-    private BlockRemover br;
+    private Counter blocksCounter, ballsCounter;
+    private BlockRemover blockRemover;
+    private BallRemover ballRemover;
 
     private static final int BALL_SPEED = 10;
     private static final int BALL_RADIUS = 5;
@@ -43,8 +45,10 @@ public class Game {
     public Game() {
         this.sprites = new SpriteCollection();
         this.environment = new GameEnvironment();
-        this.counter = new Counter();
-        this.br = new BlockRemover(this, counter);
+        this.blocksCounter = new Counter();
+        this.ballsCounter = new Counter();
+        this.blockRemover = new BlockRemover(this, blocksCounter);
+        this.ballRemover = new BallRemover(this, ballsCounter);
     }
 
     /**
@@ -97,27 +101,42 @@ public class Game {
         ball1.setTopLeftCorner(new Point(0, 0));
         ball1.setBottomRightCorner(new Point(800, 600));
         ball1.addToGame(this);
+        ball1.addHitListener(ballRemover);
+        ballsCounter.increase(1);
 
-        Ball ball2 = new Ball(new Point(400, 500), BALL_RADIUS, Color.CYAN);
-        Velocity v2 = Velocity.fromAngleAndSpeed(60, BALL_SPEED);
+        Ball ball2 = new Ball(new Point(400, 500), BALL_RADIUS, Color.MAGENTA);
+        Velocity v2 = Velocity.fromAngleAndSpeed(0, BALL_SPEED);
         ball2.setVelocity(v2);
         ball2.setTopLeftCorner(new Point(0, 0));
         ball2.setBottomRightCorner(new Point(800, 600));
         ball2.addToGame(this);
+        ball2.addHitListener(ballRemover);
+        ballsCounter.increase(1);
+
+        Ball ball3 = new Ball(new Point(400, 500), BALL_RADIUS, Color.CYAN);
+        Velocity v3 = Velocity.fromAngleAndSpeed(60, BALL_SPEED);
+        ball3.setVelocity(v3);
+        ball3.setTopLeftCorner(new Point(0, 0));
+        ball3.setBottomRightCorner(new Point(800, 600));
+        ball3.addToGame(this);
+        ball3.addHitListener(ballRemover);
+        ballsCounter.increase(1);
 
         //init walls
         Rectangle rectTop = new Rectangle(new Point(0, 0), 800, 25);
-        Rectangle rectBottom = new Rectangle(new Point(0, 575), 800, 25);
         Rectangle rectLeft = new Rectangle(new Point(0, 0), 25, 600);
         Rectangle rectRight = new Rectangle(new Point(775, 0), 25, 600);
         Block blockTop = new Block(rectTop, Color.BLACK);
-        Block blockBottom = new Block(rectBottom, Color.BLACK);
         Block blockLeft = new Block(rectLeft, Color.BLACK);
         Block blockRight = new Block(rectRight, Color.BLACK);
         blockTop.addToGame(this);
-        blockBottom.addToGame(this);
         blockLeft.addToGame(this);
         blockRight.addToGame(this);
+
+        Rectangle rectBottom = new Rectangle(new Point(0, 575), 1000, 25);
+        Block blockBottom = new Block(rectBottom, Color.BLACK);
+        blockBottom.addToGame(this);
+        blockBottom.addHitListener(ballRemover);
 
         //init blocks
         for (int i = 3; i < 15; i++) {
@@ -125,48 +144,48 @@ public class Game {
             Block block = new Block(rect, Color.GRAY, 2);
             block.addToGame(this);
             block.addHitListener(phl);
-            block.addHitListener(br);
-            counter.increase(1);
+            block.addHitListener(blockRemover);
+            blocksCounter.increase(1);
         }
         for (int i = 4; i < 15; i++) {
             Rectangle rect = new Rectangle(new Point(25 + i * BLOCK_WIDTH, 125), BLOCK_WIDTH, BLOCK_HEIGHT);
             Block block = new Block(rect, Color.RED, 1);
             block.addToGame(this);
             block.addHitListener(phl);
-            block.addHitListener(br);
-            counter.increase(1);
+            block.addHitListener(blockRemover);
+            blocksCounter.increase(1);
         }
         for (int i = 5; i < 15; i++) {
             Rectangle rect = new Rectangle(new Point(25 + i * BLOCK_WIDTH, 150), BLOCK_WIDTH, BLOCK_HEIGHT);
             Block block = new Block(rect, Color.YELLOW, 1);
             block.addToGame(this);
             block.addHitListener(phl);
-            block.addHitListener(br);
-            counter.increase(1);
+            block.addHitListener(blockRemover);
+            blocksCounter.increase(1);
         }
         for (int i = 6; i < 15; i++) {
             Rectangle rect = new Rectangle(new Point(25 + i * BLOCK_WIDTH, 175), BLOCK_WIDTH, BLOCK_HEIGHT);
             Block block = new Block(rect, Color.BLUE, 1);
             block.addToGame(this);
             block.addHitListener(phl);
-            block.addHitListener(br);
-            counter.increase(1);
+            block.addHitListener(blockRemover);
+            blocksCounter.increase(1);
         }
         for (int i = 7; i < 15; i++) {
             Rectangle rect = new Rectangle(new Point(25 + i * BLOCK_WIDTH, 200), BLOCK_WIDTH, BLOCK_HEIGHT);
             Block block = new Block(rect, Color.PINK, 1);
             block.addToGame(this);
             block.addHitListener(phl);
-            block.addHitListener(br);
-            counter.increase(1);
+            block.addHitListener(blockRemover);
+            blocksCounter.increase(1);
         }
         for (int i = 8; i < 15; i++) {
             Rectangle rect = new Rectangle(new Point(25 + i * BLOCK_WIDTH, 225), BLOCK_WIDTH, BLOCK_HEIGHT);
             Block block = new Block(rect, Color.GREEN, 1);
             block.addToGame(this);
             block.addHitListener(phl);
-            block.addHitListener(br);
-            counter.increase(1);
+            block.addHitListener(blockRemover);
+            blocksCounter.increase(1);
         }
 
         //init paddle
@@ -192,7 +211,7 @@ public class Game {
             gui.show(d);
             this.sprites.notifyAllTimePassed();
 
-            if (counter.getValue() == 0) {
+            if (blocksCounter.getValue() == 0 || ballsCounter.getValue() == 0) {
                 gui.close();
                 return;
             }

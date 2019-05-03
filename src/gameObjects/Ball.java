@@ -1,5 +1,7 @@
 package gameObjects;
 
+import Listeners.HitListener;
+import Listeners.HitNotifier;
 import biuoop.DrawSurface;
 import collisions.CollisionInfo;
 import game.Game;
@@ -10,14 +12,17 @@ import geometry.Velocity;
 import sprites.Sprite;
 
 import java.awt.Color;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Ball Model Object.
  *
  * @author Guy Shoham
  */
-public class Ball implements Sprite {
+public class Ball implements Sprite, HitNotifier {
 
+    List<HitListener> hitListeners;
     private Color color; //the color of the ball
     private Point center; //the location of the ball
     private int size; //the size of the ball (radius)
@@ -38,6 +43,7 @@ public class Ball implements Sprite {
         this.color = color;
         this.velocity = new Velocity(0, 0);
         environment = new GameEnvironment();
+        this.hitListeners = new ArrayList<>();
     }
 
     /**
@@ -173,29 +179,6 @@ public class Ball implements Sprite {
         CollisionInfo collisionInfo = environment.getClosestCollision(trajectory);
 
         if (collisionInfo == null) {
-            System.out.println("collisionInfo == null");
-            //todo: maybe all this condition will be removed in the future (because ball cannot hit the walls)
-            //check if the ball meet the right wall
-            if (center.getX() + velocity.getDx() > bottomRightCorner.getX() && velocity.getDx() > 0) {
-                //change ball from moving right to move left
-                setVelocity(velocity.getDx() * -1, velocity.getDy());
-            }
-            //check if the ball meet the bottom wall
-            if (center.getY() + velocity.getDy() > bottomRightCorner.getY() && velocity.getDy() > 0) {
-                //change ball from moving down to move up
-                setVelocity(velocity.getDx(), velocity.getDy() * -1);
-            }
-            //check if the ball meet the left wall
-            if (center.getX() + velocity.getDx() < topLeftCorner.getX() && velocity.getDx() < 0) {
-                //change ball from moving left to move right
-                setVelocity(velocity.getDx() * -1, velocity.getDy());
-            }
-            //check if the ball meet the top wall
-            if (center.getY() + velocity.getDy() < topLeftCorner.getY() && velocity.getDy() < 0) {
-                //change ball from moving up to move down
-                setVelocity(velocity.getDx(), velocity.getDy() * -1);
-            }
-            //modify the location of the ball
             center = this.getVelocity().applyToPoint(center);
         } else {
             //there is a collision with object. check if next step is the collision point.
@@ -259,4 +242,22 @@ public class Ball implements Sprite {
         }
     }
 
+    /**
+     * remove the ball from the game.
+     *
+     * @param g game
+     */
+    public void removeFromGame(Game g) {
+        g.removeSprite(this);
+    }
+
+    @Override
+    public void addHitListener(HitListener hl) {
+        hitListeners.add(hl);
+    }
+
+    @Override
+    public void removeHitListener(HitListener hl) {
+        hitListeners.remove(hl);
+    }
 }

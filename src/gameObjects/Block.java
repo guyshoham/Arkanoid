@@ -21,8 +21,8 @@ import java.util.List;
  * @author Guy Shoham
  */
 public class Block implements Collidable, Sprite, HitNotifier {
-    List<HitListener> hitListeners;
 
+    List<HitListener> hitListeners;
     private Rectangle rect;
     private Color color;
     private int numberOfHits;
