@@ -1,9 +1,6 @@
 package game;
 
-import Listeners.BallRemover;
-import Listeners.BlockRemover;
-import Listeners.Counter;
-import Listeners.PrintingHitListener;
+import Listeners.*;
 import biuoop.DrawSurface;
 import biuoop.GUI;
 import biuoop.KeyboardSensor;
@@ -15,6 +12,7 @@ import gameObjects.Paddle;
 import geometry.Velocity;
 import geometry.Point;
 import geometry.Rectangle;
+import sprites.ScoreIndicator;
 import sprites.Sprite;
 import sprites.SpriteCollection;
 
@@ -30,9 +28,10 @@ public class Game {
     private GameEnvironment environment;
     private GUI gui = new GUI("Game Run", 800, 600);
     private KeyboardSensor keyboard = gui.getKeyboardSensor();
-    private Counter blocksCounter, ballsCounter;
+    private Counter blocksCounter, ballsCounter, score;
     private BlockRemover blockRemover;
     private BallRemover ballRemover;
+    private ScoreTrackingListener scoreTrackingListener;
 
     private static final int BALL_SPEED = 10;
     private static final int BALL_RADIUS = 5;
@@ -47,8 +46,10 @@ public class Game {
         this.environment = new GameEnvironment();
         this.blocksCounter = new Counter();
         this.ballsCounter = new Counter();
+        this.score = new Counter();
         this.blockRemover = new BlockRemover(this, blocksCounter);
         this.ballRemover = new BallRemover(this, ballsCounter);
+        this.scoreTrackingListener = new ScoreTrackingListener(score);
     }
 
     /**
@@ -87,8 +88,6 @@ public class Game {
      * and add them to the game.
      */
     public void initialize() {
-        PrintingHitListener phl = new PrintingHitListener();
-
         //init background
         Rectangle background = new Rectangle(new Point(0, 0), 800, 600);
         background.setColor(Color.BLUE.darker());
@@ -123,9 +122,13 @@ public class Game {
         ballsCounter.increase(1);
 
         //init walls
-        Rectangle rectTop = new Rectangle(new Point(0, 0), 800, 25);
-        Rectangle rectLeft = new Rectangle(new Point(0, 0), 25, 600);
-        Rectangle rectRight = new Rectangle(new Point(775, 0), 25, 600);
+        Rectangle scoreRect = new Rectangle(new Point(0, 0), 800, 25);
+        ScoreIndicator scoreIndicator = new ScoreIndicator(scoreRect, score);
+        scoreIndicator.addToGame(this);
+
+        Rectangle rectTop = new Rectangle(new Point(0, 25), 800, 25);
+        Rectangle rectLeft = new Rectangle(new Point(0, 25), 25, 600);
+        Rectangle rectRight = new Rectangle(new Point(775, 25), 25, 600);
         Block blockTop = new Block(rectTop, Color.BLACK);
         Block blockLeft = new Block(rectLeft, Color.BLACK);
         Block blockRight = new Block(rectRight, Color.BLACK);
@@ -133,7 +136,7 @@ public class Game {
         blockLeft.addToGame(this);
         blockRight.addToGame(this);
 
-        Rectangle rectBottom = new Rectangle(new Point(0, 575), 1000, 25);
+        Rectangle rectBottom = new Rectangle(new Point(0, 590), 800, 25);
         Block blockBottom = new Block(rectBottom, Color.BLACK);
         blockBottom.addToGame(this);
         blockBottom.addHitListener(ballRemover);
@@ -143,7 +146,7 @@ public class Game {
             Rectangle rect = new Rectangle(new Point(25 + i * BLOCK_WIDTH, 100), BLOCK_WIDTH, BLOCK_HEIGHT);
             Block block = new Block(rect, Color.GRAY, 2);
             block.addToGame(this);
-            block.addHitListener(phl);
+            block.addHitListener(scoreTrackingListener);
             block.addHitListener(blockRemover);
             blocksCounter.increase(1);
         }
@@ -151,7 +154,7 @@ public class Game {
             Rectangle rect = new Rectangle(new Point(25 + i * BLOCK_WIDTH, 125), BLOCK_WIDTH, BLOCK_HEIGHT);
             Block block = new Block(rect, Color.RED, 1);
             block.addToGame(this);
-            block.addHitListener(phl);
+            block.addHitListener(scoreTrackingListener);
             block.addHitListener(blockRemover);
             blocksCounter.increase(1);
         }
@@ -159,7 +162,7 @@ public class Game {
             Rectangle rect = new Rectangle(new Point(25 + i * BLOCK_WIDTH, 150), BLOCK_WIDTH, BLOCK_HEIGHT);
             Block block = new Block(rect, Color.YELLOW, 1);
             block.addToGame(this);
-            block.addHitListener(phl);
+            block.addHitListener(scoreTrackingListener);
             block.addHitListener(blockRemover);
             blocksCounter.increase(1);
         }
@@ -167,7 +170,7 @@ public class Game {
             Rectangle rect = new Rectangle(new Point(25 + i * BLOCK_WIDTH, 175), BLOCK_WIDTH, BLOCK_HEIGHT);
             Block block = new Block(rect, Color.BLUE, 1);
             block.addToGame(this);
-            block.addHitListener(phl);
+            block.addHitListener(scoreTrackingListener);
             block.addHitListener(blockRemover);
             blocksCounter.increase(1);
         }
@@ -175,7 +178,7 @@ public class Game {
             Rectangle rect = new Rectangle(new Point(25 + i * BLOCK_WIDTH, 200), BLOCK_WIDTH, BLOCK_HEIGHT);
             Block block = new Block(rect, Color.PINK, 1);
             block.addToGame(this);
-            block.addHitListener(phl);
+            block.addHitListener(scoreTrackingListener);
             block.addHitListener(blockRemover);
             blocksCounter.increase(1);
         }
@@ -183,7 +186,7 @@ public class Game {
             Rectangle rect = new Rectangle(new Point(25 + i * BLOCK_WIDTH, 225), BLOCK_WIDTH, BLOCK_HEIGHT);
             Block block = new Block(rect, Color.GREEN, 1);
             block.addToGame(this);
-            block.addHitListener(phl);
+            block.addHitListener(scoreTrackingListener);
             block.addHitListener(blockRemover);
             blocksCounter.increase(1);
         }
@@ -211,7 +214,12 @@ public class Game {
             gui.show(d);
             this.sprites.notifyAllTimePassed();
 
-            if (blocksCounter.getValue() == 0 || ballsCounter.getValue() == 0) {
+            if (blocksCounter.getValue() == 0) {
+                score.increase(100);
+                gui.close();
+                return;
+            }
+            if (ballsCounter.getValue() == 0) {
                 gui.close();
                 return;
             }
