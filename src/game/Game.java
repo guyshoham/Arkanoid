@@ -12,6 +12,7 @@ import gameObjects.Paddle;
 import geometry.Velocity;
 import geometry.Point;
 import geometry.Rectangle;
+import sprites.LivesIndicator;
 import sprites.ScoreIndicator;
 import sprites.Sprite;
 import sprites.SpriteCollection;
@@ -28,7 +29,7 @@ public class Game {
     private GameEnvironment environment;
     private GUI gui = new GUI("Game Run", 800, 600);
     private KeyboardSensor keyboard = gui.getKeyboardSensor();
-    private Counter blocksCounter, ballsCounter, score;
+    private Counter blocksCounter, ballsCounter, score, lives;
     private BlockRemover blockRemover;
     private BallRemover ballRemover;
     private ScoreTrackingListener scoreTrackingListener;
@@ -37,6 +38,7 @@ public class Game {
     private static final int BALL_RADIUS = 5;
     private static final int BLOCK_WIDTH = 50;
     private static final int BLOCK_HEIGHT = 25;
+    private boolean isPaddleExist;
 
     /**
      * class Constructor.
@@ -47,9 +49,11 @@ public class Game {
         this.blocksCounter = new Counter();
         this.ballsCounter = new Counter();
         this.score = new Counter();
+        this.lives = new Counter();
         this.blockRemover = new BlockRemover(this, blocksCounter);
         this.ballRemover = new BallRemover(this, ballsCounter);
         this.scoreTrackingListener = new ScoreTrackingListener(score);
+        this.isPaddleExist = false;
     }
 
     /**
@@ -93,36 +97,21 @@ public class Game {
         background.setColor(Color.BLUE.darker());
         background.addToGame(this);
 
-        //init 2 balls
-        Ball ball1 = new Ball(new Point(400, 500), BALL_RADIUS, Color.YELLOW);
-        Velocity v1 = Velocity.fromAngleAndSpeed(300, BALL_SPEED);
-        ball1.setVelocity(v1);
-        ball1.setTopLeftCorner(new Point(0, 0));
-        ball1.setBottomRightCorner(new Point(800, 600));
-        ball1.addToGame(this);
-        ball1.addHitListener(ballRemover);
-        ballsCounter.increase(1);
-
-        Ball ball2 = new Ball(new Point(400, 500), BALL_RADIUS, Color.MAGENTA);
-        Velocity v2 = Velocity.fromAngleAndSpeed(0, BALL_SPEED);
-        ball2.setVelocity(v2);
-        ball2.setTopLeftCorner(new Point(0, 0));
-        ball2.setBottomRightCorner(new Point(800, 600));
-        ball2.addToGame(this);
-        ball2.addHitListener(ballRemover);
-        ballsCounter.increase(1);
-
-        Ball ball3 = new Ball(new Point(400, 500), BALL_RADIUS, Color.CYAN);
+        /*Ball ball3 = new Ball(new Point(400, 500), BALL_RADIUS, Color.CYAN);
         Velocity v3 = Velocity.fromAngleAndSpeed(60, BALL_SPEED);
         ball3.setVelocity(v3);
         ball3.setTopLeftCorner(new Point(0, 0));
         ball3.setBottomRightCorner(new Point(800, 600));
         ball3.addToGame(this);
         ball3.addHitListener(ballRemover);
-        ballsCounter.increase(1);
+        ballsCounter.increase(1);*/
 
         //init walls
-        Rectangle scoreRect = new Rectangle(new Point(0, 0), 800, 25);
+        Rectangle livesRect = new Rectangle(new Point(0, 0), 100, 25);
+        LivesIndicator livesIndicator = new LivesIndicator(livesRect, lives);
+        livesIndicator.addToGame(this);
+
+        Rectangle scoreRect = new Rectangle(new Point(100, 0), 700, 25);
         ScoreIndicator scoreIndicator = new ScoreIndicator(scoreRect, score);
         scoreIndicator.addToGame(this);
 
@@ -190,18 +179,40 @@ public class Game {
             block.addHitListener(blockRemover);
             blocksCounter.increase(1);
         }
-
-        //init paddle
-        Paddle paddle = new Paddle(new Rectangle(new Point(350, 550), 100, 25), Color.GRAY, keyboard);
-        paddle.addToGame(this);
-
-        Ball.setEnvironment(environment);
     }
 
     /**
      * Run the game -- start the animation loop.
      */
-    public void run() {
+    public int playOneTurn() {
+        //init 2 balls
+        Ball ball1 = new Ball(new Point(400, 500), BALL_RADIUS, Color.YELLOW);
+        Velocity v1 = Velocity.fromAngleAndSpeed(300, BALL_SPEED);
+        ball1.setVelocity(v1);
+        ball1.setTopLeftCorner(new Point(0, 0));
+        ball1.setBottomRightCorner(new Point(800, 600));
+        ball1.addToGame(this);
+        ball1.addHitListener(ballRemover);
+        ballsCounter.increase(1);
+
+        Ball ball2 = new Ball(new Point(400, 500), BALL_RADIUS, Color.MAGENTA);
+        Velocity v2 = Velocity.fromAngleAndSpeed(0, BALL_SPEED);
+        ball2.setVelocity(v2);
+        ball2.setTopLeftCorner(new Point(0, 0));
+        ball2.setBottomRightCorner(new Point(800, 600));
+        ball2.addToGame(this);
+        ball2.addHitListener(ballRemover);
+        ballsCounter.increase(1);
+
+        Ball.setEnvironment(environment);
+
+        //init paddle if needed
+        if (!isPaddleExist) {
+            Paddle paddle = new Paddle(new Rectangle(new Point(350, 550), 100, 25), Color.GRAY, keyboard);
+            paddle.addToGame(this);
+            isPaddleExist = true;
+        }
+
         Sleeper sleeper = new Sleeper();
 
         int framesPerSecond = 60;
@@ -216,12 +227,10 @@ public class Game {
 
             if (blocksCounter.getValue() == 0) {
                 score.increase(100);
-                gui.close();
-                return;
+                return 1;
             }
             if (ballsCounter.getValue() == 0) {
-                gui.close();
-                return;
+                return 0;
             }
 
             // timing
@@ -231,5 +240,18 @@ public class Game {
                 sleeper.sleepFor(milliSecondLeftToSleep);
             }
         }
+    }
+
+    public void run() {
+        lives.increase(4);
+        while (lives.getValue() != 0) {
+            if (playOneTurn() == 0) {
+                lives.decrease(1);
+            } else {
+                gui.close();
+                return;
+            }
+        }
+        gui.close();
     }
 }
