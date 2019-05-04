@@ -10,6 +10,7 @@ import gameobjects.Block;
 import gameobjects.LivesIndicator;
 import gameobjects.Paddle;
 import gameobjects.ScoreIndicator;
+import geometry.Background;
 import geometry.Point;
 import geometry.Rectangle;
 import listeners.BallRemover;
@@ -28,13 +29,15 @@ import java.awt.Color;
 public class Game {
     private SpriteCollection sprites;
     private GameEnvironment environment;
-    private GUI gui = new GUI("Game Run", 800, 600);
+    private GUI gui = new GUI("Game Run", GUI_WIDTH, GUI_HEIGHT);
     private KeyboardSensor keyboard = gui.getKeyboardSensor();
     private Counter blocksCounter, ballsCounter, score, lives;
     private BlockRemover blockRemover;
     private BallRemover ballRemover;
     private ScoreTrackingListener scoreTrackingListener;
 
+    private static final int GUI_WIDTH = 800;
+    private static final int GUI_HEIGHT = 600;
     private static final int BALL_SPEED = 10;
     private static final int BALL_RADIUS = 5;
     private static final int BLOCK_WIDTH = 50;
@@ -99,8 +102,7 @@ public class Game {
      */
     public void initialize() {
         //init background
-        Rectangle background = new Rectangle(new Point(0, 0), 800, 600);
-        background.setColor(Color.BLUE.darker());
+        Background background = new Background(new Point(0, 0), GUI_WIDTH, GUI_HEIGHT);
         background.addToGame(this);
 
         //init walls, lives rect and score rect
@@ -160,7 +162,7 @@ public class Game {
         Velocity v1 = Velocity.fromAngleAndSpeed(300, BALL_SPEED);
         ball1.setVelocity(v1);
         ball1.setTopLeftCorner(new Point(0, 0));
-        ball1.setBottomRightCorner(new Point(800, 600));
+        ball1.setBottomRightCorner(new Point(GUI_WIDTH, GUI_HEIGHT));
         ball1.addToGame(this);
         ball1.addHitListener(ballRemover);
         ballsCounter.increase(1);
@@ -169,7 +171,7 @@ public class Game {
         Velocity v2 = Velocity.fromAngleAndSpeed(0, BALL_SPEED);
         ball2.setVelocity(v2);
         ball2.setTopLeftCorner(new Point(0, 0));
-        ball2.setBottomRightCorner(new Point(800, 600));
+        ball2.setBottomRightCorner(new Point(GUI_WIDTH, GUI_HEIGHT));
         ball2.addToGame(this);
         ball2.addHitListener(ballRemover);
         ballsCounter.increase(1);

@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Point Model Object.
+ * Rectangle Model Object.
  *
  * @author Guy Shoham
  */
@@ -119,7 +119,6 @@ public class Rectangle implements Sprite {
     public Line getRightEdge() {
         return rightEdge;
     }
-
 
     /**
      * @param line line.
