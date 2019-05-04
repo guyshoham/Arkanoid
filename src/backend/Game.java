@@ -103,16 +103,7 @@ public class Game {
         background.setColor(Color.BLUE.darker());
         background.addToGame(this);
 
-        /*Ball ball3 = new Ball(new Point(400, 500), BALL_RADIUS, Color.CYAN);
-        Velocity v3 = Velocity.fromAngleAndSpeed(60, BALL_SPEED);
-        ball3.setVelocity(v3);
-        ball3.setTopLeftCorner(new Point(0, 0));
-        ball3.setBottomRightCorner(new Point(800, 600));
-        ball3.addToGame(this);
-        ball3.addHitListener(ballRemover);
-        ballsCounter.increase(1);*/
-
-        //init walls
+        //init walls, lives rect and score rect
         Rectangle livesRect = new Rectangle(new Point(0, 0), 100, 25);
         LivesIndicator livesIndicator = new LivesIndicator(livesRect, lives);
         livesIndicator.addToGame(this);
@@ -131,59 +122,29 @@ public class Game {
         blockLeft.addToGame(this);
         blockRight.addToGame(this);
 
+        //init death region block
         Rectangle rectBottom = new Rectangle(new Point(0, 590), 800, 25);
         Block blockBottom = new Block(rectBottom, Color.BLACK);
         blockBottom.addToGame(this);
         blockBottom.addHitListener(ballRemover);
 
+        Color[] colors = {Color.GRAY, Color.RED, Color.YELLOW, Color.BLUE, Color.PINK, Color.GREEN};
+
         //init blocks
-        for (int i = 3; i < 15; i++) {
-            Rectangle rect = new Rectangle(new Point(25 + i * BLOCK_WIDTH, 100), BLOCK_WIDTH, BLOCK_HEIGHT);
-            Block block = new Block(rect, Color.GRAY, 2);
-            block.addToGame(this);
-            block.addHitListener(scoreTrackingListener);
-            block.addHitListener(blockRemover);
-            blocksCounter.increase(1);
-        }
-        for (int i = 4; i < 15; i++) {
-            Rectangle rect = new Rectangle(new Point(25 + i * BLOCK_WIDTH, 125), BLOCK_WIDTH, BLOCK_HEIGHT);
-            Block block = new Block(rect, Color.RED, 1);
-            block.addToGame(this);
-            block.addHitListener(scoreTrackingListener);
-            block.addHitListener(blockRemover);
-            blocksCounter.increase(1);
-        }
-        for (int i = 5; i < 15; i++) {
-            Rectangle rect = new Rectangle(new Point(25 + i * BLOCK_WIDTH, 150), BLOCK_WIDTH, BLOCK_HEIGHT);
-            Block block = new Block(rect, Color.YELLOW, 1);
-            block.addToGame(this);
-            block.addHitListener(scoreTrackingListener);
-            block.addHitListener(blockRemover);
-            blocksCounter.increase(1);
-        }
-        for (int i = 6; i < 15; i++) {
-            Rectangle rect = new Rectangle(new Point(25 + i * BLOCK_WIDTH, 175), BLOCK_WIDTH, BLOCK_HEIGHT);
-            Block block = new Block(rect, Color.BLUE, 1);
-            block.addToGame(this);
-            block.addHitListener(scoreTrackingListener);
-            block.addHitListener(blockRemover);
-            blocksCounter.increase(1);
-        }
-        for (int i = 7; i < 15; i++) {
-            Rectangle rect = new Rectangle(new Point(25 + i * BLOCK_WIDTH, 200), BLOCK_WIDTH, BLOCK_HEIGHT);
-            Block block = new Block(rect, Color.PINK, 1);
-            block.addToGame(this);
-            block.addHitListener(scoreTrackingListener);
-            block.addHitListener(blockRemover);
-            blocksCounter.increase(1);
-        }
-        for (int i = 8; i < 15; i++) {
-            Rectangle rect = new Rectangle(new Point(25 + i * BLOCK_WIDTH, 225), BLOCK_WIDTH, BLOCK_HEIGHT);
-            Block block = new Block(rect, Color.GREEN, 1);
-            block.addToGame(this);
-            block.addHitListener(scoreTrackingListener);
-            block.addHitListener(blockRemover);
-            blocksCounter.increase(1);
+        for (int row = 0; row < 6; row++) {
+            for (int b = 3 + row; b < 15; b++) {
+                Rectangle rect = new Rectangle(new Point(25 + b * BLOCK_WIDTH, 100 + row * 25), BLOCK_WIDTH, BLOCK_HEIGHT);
+                Block block = new Block(rect, colors[row]);
+                if (row == 0) {
+                    block.setNumberOfHits(2);
+                } else {
+                    block.setNumberOfHits(1);
+                }
+                block.addToGame(this);
+                block.addHitListener(scoreTrackingListener);
+                block.addHitListener(blockRemover);
+                blocksCounter.increase(1);
+            }
         }
     }
 
