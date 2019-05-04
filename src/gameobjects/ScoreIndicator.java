@@ -1,16 +1,28 @@
-package sprites;
+package gameobjects;
 
-import Listeners.Counter;
+import backend.Counter;
 import biuoop.DrawSurface;
-import game.Game;
+import backend.Game;
 import geometry.Rectangle;
+import sprites.Sprite;
 
-import java.awt.*;
+import java.awt.Color;
 
+/**
+ * class ScoreIndicator.
+ *
+ * @author Guy Shoham
+ */
 public class ScoreIndicator implements Sprite {
     private Rectangle rect;
     private Counter score;
 
+    /**
+     * class constructor.
+     *
+     * @param rectangle rectangle.
+     * @param score     counter.
+     */
     public ScoreIndicator(Rectangle rectangle, Counter score) {
         this.rect = rectangle;
         this.score = score;

@@ -1,14 +1,14 @@
-package gameObjects;
+package gameobjects;
 
-import Listeners.HitListener;
-import Listeners.HitNotifier;
+import listeners.HitListener;
+import listeners.HitNotifier;
 import biuoop.DrawSurface;
 import collisions.CollisionInfo;
-import game.Game;
-import game.GameEnvironment;
+import backend.Game;
+import backend.GameEnvironment;
 import geometry.Line;
 import geometry.Point;
-import geometry.Velocity;
+import backend.Velocity;
 import sprites.Sprite;
 
 import java.awt.Color;
@@ -22,7 +22,7 @@ import java.util.List;
  */
 public class Ball implements Sprite, HitNotifier {
 
-    List<HitListener> hitListeners;
+    private List<HitListener> hitListeners;
     private Color color; //the color of the ball
     private Point center; //the location of the ball
     private int size; //the size of the ball (radius)

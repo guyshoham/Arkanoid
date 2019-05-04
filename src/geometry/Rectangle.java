@@ -1,7 +1,7 @@
 package geometry;
 
 import biuoop.DrawSurface;
-import game.Game;
+import backend.Game;
 import sprites.Sprite;
 
 import java.awt.Color;

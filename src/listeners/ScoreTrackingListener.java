@@ -1,11 +1,22 @@
-package Listeners;
+package listeners;
 
-import gameObjects.Ball;
-import gameObjects.Block;
+import backend.Counter;
+import gameobjects.Ball;
+import gameobjects.Block;
 
+/**
+ * class ScoreTrackingListener.
+ *
+ * @author Guy Shoham
+ */
 public class ScoreTrackingListener implements HitListener {
     private Counter currentScore;
 
+    /**
+     * class constructor.
+     *
+     * @param scoreCounter counter.
+     */
     public ScoreTrackingListener(Counter scoreCounter) {
         this.currentScore = scoreCounter;
     }

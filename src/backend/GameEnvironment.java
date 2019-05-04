@@ -1,4 +1,4 @@
-package game;
+package backend;
 
 import collisions.Collidable;
 import collisions.CollisionInfo;
@@ -33,6 +33,11 @@ public class GameEnvironment {
         collidables.add(c);
     }
 
+    /**
+     * remove the collidable object from the game environment.
+     *
+     * @param c collidable.
+     */
     public void removeCollidable(Collidable c) {
         collidables.remove(c);
     }

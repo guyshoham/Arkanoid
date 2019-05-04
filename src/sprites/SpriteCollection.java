@@ -11,13 +11,13 @@ import java.util.List;
  * @author Guy Shoham
  */
 public class SpriteCollection {
-    private List<Sprite> sprites;
+    private List<Sprite> spriteList;
 
     /**
      * Class constructor.
      */
     public SpriteCollection() {
-        this.sprites = new ArrayList<>();
+        this.spriteList = new ArrayList<>();
     }
 
     /**
@@ -26,7 +26,7 @@ public class SpriteCollection {
      * @param s sprite.
      */
     public void addSprite(Sprite s) {
-        sprites.add(s);
+        spriteList.add(s);
     }
 
     /**
@@ -35,15 +35,18 @@ public class SpriteCollection {
      * @param s sprite.
      */
     public void removeSprite(Sprite s) {
-        sprites.remove(s);
+        spriteList.remove(s);
     }
 
     /**
      * call timePassed() on all sprites.
      */
     public void notifyAllTimePassed() {
-        for (int i = 0; i < sprites.size(); i++) {
-            sprites.get(i).timePassed();
+        // Make a copy of the sprites before iterating over them.
+        List<Sprite> sprites = new ArrayList<>(this.spriteList);
+        // Notify all sprites about time passed:
+        for (Sprite sprite : sprites) {
+            sprite.timePassed();
         }
     }
 
@@ -53,7 +56,7 @@ public class SpriteCollection {
      * @param surface surface.
      */
     public void drawAllOn(DrawSurface surface) {
-        for (Sprite sprite : sprites) {
+        for (Sprite sprite : spriteList) {
             sprite.drawOn(surface);
         }
     }

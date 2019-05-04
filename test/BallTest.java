@@ -1,4 +1,4 @@
-import gameObjects.Ball;
+import gameobjects.Ball;
 import geometry.Point;
 import org.junit.Test;
 

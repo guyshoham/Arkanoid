@@ -1,19 +1,20 @@
-package game;
+package backend;
 
-import Listeners.*;
 import biuoop.DrawSurface;
 import biuoop.GUI;
 import biuoop.KeyboardSensor;
 import biuoop.Sleeper;
 import collisions.Collidable;
-import gameObjects.Ball;
-import gameObjects.Block;
-import gameObjects.Paddle;
-import geometry.Velocity;
+import gameobjects.Ball;
+import gameobjects.Block;
+import gameobjects.LivesIndicator;
+import gameobjects.Paddle;
+import gameobjects.ScoreIndicator;
 import geometry.Point;
 import geometry.Rectangle;
-import sprites.LivesIndicator;
-import sprites.ScoreIndicator;
+import listeners.BallRemover;
+import listeners.BlockRemover;
+import listeners.ScoreTrackingListener;
 import sprites.Sprite;
 import sprites.SpriteCollection;
 
@@ -65,6 +66,11 @@ public class Game {
         environment.addCollidable(c);
     }
 
+    /**
+     * remove the collidable object from the game environment.
+     *
+     * @param c collidable.
+     */
     public void removeCollidable(Collidable c) {
         environment.removeCollidable(c);
     }
@@ -182,7 +188,10 @@ public class Game {
     }
 
     /**
-     * Run the game -- start the animation loop.
+     * play one turn -- start the animation loop.
+     * finish when no balls left or no blocks left.
+     *
+     * @return 1 if turn ended because of no blocks left, 0 if turn ended because of no balls left.
      */
     public int playOneTurn() {
         //init 2 balls
@@ -243,6 +252,9 @@ public class Game {
         }
     }
 
+    /**
+     * Run the game and finish after 4 lives has been played or level is finish.
+     */
     public void run() {
         lives.increase(4);
         while (lives.getValue() != 0) {

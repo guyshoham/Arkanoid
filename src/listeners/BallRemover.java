@@ -1,13 +1,25 @@
-package Listeners;
+package listeners;
 
-import game.Game;
-import gameObjects.Ball;
-import gameObjects.Block;
+import backend.Counter;
+import backend.Game;
+import gameobjects.Ball;
+import gameobjects.Block;
 
+/**
+ * class BallRemover.
+ *
+ * @author Guy Shoham
+ */
 public class BallRemover implements HitListener {
     private Game game;
     private Counter remainingBalls;
 
+    /**
+     * class constructor.
+     *
+     * @param game       game
+     * @param numOfBalls counter
+     */
     public BallRemover(Game game, Counter numOfBalls) {
         this.game = game;
         this.remainingBalls = numOfBalls;

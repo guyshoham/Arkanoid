@@ -1,5 +1,10 @@
-package Listeners;
+package listeners;
 
+/**
+ * interface HitNotifier.
+ *
+ * @author Guy Shoham
+ */
 public interface HitNotifier {
     /**
      * Add hl as a listener to hit events.

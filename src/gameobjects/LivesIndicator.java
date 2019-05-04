@@ -1,16 +1,28 @@
-package sprites;
+package gameobjects;
 
-import Listeners.Counter;
+import backend.Counter;
 import biuoop.DrawSurface;
-import game.Game;
+import backend.Game;
 import geometry.Rectangle;
+import sprites.Sprite;
 
-import java.awt.*;
+import java.awt.Color;
 
+/**
+ * class LivesIndicator.
+ *
+ * @author Guy Shoham
+ */
 public class LivesIndicator implements Sprite {
     private Rectangle rect;
     private Counter lives;
 
+    /**
+     * class constructor.
+     *
+     * @param rectangle rectangle.
+     * @param lives     counter.
+     */
     public LivesIndicator(Rectangle rectangle, Counter lives) {
         this.rect = rectangle;
         this.lives = lives;

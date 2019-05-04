@@ -1,14 +1,14 @@
-package gameObjects;
+package gameobjects;
 
-import Listeners.HitListener;
-import Listeners.HitNotifier;
+import backend.Velocity;
 import biuoop.DrawSurface;
 import collisions.Collidable;
-import game.Game;
+import backend.Game;
 import geometry.Line;
 import geometry.Point;
 import geometry.Rectangle;
-import geometry.Velocity;
+import listeners.HitListener;
+import listeners.HitNotifier;
 import sprites.Sprite;
 
 import java.awt.Color;
@@ -22,7 +22,7 @@ import java.util.List;
  */
 public class Block implements Collidable, Sprite, HitNotifier {
 
-    List<HitListener> hitListeners;
+    private List<HitListener> hitListeners;
     private Rectangle rect;
     private Color color;
     private int numberOfHits;
@@ -138,6 +138,11 @@ public class Block implements Collidable, Sprite, HitNotifier {
         hitListeners.remove(hl);
     }
 
+    /**
+     * Notify all listeners about a hit event.
+     *
+     * @param hitter ball.
+     */
     private void notifyHit(Ball hitter) {
         // Make a copy of the hitListeners before iterating over them.
         List<HitListener> listeners = new ArrayList<>(this.hitListeners);
@@ -147,14 +152,23 @@ public class Block implements Collidable, Sprite, HitNotifier {
         }
     }
 
+    /**
+     * @return number of hits as string.
+     */
     public String getHitPoints() {
         return String.valueOf(numberOfHits);
     }
 
+    /**
+     * @return number of hits.
+     */
     public int getNumberOfHits() {
         return numberOfHits;
     }
 
+    /**
+     * remove 1 hit form number of hits.
+     */
     public void removeHit() {
         numberOfHits--;
     }

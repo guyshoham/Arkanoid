@@ -1,17 +1,26 @@
-package Listeners;
+package listeners;
 
-import game.Game;
-import gameObjects.Ball;
-import gameObjects.Block;
+import backend.Counter;
+import backend.Game;
+import gameobjects.Ball;
+import gameobjects.Block;
 
 /**
  * a BlockRemover is in charge of removing blocks from the game, as well as keeping count
  * of the number of blocks that remain.
+ *
+ * @author Guy Shoham
  */
 public class BlockRemover implements HitListener {
     private Game game;
     private Counter remainingBlocks;
 
+    /**
+     * class constructor.
+     *
+     * @param game          game
+     * @param removedBlocks blocks to be removed
+     */
     public BlockRemover(Game game, Counter removedBlocks) {
         this.game = game;
         this.remainingBlocks = removedBlocks;

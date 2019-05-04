@@ -1,4 +1,4 @@
-import game.Game;
+import backend.Game;
 
 /**
  * class ass3Game.

@@ -1,12 +1,12 @@
-package gameObjects;
+package gameobjects;
 
 import biuoop.DrawSurface;
 import biuoop.KeyboardSensor;
 import collisions.Collidable;
-import game.Game;
+import backend.Game;
 import geometry.Point;
 import geometry.Rectangle;
-import geometry.Velocity;
+import backend.Velocity;
 import sprites.Sprite;
 
 import java.awt.Color;
@@ -92,13 +92,7 @@ public class Paddle implements Sprite, Collidable {
         return rect;
     }
 
-    /**
-     * this method handle the paddle when it got hit.
-     *
-     * @param collisionPoint  the collision point of the collidable object and the ball.
-     * @param currentVelocity current velocity of the hitting ball.
-     * @return new Velocity to the hitting object.
-     */
+    @Override
     public Velocity hit(Ball hitter, Point collisionPoint, Velocity currentVelocity) {
         Velocity retVal = new Velocity(currentVelocity.getDx(), currentVelocity.getDy());
 
