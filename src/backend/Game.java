@@ -5,7 +5,6 @@ import biuoop.GUI;
 import biuoop.KeyboardSensor;
 import biuoop.Sleeper;
 import collisions.Collidable;
-import com.sun.xml.internal.org.jvnet.fastinfoset.stax.LowLevelFastInfosetStreamWriter;
 import gameobjects.Ball;
 import gameobjects.Block;
 import gameobjects.LivesIndicator;
