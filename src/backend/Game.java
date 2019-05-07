@@ -5,6 +5,7 @@ import biuoop.GUI;
 import biuoop.KeyboardSensor;
 import biuoop.Sleeper;
 import collisions.Collidable;
+import com.sun.xml.internal.org.jvnet.fastinfoset.stax.LowLevelFastInfosetStreamWriter;
 import gameobjects.Ball;
 import gameobjects.Block;
 import gameobjects.LivesIndicator;
@@ -38,10 +39,12 @@ public class Game {
 
     private static final int GUI_WIDTH = 800;
     private static final int GUI_HEIGHT = 600;
-    private static final int BALL_SPEED = 10;
+    private static final int BALL_SPEED = 9;
     private static final int BALL_RADIUS = 5;
     private static final int BLOCK_WIDTH = 50;
     private static final int BLOCK_HEIGHT = 25;
+    private static final int WIN = 1;
+    private static final int LOSE = 0;
     private boolean isPaddleExist;
 
     /**
@@ -53,7 +56,7 @@ public class Game {
         this.blocksCounter = new Counter();
         this.ballsCounter = new Counter();
         this.score = new Counter();
-        this.lives = new Counter();
+        this.lives = new Counter(4);
         this.blockRemover = new BlockRemover(this, blocksCounter);
         this.ballRemover = new BallRemover(this, ballsCounter);
         this.scoreTrackingListener = new ScoreTrackingListener(score);
@@ -135,7 +138,8 @@ public class Game {
         //init blocks
         for (int row = 0; row < 6; row++) {
             for (int b = 3 + row; b < 15; b++) {
-                Rectangle rect = new Rectangle(new Point(25 + b * BLOCK_WIDTH, 100 + row * 25), BLOCK_WIDTH, BLOCK_HEIGHT);
+                Rectangle rect = new Rectangle(new Point(25 + b * BLOCK_WIDTH, 100 + row * 25),
+                        BLOCK_WIDTH, BLOCK_HEIGHT);
                 Block block = new Block(rect, colors[row]);
                 if (row == 0) {
                     block.setNumberOfHits(2);
@@ -199,11 +203,10 @@ public class Game {
 
             if (blocksCounter.getValue() == 0) {
                 score.increase(100);
-                System.out.println(score.getValue());
-                return 1;
+                return WIN;
             }
             if (ballsCounter.getValue() == 0) {
-                return 0;
+                return LOSE;
             }
 
             // timing
@@ -219,15 +222,19 @@ public class Game {
      * Run the game and finish after 4 lives has been played or level is finish.
      */
     public void run() {
-        lives.increase(4);
+        //play while you still have lives.
         while (lives.getValue() != 0) {
-            if (playOneTurn() == 0) {
+            if (playOneTurn() == LOSE) {
                 lives.decrease(1);
             } else {
+                //you win the game.
+                System.out.println("You Win! Score: " + score.getValue());
                 gui.close();
                 return;
             }
         }
+        //you lost all your lives, game over.
+        System.out.println("Game Over! Score: " + score.getValue());
         gui.close();
     }
 }

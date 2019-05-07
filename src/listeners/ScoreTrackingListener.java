@@ -28,6 +28,5 @@ public class ScoreTrackingListener implements HitListener {
         } else {
             currentScore.increase(5);
         }
-        System.out.println(currentScore.getValue());
     }
 }

@@ -33,9 +33,5 @@ public class BallRemover implements HitListener {
         hitter.removeFromGame(game);
         hitter.removeHitListener(this);
         remainingBalls.decrease(1);
-        System.out.println("A ball removed");
-        if (remainingBalls.getValue() == 0) {
-            System.out.println("You lost a life");
-        }
     }
 }

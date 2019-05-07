@@ -8,11 +8,21 @@ package backend;
 public class Counter {
     private int count;
 
+
+    /**
+     * class constructor.
+     *
+     * @param num starting number.
+     */
+    public Counter(int num) {
+        this.count = num;
+    }
+
     /**
      * class constructor.
      */
     public Counter() {
-        this.count = 0;
+        this(0);
     }
 
     /**
