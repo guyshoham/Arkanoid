@@ -1,5 +1,7 @@
 package backend;
 
+import animation.Animation;
+import animation.AnimationRunner;
 import biuoop.DrawSurface;
 import biuoop.GUI;
 import biuoop.KeyboardSensor;
@@ -26,7 +28,9 @@ import java.awt.Color;
  *
  * @author Guy Shoham
  */
-public class Game {
+public class Game implements Animation {
+    private AnimationRunner runner;
+    private boolean running;
     private SpriteCollection sprites;
     private GameEnvironment environment;
     private GUI gui = new GUI("Game Run", GUI_WIDTH, GUI_HEIGHT);
@@ -55,11 +59,12 @@ public class Game {
         this.blocksCounter = new Counter();
         this.ballsCounter = new Counter();
         this.score = new Counter();
-        this.lives = new Counter(4);
+        this.lives = new Counter(10);
         this.blockRemover = new BlockRemover(this, blocksCounter);
         this.ballRemover = new BallRemover(this, ballsCounter);
         this.scoreTrackingListener = new ScoreTrackingListener(score);
         this.isPaddleExist = false;
+        this.runner = new AnimationRunner(gui);
     }
 
     /**
@@ -156,10 +161,21 @@ public class Game {
     /**
      * play one turn -- start the animation loop.
      * finish when no balls left or no blocks left.
-     *
-     * @return 1 if turn ended because of no blocks left, 0 if turn ended because of no balls left.
      */
-    public int playOneTurn() {
+    public void playOneTurn() {
+        this.createBallOnTopOfPaddle();
+        this.running = true;
+        this.runner.run(this);
+    }
+
+    private void createBallOnTopOfPaddle() {
+        //init paddle if needed
+        if (!isPaddleExist) {
+            Paddle paddle = new Paddle(new Rectangle(new Point(350, 550), 100, 25), Color.GRAY, keyboard);
+            paddle.addToGame(this);
+            isPaddleExist = true;
+        }
+
         //init 2 balls
         Ball ball1 = new Ball(new Point(400, 500), BALL_RADIUS, Color.YELLOW);
         Velocity v1 = Velocity.fromAngleAndSpeed(300, BALL_SPEED);
@@ -180,40 +196,19 @@ public class Game {
         ballsCounter.increase(1);
 
         Ball.setEnvironment(environment);
+    }
 
-        //init paddle if needed
-        if (!isPaddleExist) {
-            Paddle paddle = new Paddle(new Rectangle(new Point(350, 550), 100, 25), Color.GRAY, keyboard);
-            paddle.addToGame(this);
-            isPaddleExist = true;
-        }
+    @Override
+    public boolean shouldStop() {
+        return !this.running;
+    }
 
-        Sleeper sleeper = new Sleeper();
-
-        int framesPerSecond = 60;
-        int millisecondsPerFrame = 1000 / framesPerSecond;
-        while (true) {
-            long startTime = System.currentTimeMillis(); // timing
-
-            DrawSurface d = gui.getDrawSurface();
-            this.sprites.drawAllOn(d);
-            gui.show(d);
-            this.sprites.notifyAllTimePassed();
-
-            if (blocksCounter.getValue() == 0) {
-                score.increase(100);
-                return WIN;
-            }
-            if (ballsCounter.getValue() == 0) {
-                return LOSE;
-            }
-
-            // timing
-            long usedTime = System.currentTimeMillis() - startTime;
-            long milliSecondLeftToSleep = millisecondsPerFrame - usedTime;
-            if (milliSecondLeftToSleep > 0) {
-                sleeper.sleepFor(milliSecondLeftToSleep);
-            }
+    @Override
+    public void doOneFrame(DrawSurface d) {
+        this.sprites.drawAllOn(d);
+        this.sprites.notifyAllTimePassed();
+        if (blocksCounter.getValue() == 0 || ballsCounter.getValue() == 0) {
+            running = false;
         }
     }
 
@@ -223,10 +218,12 @@ public class Game {
     public void run() {
         //play while you still have lives.
         while (lives.getValue() != 0) {
-            if (playOneTurn() == LOSE) {
+            playOneTurn();
+            if (ballsCounter.getValue() == 0) {
                 lives.decrease(1);
             } else {
                 //you win the game.
+                score.increase(100);
                 System.out.println("You Win! Score: " + score.getValue());
                 gui.close();
                 return;
