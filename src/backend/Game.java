@@ -2,11 +2,11 @@ package backend;
 
 import animation.Animation;
 import animation.AnimationRunner;
+import animation.CountdownAnimation;
 import animation.PauseScreen;
 import biuoop.DrawSurface;
 import biuoop.GUI;
 import biuoop.KeyboardSensor;
-import biuoop.Sleeper;
 import collisions.Collidable;
 import gameobjects.Ball;
 import gameobjects.Block;
@@ -165,6 +165,9 @@ public class Game implements Animation {
      */
     public void playOneTurn() {
         this.createBallOnTopOfPaddle();
+        this.runner.run(new CountdownAnimation(2, 3, sprites)); // countdown before turn starts.
+        // use our runner to run the current animation -- which is one turn of
+        // the game.
         this.running = true;
         this.runner.run(this);
     }
