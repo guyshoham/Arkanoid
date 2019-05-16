@@ -1,7 +1,7 @@
 package geometry;
 
+import backend.GameLevel;
 import biuoop.DrawSurface;
-import backend.Game;
 import sprites.Sprite;
 
 import java.awt.Color;
@@ -180,7 +180,7 @@ public class Rectangle implements Sprite {
      *
      * @param g game
      */
-    public void addToGame(Game g) {
+    public void addToGame(GameLevel g) {
         g.addSprite(this);
     }
 }

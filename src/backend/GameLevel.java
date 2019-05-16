@@ -25,11 +25,11 @@ import sprites.SpriteCollection;
 import java.awt.Color;
 
 /**
- * class Game.
+ * class GameLevel.
  *
  * @author Guy Shoham
  */
-public class Game implements Animation {
+public class GameLevel implements Animation {
     private AnimationRunner runner;
     private boolean running;
     private SpriteCollection sprites;
@@ -54,7 +54,7 @@ public class Game implements Animation {
     /**
      * class Constructor.
      */
-    public Game() {
+    public GameLevel() {
         this.sprites = new SpriteCollection();
         this.environment = new GameEnvironment();
         this.blocksCounter = new Counter();

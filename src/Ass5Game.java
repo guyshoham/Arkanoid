@@ -1,4 +1,4 @@
-import backend.Game;
+import backend.GameLevel;
 
 /**
  * class ass3Game.
@@ -20,7 +20,7 @@ public class Ass5Game {
      * this method runs a game of Arkanoid.
      */
     public static void runGame() {
-        Game game = new Game();
+        GameLevel game = new GameLevel();
         game.initialize();
         game.run();
     }

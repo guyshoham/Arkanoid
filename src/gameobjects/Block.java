@@ -3,7 +3,7 @@ package gameobjects;
 import backend.Velocity;
 import biuoop.DrawSurface;
 import collisions.Collidable;
-import backend.Game;
+import backend.GameLevel;
 import geometry.Line;
 import geometry.Point;
 import geometry.Rectangle;
@@ -113,7 +113,7 @@ public class Block implements Collidable, Sprite, HitNotifier {
      *
      * @param g game
      */
-    public void addToGame(Game g) {
+    public void addToGame(GameLevel g) {
         g.addCollidable(this);
         g.addSprite(this);
     }
@@ -123,7 +123,7 @@ public class Block implements Collidable, Sprite, HitNotifier {
      *
      * @param g game
      */
-    public void removeFromGame(Game g) {
+    public void removeFromGame(GameLevel g) {
         g.removeCollidable(this);
         g.removeSprite(this);
     }

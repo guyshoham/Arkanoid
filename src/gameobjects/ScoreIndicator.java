@@ -1,8 +1,8 @@
 package gameobjects;
 
 import backend.Counter;
+import backend.GameLevel;
 import biuoop.DrawSurface;
-import backend.Game;
 import geometry.Rectangle;
 import sprites.Sprite;
 
@@ -48,7 +48,7 @@ public class ScoreIndicator implements Sprite {
      *
      * @param g game
      */
-    public void addToGame(Game g) {
+    public void addToGame(GameLevel g) {
         g.addSprite(this);
     }
 
@@ -57,7 +57,7 @@ public class ScoreIndicator implements Sprite {
      *
      * @param g game
      */
-    public void removeFromGame(Game g) {
+    public void removeFromGame(GameLevel g) {
         g.removeSprite(this);
     }
 

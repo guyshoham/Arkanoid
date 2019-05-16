@@ -1,7 +1,7 @@
 package listeners;
 
 import backend.Counter;
-import backend.Game;
+import backend.GameLevel;
 import gameobjects.Ball;
 import gameobjects.Block;
 
@@ -12,7 +12,7 @@ import gameobjects.Block;
  * @author Guy Shoham
  */
 public class BlockRemover implements HitListener {
-    private Game game;
+    private GameLevel game;
     private Counter remainingBlocks;
 
     /**
@@ -21,7 +21,7 @@ public class BlockRemover implements HitListener {
      * @param game          game
      * @param removedBlocks blocks to be removed
      */
-    public BlockRemover(Game game, Counter removedBlocks) {
+    public BlockRemover(GameLevel game, Counter removedBlocks) {
         this.game = game;
         this.remainingBlocks = removedBlocks;
     }

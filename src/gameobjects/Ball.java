@@ -1,10 +1,10 @@
 package gameobjects;
 
+import backend.GameLevel;
 import listeners.HitListener;
 import listeners.HitNotifier;
 import biuoop.DrawSurface;
 import collisions.CollisionInfo;
-import backend.Game;
 import backend.GameEnvironment;
 import geometry.Line;
 import geometry.Point;
@@ -111,7 +111,7 @@ public class Ball implements Sprite, HitNotifier {
      *
      * @param g game
      */
-    public void addToGame(Game g) {
+    public void addToGame(GameLevel g) {
         g.addSprite(this);
     }
 
@@ -247,7 +247,7 @@ public class Ball implements Sprite, HitNotifier {
      *
      * @param g game
      */
-    public void removeFromGame(Game g) {
+    public void removeFromGame(GameLevel g) {
         g.removeSprite(this);
     }
 

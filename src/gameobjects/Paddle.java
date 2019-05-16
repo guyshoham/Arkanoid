@@ -3,7 +3,7 @@ package gameobjects;
 import biuoop.DrawSurface;
 import biuoop.KeyboardSensor;
 import collisions.Collidable;
-import backend.Game;
+import backend.GameLevel;
 import geometry.Point;
 import geometry.Rectangle;
 import backend.Velocity;
@@ -149,7 +149,7 @@ public class Paddle implements Sprite, Collidable {
      *
      * @param g game.
      */
-    public void addToGame(Game g) {
+    public void addToGame(GameLevel g) {
         g.addCollidable(this);
         g.addSprite(this);
     }
