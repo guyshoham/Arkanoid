@@ -2,6 +2,7 @@ package backend;
 
 import animation.Animation;
 import animation.AnimationRunner;
+import animation.PauseScreen;
 import biuoop.DrawSurface;
 import biuoop.GUI;
 import biuoop.KeyboardSensor;
@@ -207,6 +208,9 @@ public class Game implements Animation {
     public void doOneFrame(DrawSurface d) {
         this.sprites.drawAllOn(d);
         this.sprites.notifyAllTimePassed();
+        if (this.keyboard.isPressed("p")) {
+            this.runner.run(new PauseScreen(this.keyboard));
+        }
         if (blocksCounter.getValue() == 0 || ballsCounter.getValue() == 0) {
             running = false;
         }
