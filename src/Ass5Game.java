@@ -1,8 +1,9 @@
+import backend.GameFlow;
 import backend.GameLevel;
-import levels.LevelDirectHit;
-import levels.LevelFinalFour;
-import levels.LevelGreenThree;
-import levels.LevelWideEasy;
+import levels.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * class ass3Game.
@@ -24,12 +25,12 @@ public class Ass5Game {
      * this method runs a game of Arkanoid.
      */
     public static void runGame() {
-        //GameLevel game = new GameLevel(new LevelDirectHit());
-        GameLevel game = new GameLevel(new LevelWideEasy());
-        //GameLevel game = new GameLevel(new LevelGreenThree());
-        //GameLevel game = new GameLevel(new LevelFinalFour());
-        game.initialize();
-        game.run();
+        GameFlow gameFlow = new GameFlow();
+        List<LevelInformation> levels = new ArrayList<>();
+        levels.add(new LevelDirectHit());
+        levels.add(new LevelWideEasy());
+        levels.add(new LevelGreenThree());
+        levels.add(new LevelFinalFour());
+        gameFlow.runLevels(levels);
     }
-
 }

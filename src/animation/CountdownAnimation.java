@@ -4,6 +4,8 @@ import biuoop.DrawSurface;
 import biuoop.Sleeper;
 import sprites.SpriteCollection;
 
+import java.awt.*;
+
 public class CountdownAnimation implements Animation {
     private Sleeper sleeper = new Sleeper();
     private SpriteCollection gameScreen;
@@ -27,6 +29,7 @@ public class CountdownAnimation implements Animation {
     @Override
     public void doOneFrame(DrawSurface d) {
         this.gameScreen.drawAllOn(d);
+        d.setColor(Color.PINK);
         d.drawText(d.getWidth() / 2, d.getHeight() / 2, String.valueOf(countState), 50);
         sleeper.sleepFor((long) (numOfSeconds / countFrom));
         countState--;

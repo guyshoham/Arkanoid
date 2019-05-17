@@ -35,8 +35,7 @@ public class GameLevel implements Animation {
     private boolean running;
     private SpriteCollection sprites;
     private GameEnvironment environment;
-    private GUI gui = new GUI("Game Run", GUI_WIDTH, GUI_HEIGHT);
-    private KeyboardSensor keyboard = gui.getKeyboardSensor();
+    private KeyboardSensor keyboard;
     private Counter blocksCounter, ballsCounter, score, lives;
     private BlockRemover blockRemover;
     private BallRemover ballRemover;
@@ -51,19 +50,20 @@ public class GameLevel implements Animation {
     /**
      * class Constructor.
      */
-    public GameLevel(LevelInformation info) {
+    public GameLevel(LevelInformation info, Counter score, Counter lives,GUI gui) {
         this.sprites = new SpriteCollection();
         this.environment = new GameEnvironment();
         this.blocksCounter = new Counter();
         this.ballsCounter = new Counter();
-        this.score = new Counter();
-        this.lives = new Counter(7);
+        this.score = score;
+        this.lives = lives;
         this.blockRemover = new BlockRemover(this, blocksCounter);
         this.ballRemover = new BallRemover(this, ballsCounter);
         this.scoreTrackingListener = new ScoreTrackingListener(score);
         this.isPaddleExist = false;
         this.runner = new AnimationRunner(gui);
         this.info = info;
+        this.keyboard=gui.getKeyboardSensor();
     }
 
     /**
@@ -212,12 +212,12 @@ public class GameLevel implements Animation {
                 //you win the game.
                 score.increase(100);
                 System.out.println("You Win! Score: " + score.getValue());
-                gui.close();
+                //gui.close();
                 return;
             }
         }
         //you lost all your lives, game over.
         System.out.println("Game Over! Score: " + score.getValue());
-        gui.close();
+        //gui.close();
     }
 }
