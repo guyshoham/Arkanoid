@@ -9,7 +9,7 @@ import java.util.List;
  *
  * @author Guy Shoham
  */
-public class Ass5Game {
+public class Ass6Game {
 
     /**
      * this main method calls runGame method.
