@@ -27,4 +27,11 @@ public interface Sprite {
      * @param g game
      */
     void addToGame(GameLevel g);
+
+    /**
+     * remove the sprite from the game.
+     *
+     * @param g game
+     */
+    void removeFromGame(GameLevel g);
 }

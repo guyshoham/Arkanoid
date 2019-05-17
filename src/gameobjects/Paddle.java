@@ -145,14 +145,16 @@ public class Paddle implements Sprite, Collidable {
         return retVal;
     }
 
-    /**
-     * Add this paddle to the game.
-     *
-     * @param g game.
-     */
+    @Override
     public void addToGame(GameLevel g) {
         g.addCollidable(this);
         g.addSprite(this);
+    }
+
+    @Override
+    public void removeFromGame(GameLevel g) {
+        g.removeCollidable(this);
+        g.removeSprite(this);
     }
 
     @Override

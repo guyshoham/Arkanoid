@@ -26,7 +26,7 @@ public class LevelDirectHit implements LevelInformation {
 
     @Override
     public int paddleSpeed() {
-        return 2;
+        return 5;
     }
 
     @Override

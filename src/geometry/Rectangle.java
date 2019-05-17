@@ -175,12 +175,13 @@ public class Rectangle implements Sprite {
                 + ", height=" + height + '}';
     }
 
-    /**
-     * add the rectangle to the game.
-     *
-     * @param g game
-     */
+    @Override
     public void addToGame(GameLevel g) {
         g.addSprite(this);
+    }
+
+    @Override
+    public void removeFromGame(GameLevel g) {
+        g.removeSprite(this);
     }
 }

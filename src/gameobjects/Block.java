@@ -107,21 +107,13 @@ public class Block implements Collidable, Sprite, HitNotifier {
     public void timePassed() {
     }
 
-    /**
-     * add the block to the game.
-     *
-     * @param g game
-     */
+    @Override
     public void addToGame(GameLevel g) {
         g.addCollidable(this);
         g.addSprite(this);
     }
 
-    /**
-     * remove the block from the game.
-     *
-     * @param g game
-     */
+    @Override
     public void removeFromGame(GameLevel g) {
         g.removeCollidable(this);
         g.removeSprite(this);

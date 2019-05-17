@@ -35,7 +35,7 @@ public class ScoreIndicator implements Sprite {
 
         String text = String.valueOf(score.getValue());
         surface.setColor(Color.BLACK);
-        surface.drawText(350, (int) (rect.getUpperLeft().getY() + (rect.getHeight() / 10 * 7)), "Score: " + text, 15);
+        surface.drawText(300, (int) (rect.getUpperLeft().getY() + (rect.getHeight() / 10 * 7)), "Score: " + text, 15);
     }
 
     @Override
@@ -43,20 +43,12 @@ public class ScoreIndicator implements Sprite {
 
     }
 
-    /**
-     * add the scoreIndicator to the game.
-     *
-     * @param g game
-     */
+    @Override
     public void addToGame(GameLevel g) {
         g.addSprite(this);
     }
 
-    /**
-     * remove the scoreIndicator from the game.
-     *
-     * @param g game
-     */
+    @Override
     public void removeFromGame(GameLevel g) {
         g.removeSprite(this);
     }

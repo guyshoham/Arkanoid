@@ -43,20 +43,12 @@ public class LivesIndicator implements Sprite {
 
     }
 
-    /**
-     * add the livesIndicator to the game.
-     *
-     * @param g game
-     */
+    @Override
     public void addToGame(GameLevel g) {
         g.addSprite(this);
     }
 
-    /**
-     * remove the livesIndicator from the game.
-     *
-     * @param g game
-     */
+    @Override
     public void removeFromGame(GameLevel g) {
         g.removeSprite(this);
     }

@@ -18,10 +18,11 @@ public class GameFlow {
 
     private static final int GUI_WIDTH = 800;
     private static final int GUI_HEIGHT = 600;
+    private static final int LIVES = 7;
 
     public GameFlow() {
         this.score = new Counter();
-        this.lives = new Counter(7);
+        this.lives = new Counter(LIVES);
         this.runner = new AnimationRunner(gui);
         this.keyboard = gui.getKeyboardSensor();
 

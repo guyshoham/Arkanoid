@@ -108,13 +108,14 @@ public class Ball implements Sprite, HitNotifier {
         moveOneStep();
     }
 
-    /**
-     * adds the ball to the game.
-     *
-     * @param g game
-     */
+    @Override
     public void addToGame(GameLevel g) {
         g.addSprite(this);
+    }
+
+    @Override
+    public void removeFromGame(GameLevel g) {
+        g.removeSprite(this);
     }
 
     /**
@@ -242,15 +243,6 @@ public class Ball implements Sprite, HitNotifier {
                 retVal = new Line(center, currentPos);
             }
         }
-    }
-
-    /**
-     * remove the ball from the game.
-     *
-     * @param g game
-     */
-    public void removeFromGame(GameLevel g) {
-        g.removeSprite(this);
     }
 
     @Override

@@ -41,6 +41,7 @@ public class GameLevel implements Animation {
     private BallRemover ballRemover;
     private ScoreTrackingListener scoreTrackingListener;
     private LevelInformation info;
+    private Paddle paddle;
 
     private static final int GUI_WIDTH = 800;
     private static final int GUI_HEIGHT = 600;
@@ -140,6 +141,7 @@ public class GameLevel implements Animation {
         blockBottom.addToGame(this);
         blockBottom.addHitListener(ballRemover);
 
+        //init blocks
         for (Block block : info.blocks()) {
             block.addToGame(this);
             block.addHitListener(scoreTrackingListener);
@@ -161,12 +163,13 @@ public class GameLevel implements Animation {
 
     private void createBallOnTopOfPaddle() {
         //init paddle if needed
-        if (!isPaddleExist) {
-            Paddle paddle = new Paddle(new Rectangle(new Point(25 + ((750 - info.paddleWidth()) / 2), 550),
-                    info.paddleWidth(), 25), Color.orange, info.paddleSpeed(), keyboard);
-            paddle.addToGame(this);
-            isPaddleExist = true;
+        if (isPaddleExist) {
+            paddle.removeFromGame(this);
         }
+        paddle = new Paddle(new Rectangle(new Point(25 + ((750 - info.paddleWidth()) / 2), 550),
+                info.paddleWidth(), 20), Color.orange, info.paddleSpeed(), keyboard);
+        paddle.addToGame(this);
+        isPaddleExist = true;
 
         for (int i = 0; i < info.numberOfBalls(); i++) {
             Ball ball = new Ball(new Point(400, 500), BALL_RADIUS, Color.WHITE);
@@ -200,7 +203,7 @@ public class GameLevel implements Animation {
     }
 
     /**
-     * Run the game and finish after 4 lives has been played or level is finish.
+     * Run the game and finish after 7 lives has been played or level is finish.
      */
     public void run() {
         //play while you still have lives.
@@ -209,15 +212,10 @@ public class GameLevel implements Animation {
             if (ballsCounter.getValue() == 0) {
                 lives.decrease(1);
             } else {
-                //you win the game.
+                //you finish the level.
                 score.increase(100);
-                System.out.println("You Win! Score: " + score.getValue());
-                //gui.close();
                 return;
             }
         }
-        //you lost all your lives, game over.
-        System.out.println("Game Over! Score: " + score.getValue());
-        //gui.close();
     }
 }
