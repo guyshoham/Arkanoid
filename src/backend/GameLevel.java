@@ -50,7 +50,7 @@ public class GameLevel implements Animation {
     /**
      * class Constructor.
      */
-    public GameLevel(LevelInformation info, Counter score, Counter lives,GUI gui) {
+    public GameLevel(LevelInformation info, KeyboardSensor keyboard, AnimationRunner runner, Counter score, Counter lives, GUI gui) {
         this.sprites = new SpriteCollection();
         this.environment = new GameEnvironment();
         this.blocksCounter = new Counter();
@@ -61,9 +61,9 @@ public class GameLevel implements Animation {
         this.ballRemover = new BallRemover(this, ballsCounter);
         this.scoreTrackingListener = new ScoreTrackingListener(score);
         this.isPaddleExist = false;
-        this.runner = new AnimationRunner(gui);
+        this.runner = runner;
         this.info = info;
-        this.keyboard=gui.getKeyboardSensor();
+        this.keyboard = keyboard;
     }
 
     /**

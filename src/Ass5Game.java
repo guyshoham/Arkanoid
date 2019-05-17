@@ -1,5 +1,4 @@
 import backend.GameFlow;
-import backend.GameLevel;
 import levels.*;
 
 import java.util.ArrayList;
@@ -27,9 +26,9 @@ public class Ass5Game {
     public static void runGame() {
         GameFlow gameFlow = new GameFlow();
         List<LevelInformation> levels = new ArrayList<>();
-        levels.add(new LevelDirectHit());
-        levels.add(new LevelWideEasy());
-        levels.add(new LevelGreenThree());
+        //levels.add(new LevelDirectHit());
+        //levels.add(new LevelWideEasy());
+        //levels.add(new LevelGreenThree());
         levels.add(new LevelFinalFour());
         gameFlow.runLevels(levels);
     }
