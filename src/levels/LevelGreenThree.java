@@ -1,6 +1,7 @@
 package levels;
 
 import backend.Velocity;
+import backgrounds.BackgroundGreenThree;
 import gameobjects.Block;
 import geometry.Point;
 import geometry.Rectangle;
@@ -41,7 +42,7 @@ public class LevelGreenThree implements LevelInformation {
 
     @Override
     public Sprite getBackground() {
-        return null;
+        return new BackgroundGreenThree();
     }
 
     @Override

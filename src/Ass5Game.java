@@ -24,10 +24,10 @@ public class Ass5Game {
      * this method runs a game of Arkanoid.
      */
     public static void runGame() {
+        //GameLevel game = new GameLevel(new LevelDirectHit());
         //GameLevel game = new GameLevel(new LevelWideEasy());
-        //GameLevel game = new GameLevel(new LevelFinalFour());
         //GameLevel game = new GameLevel(new LevelGreenThree());
-        GameLevel game = new GameLevel(new LevelDirectHit());
+        GameLevel game = new GameLevel(new LevelFinalFour());
         game.initialize();
         game.run();
     }

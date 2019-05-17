@@ -1,6 +1,7 @@
 package levels;
 
 import backend.Velocity;
+import backgrounds.BackgroundFinalFour;
 import gameobjects.Block;
 import geometry.Point;
 import geometry.Rectangle;
@@ -13,7 +14,7 @@ import java.util.List;
 public class LevelFinalFour implements LevelInformation {
     @Override
     public int numberOfBalls() {
-        return 10;
+        return 3;
     }
 
     @Override
@@ -42,7 +43,7 @@ public class LevelFinalFour implements LevelInformation {
 
     @Override
     public Sprite getBackground() {
-        return null;
+        return new BackgroundFinalFour();
     }
 
     @Override

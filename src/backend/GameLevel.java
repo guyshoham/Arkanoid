@@ -57,7 +57,7 @@ public class GameLevel implements Animation {
         this.blocksCounter = new Counter();
         this.ballsCounter = new Counter();
         this.score = new Counter();
-        this.lives = new Counter(10);
+        this.lives = new Counter(7);
         this.blockRemover = new BlockRemover(this, blocksCounter);
         this.ballRemover = new BallRemover(this, ballsCounter);
         this.scoreTrackingListener = new ScoreTrackingListener(score);
@@ -135,7 +135,7 @@ public class GameLevel implements Animation {
         blockRight.addToGame(this);
 
         //init death region block
-        Rectangle rectBottom = new Rectangle(new Point(0, 590), 800, 25);
+        Rectangle rectBottom = new Rectangle(new Point(0, 600), 800, 25);
         Block blockBottom = new Block(rectBottom, Color.BLACK);
         blockBottom.addToGame(this);
         blockBottom.addHitListener(ballRemover);

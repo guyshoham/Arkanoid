@@ -1,6 +1,7 @@
 package levels;
 
 import backend.Velocity;
+import backgrounds.BackgroundWideEasy;
 import gameobjects.Block;
 import geometry.Point;
 import geometry.Rectangle;
@@ -49,7 +50,7 @@ public class LevelWideEasy implements LevelInformation {
 
     @Override
     public Sprite getBackground() {
-        return null;
+        return new BackgroundWideEasy();
     }
 
     @Override
