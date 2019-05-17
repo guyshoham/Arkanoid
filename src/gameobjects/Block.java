@@ -89,15 +89,14 @@ public class Block implements Collidable, Sprite, HitNotifier {
         rect.setColor(color);
         rect.drawOn(surface);
 
-        String text = "x";
+        /*String text = "x";
         if (numberOfHits != 0) {
             text = String.valueOf(numberOfHits);
         }
         surface.setColor(Color.WHITE);
         surface.drawText((int) (rect.getUpperLeft().getX() + (rect.getWidth() / 2)),
                 (int) (rect.getUpperLeft().getY() + (rect.getHeight() / 10 * 7)), text, 15);
-
-
+        */
     }
 
     /**

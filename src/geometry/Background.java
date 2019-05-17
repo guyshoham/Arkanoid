@@ -29,7 +29,7 @@ public class Background extends Rectangle implements Sprite {
         this.upperLeft = upperLeft;
         this.width = width;
         this.height = height;
-        this.color = Color.BLUE.darker();
+        this.color = Color.GREEN.darker().darker();
     }
 
     /**

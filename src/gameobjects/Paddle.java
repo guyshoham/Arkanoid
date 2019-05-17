@@ -23,7 +23,7 @@ public class Paddle implements Sprite, Collidable {
     private KeyboardSensor keyboard;
     private Rectangle rect;
     private Color color;
-    private static final int SPEED = 10; //speed of the paddle
+    private int speed;
     private static final double LEFT_CORNER = 25; //min X value paddle can go
     private static final double RIGHT_CORNER = 775; //max X value paddle can go
 
@@ -34,17 +34,18 @@ public class Paddle implements Sprite, Collidable {
      * @param color     the color of the paddle.
      * @param keyboard  the keyboard moving the paddle.
      */
-    public Paddle(Rectangle rectangle, Color color, KeyboardSensor keyboard) {
+    public Paddle(Rectangle rectangle, Color color, int speed, KeyboardSensor keyboard) {
         this.rect = rectangle;
         this.color = color;
         this.keyboard = keyboard;
+        this.speed = speed;
     }
 
     /**
      * moves the paddle one step to the left.
      */
     public void moveLeft() {
-        Point newUpperLeft = new Point(rect.getUpperLeft().getX() - SPEED, rect.getUpperLeft().getY());
+        Point newUpperLeft = new Point(rect.getUpperLeft().getX() - speed, rect.getUpperLeft().getY());
         //check if the rectangle new position is in borders
         if (newUpperLeft.getX() >= LEFT_CORNER) {
             //move the X pos of rect to the left
@@ -56,7 +57,7 @@ public class Paddle implements Sprite, Collidable {
      * move the paddle one step to the right.
      */
     public void moveRight() {
-        Point newUpperLeft = new Point(rect.getUpperLeft().getX() + SPEED, rect.getUpperLeft().getY());
+        Point newUpperLeft = new Point(rect.getUpperLeft().getX() + speed, rect.getUpperLeft().getY());
         //check if the rectangle new position is in borders
         if (newUpperLeft.getX() + rect.getWidth() <= RIGHT_CORNER) {
             //move the X pos of rect to the right

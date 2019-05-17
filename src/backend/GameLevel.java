@@ -10,6 +10,7 @@ import biuoop.KeyboardSensor;
 import collisions.Collidable;
 import gameobjects.Ball;
 import gameobjects.Block;
+import gameobjects.LevelNameIndicator;
 import gameobjects.LivesIndicator;
 import gameobjects.Paddle;
 import gameobjects.ScoreIndicator;
@@ -40,21 +41,17 @@ public class GameLevel implements Animation {
     private BlockRemover blockRemover;
     private BallRemover ballRemover;
     private ScoreTrackingListener scoreTrackingListener;
+    private LevelInformation info;
 
     private static final int GUI_WIDTH = 800;
     private static final int GUI_HEIGHT = 600;
-    private static final int BALL_SPEED = 9;
     private static final int BALL_RADIUS = 5;
-    private static final int BLOCK_WIDTH = 50;
-    private static final int BLOCK_HEIGHT = 25;
-    private static final int WIN = 1;
-    private static final int LOSE = 0;
     private boolean isPaddleExist;
 
     /**
      * class Constructor.
      */
-    public GameLevel() {
+    public GameLevel(LevelInformation info) {
         this.sprites = new SpriteCollection();
         this.environment = new GameEnvironment();
         this.blocksCounter = new Counter();
@@ -66,6 +63,7 @@ public class GameLevel implements Animation {
         this.scoreTrackingListener = new ScoreTrackingListener(score);
         this.isPaddleExist = false;
         this.runner = new AnimationRunner(gui);
+        this.info = info;
     }
 
     /**
@@ -118,16 +116,20 @@ public class GameLevel implements Animation {
         LivesIndicator livesIndicator = new LivesIndicator(livesRect, lives);
         livesIndicator.addToGame(this);
 
-        Rectangle scoreRect = new Rectangle(new Point(100, 0), 700, 25);
+        Rectangle scoreRect = new Rectangle(new Point(100, 0), 400, 25);
         ScoreIndicator scoreIndicator = new ScoreIndicator(scoreRect, score);
         scoreIndicator.addToGame(this);
+
+        Rectangle levelNameRect = new Rectangle(new Point(500, 0), 300, 25);
+        LevelNameIndicator levelNameIndicator = new LevelNameIndicator(levelNameRect, info.levelName());
+        levelNameIndicator.addToGame(this);
 
         Rectangle rectTop = new Rectangle(new Point(0, 25), 800, 25);
         Rectangle rectLeft = new Rectangle(new Point(0, 25), 25, 600);
         Rectangle rectRight = new Rectangle(new Point(775, 25), 25, 600);
-        Block blockTop = new Block(rectTop, Color.BLACK);
-        Block blockLeft = new Block(rectLeft, Color.BLACK);
-        Block blockRight = new Block(rectRight, Color.BLACK);
+        Block blockTop = new Block(rectTop, Color.GRAY);
+        Block blockLeft = new Block(rectLeft, Color.GRAY);
+        Block blockRight = new Block(rectRight, Color.GRAY);
         blockTop.addToGame(this);
         blockLeft.addToGame(this);
         blockRight.addToGame(this);
@@ -138,25 +140,12 @@ public class GameLevel implements Animation {
         blockBottom.addToGame(this);
         blockBottom.addHitListener(ballRemover);
 
-        Color[] colors = {Color.GRAY, Color.RED, Color.YELLOW, Color.BLUE, Color.PINK, Color.GREEN};
-
-        //init blocks
-        for (int row = 0; row < 6; row++) {
-            for (int b = 3 + row; b < 15; b++) {
-                Rectangle rect = new Rectangle(new Point(25 + b * BLOCK_WIDTH, 100 + row * 25),
-                        BLOCK_WIDTH, BLOCK_HEIGHT);
-                Block block = new Block(rect, colors[row]);
-                if (row == 0) {
-                    block.setNumberOfHits(2);
-                } else {
-                    block.setNumberOfHits(1);
-                }
-                block.addToGame(this);
-                block.addHitListener(scoreTrackingListener);
-                block.addHitListener(blockRemover);
-                blocksCounter.increase(1);
-            }
+        for (Block block : info.blocks()) {
+            block.addToGame(this);
+            block.addHitListener(scoreTrackingListener);
+            block.addHitListener(blockRemover);
         }
+        blocksCounter.increase(info.numberOfBlocksToRemove());
     }
 
     /**
@@ -166,8 +155,6 @@ public class GameLevel implements Animation {
     public void playOneTurn() {
         this.createBallOnTopOfPaddle();
         this.runner.run(new CountdownAnimation(2, 3, sprites)); // countdown before turn starts.
-        // use our runner to run the current animation -- which is one turn of
-        // the game.
         this.running = true;
         this.runner.run(this);
     }
@@ -175,29 +162,22 @@ public class GameLevel implements Animation {
     private void createBallOnTopOfPaddle() {
         //init paddle if needed
         if (!isPaddleExist) {
-            Paddle paddle = new Paddle(new Rectangle(new Point(350, 550), 100, 25), Color.GRAY, keyboard);
+            Paddle paddle = new Paddle(new Rectangle(new Point(25 + ((750 - info.paddleWidth()) / 2), 550),
+                    info.paddleWidth(), 25), Color.orange, info.paddleSpeed(), keyboard);
             paddle.addToGame(this);
             isPaddleExist = true;
         }
 
-        //init 2 balls
-        Ball ball1 = new Ball(new Point(400, 500), BALL_RADIUS, Color.YELLOW);
-        Velocity v1 = Velocity.fromAngleAndSpeed(300, BALL_SPEED);
-        ball1.setVelocity(v1);
-        ball1.setTopLeftCorner(new Point(0, 0));
-        ball1.setBottomRightCorner(new Point(GUI_WIDTH, GUI_HEIGHT));
-        ball1.addToGame(this);
-        ball1.addHitListener(ballRemover);
-        ballsCounter.increase(1);
-
-        Ball ball2 = new Ball(new Point(400, 500), BALL_RADIUS, Color.MAGENTA);
-        Velocity v2 = Velocity.fromAngleAndSpeed(0, BALL_SPEED);
-        ball2.setVelocity(v2);
-        ball2.setTopLeftCorner(new Point(0, 0));
-        ball2.setBottomRightCorner(new Point(GUI_WIDTH, GUI_HEIGHT));
-        ball2.addToGame(this);
-        ball2.addHitListener(ballRemover);
-        ballsCounter.increase(1);
+        for (int i = 0; i < info.numberOfBalls(); i++) {
+            Ball ball = new Ball(new Point(400, 500), BALL_RADIUS, Color.WHITE);
+            Velocity v = info.initialBallVelocities().get(i);
+            ball.setVelocity(v);
+            ball.setTopLeftCorner(new Point(0, 0));
+            ball.setBottomRightCorner(new Point(GUI_WIDTH, GUI_HEIGHT));
+            ball.addToGame(this);
+            ball.addHitListener(ballRemover);
+            ballsCounter.increase(1);
+        }
 
         Ball.setEnvironment(environment);
     }

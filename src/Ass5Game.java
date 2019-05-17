@@ -1,4 +1,8 @@
 import backend.GameLevel;
+import levels.LevelDirectHit;
+import levels.LevelFinalFour;
+import levels.LevelGreenThree;
+import levels.LevelWideEasy;
 
 /**
  * class ass3Game.
@@ -20,7 +24,10 @@ public class Ass5Game {
      * this method runs a game of Arkanoid.
      */
     public static void runGame() {
-        GameLevel game = new GameLevel();
+        //GameLevel game = new GameLevel(new LevelWideEasy());
+        //GameLevel game = new GameLevel(new LevelFinalFour());
+        //GameLevel game = new GameLevel(new LevelGreenThree());
+        GameLevel game = new GameLevel(new LevelDirectHit());
         game.initialize();
         game.run();
     }
