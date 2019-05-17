@@ -14,9 +14,9 @@ import gameobjects.LevelNameIndicator;
 import gameobjects.LivesIndicator;
 import gameobjects.Paddle;
 import gameobjects.ScoreIndicator;
-import geometry.Background;
 import geometry.Point;
 import geometry.Rectangle;
+import levels.LevelInformation;
 import listeners.BallRemover;
 import listeners.BlockRemover;
 import listeners.ScoreTrackingListener;
@@ -108,7 +108,7 @@ public class GameLevel implements Animation {
      */
     public void initialize() {
         //init background
-        Background background = new Background(new Point(0, 0), GUI_WIDTH, GUI_HEIGHT);
+        Sprite background = info.getBackground();
         background.addToGame(this);
 
         //init walls, lives rect and score rect

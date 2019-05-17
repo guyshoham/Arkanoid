@@ -1,5 +1,6 @@
-package backend;
+package levels;
 
+import backend.Velocity;
 import gameobjects.Block;
 import sprites.Sprite;
 

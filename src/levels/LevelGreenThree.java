@@ -1,6 +1,5 @@
 package levels;
 
-import backend.LevelInformation;
 import backend.Velocity;
 import gameobjects.Block;
 import geometry.Point;

@@ -47,4 +47,6 @@ public class Background extends Rectangle implements Sprite {
         surface.setColor(Color.WHITE);
         surface.drawText(350, (int) (upperLeft.getY() + (height / 10 * 7)), "Arkanoid", 40);
     }
+
+
 }

@@ -176,7 +176,7 @@ public class Rectangle implements Sprite {
     }
 
     /**
-     * add the block to the game.
+     * add the rectangle to the game.
      *
      * @param g game
      */

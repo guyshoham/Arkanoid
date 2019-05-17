@@ -1,5 +1,6 @@
 package sprites;
 
+import backend.GameLevel;
 import biuoop.DrawSurface;
 
 /**
@@ -19,4 +20,11 @@ public interface Sprite {
      * notify the sprite that time has passed.
      */
     void timePassed();
+
+    /**
+     * add the sprite to the game.
+     *
+     * @param g game
+     */
+    void addToGame(GameLevel g);
 }

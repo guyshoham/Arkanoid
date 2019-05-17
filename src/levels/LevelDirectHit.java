@@ -1,7 +1,7 @@
 package levels;
 
-import backend.LevelInformation;
 import backend.Velocity;
+import backgrounds.BackgroundDirectHit;
 import gameobjects.Block;
 import geometry.Point;
 import geometry.Rectangle;
@@ -41,14 +41,14 @@ public class LevelDirectHit implements LevelInformation {
 
     @Override
     public Sprite getBackground() {
-        return null;
+        return new BackgroundDirectHit();
     }
 
     @Override
     public List<Block> blocks() {
         List<Block> blocks = new ArrayList<>();
 
-        Rectangle rect = new Rectangle(new Point(385, 200), 30, 30);
+        Rectangle rect = new Rectangle(new Point(385, 170), 28, 28);
         Block b = new Block(rect, Color.RED);
         b.setNumberOfHits(1);
         blocks.add(b);
