@@ -67,7 +67,7 @@ public class LevelWideEasy implements LevelInformation {
 
         //init blocks
         for (int b = 0; b < 15; b++) {
-            Rectangle rect = new Rectangle(new Point(25 + b * 50, 200),
+            Rectangle rect = new Rectangle(new Point(25 + b * 50, 275),
                     50, 25);
             Block block = new Block(rect, colors[b]);
             block.setNumberOfHits(1);

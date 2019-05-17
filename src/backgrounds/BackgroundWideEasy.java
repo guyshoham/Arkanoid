@@ -25,17 +25,24 @@ public class BackgroundWideEasy extends Rectangle implements Sprite {
 
     @Override
     public void drawOn(DrawSurface surface) {
-        surface.setColor(Color.BLACK);
+        surface.setColor(Color.WHITE);
         surface.fillRectangle((int) upperLeft.getX(), (int) upperLeft.getY(), (int) (width), (int) (height));
 
-        surface.setColor(Color.BLUE);
-        surface.drawLine(260, 181, 380, 181);
-        surface.drawLine(541, 181, 419, 181);
-        surface.drawLine(400, 56, 400, 180);
-        surface.drawLine(400, 200, 400, 327);
 
-        surface.drawCircle(400, 181, 60);
-        surface.drawCircle(400, 181, 90);
-        surface.drawCircle(400, 181, 120);
+        //light rays
+        int index = 25;
+        surface.setColor(new Color(238, 230, 175));
+        while (index < 775) {
+            surface.drawLine(150, 150, index, 275);
+            index = index + 5;
+        }
+
+        //sun
+        surface.setColor(new Color(238, 230, 175));
+        surface.fillCircle(150, 150, 60);
+        surface.setColor(new Color(235, 214, 73));
+        surface.fillCircle(150, 150, 50);
+        surface.setColor(new Color(253, 224, 24));
+        surface.fillCircle(150, 150, 40);
     }
 }

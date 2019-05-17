@@ -25,9 +25,9 @@ public class Ass5Game {
      */
     public static void runGame() {
         //GameLevel game = new GameLevel(new LevelDirectHit());
-        //GameLevel game = new GameLevel(new LevelWideEasy());
+        GameLevel game = new GameLevel(new LevelWideEasy());
         //GameLevel game = new GameLevel(new LevelGreenThree());
-        GameLevel game = new GameLevel(new LevelFinalFour());
+        //GameLevel game = new GameLevel(new LevelFinalFour());
         game.initialize();
         game.run();
     }

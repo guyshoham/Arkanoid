@@ -96,6 +96,8 @@ public class Ball implements Sprite, HitNotifier {
     public void drawOn(DrawSurface surface) {
         surface.setColor(color);
         surface.fillCircle(getX(), getY(), size);
+        surface.setColor(Color.BLACK);
+        surface.drawCircle(getX(), getY(), size);
     }
 
     /**
