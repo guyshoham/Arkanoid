@@ -1,14 +1,13 @@
 package animation;
 
 import biuoop.DrawSurface;
-import biuoop.KeyboardSensor;
 
-public class EndScreen extends KeyPressStoppableAnimation implements Animation {
+public class EndScreen extends KeyPressStoppableAnimation {
     private boolean isWon;
     private int score;
 
-    public EndScreen(KeyboardSensor k, boolean isWon, int score) {
-        super(k, KeyboardSensor.SPACE_KEY);
+    public EndScreen(boolean isWon, int score, Animation decorated) {
+        super(decorated);
         this.isWon = isWon;
         this.score = score;
     }
