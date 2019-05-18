@@ -10,10 +10,12 @@ public abstract class KeyPressStoppableAnimation implements Animation {
         this.decorated = decorated;
     }
 
+    @Override
     public void doOneFrame(DrawSurface d) {
         this.decorated.doOneFrame(d);
     }
 
+    @Override
     public boolean shouldStop() {
         return this.decorated.shouldStop();
     }

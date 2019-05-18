@@ -12,6 +12,7 @@ public class EndScreen extends KeyPressStoppableAnimation {
         this.score = score;
     }
 
+    @Override
     public void doOneFrame(DrawSurface d) {
         if (isWon) {
             d.drawText(10, d.getHeight() / 2, "You Win! Your Score is " + score, 32);
@@ -19,9 +20,5 @@ public class EndScreen extends KeyPressStoppableAnimation {
             d.drawText(10, d.getHeight() / 2, "Game Over. Your Score is " + score, 32);
         }
         super.doOneFrame(d);
-    }
-
-    public boolean shouldStop() {
-        return super.shouldStop();
     }
 }

@@ -1,4 +1,4 @@
-package gameobjects;
+package indicators;
 
 import backend.Counter;
 import backend.GameLevel;
@@ -9,23 +9,23 @@ import sprites.Sprite;
 import java.awt.Color;
 
 /**
- * class LivesIndicator.
+ * class ScoreIndicator.
  *
  * @author Guy Shoham
  */
-public class LivesIndicator implements Sprite {
+public class ScoreIndicator implements Sprite {
     private Rectangle rect;
-    private Counter lives;
+    private Counter score;
 
     /**
      * class constructor.
      *
      * @param rectangle rectangle.
-     * @param lives     counter.
+     * @param score     counter.
      */
-    public LivesIndicator(Rectangle rectangle, Counter lives) {
+    public ScoreIndicator(Rectangle rectangle, Counter score) {
         this.rect = rectangle;
-        this.lives = lives;
+        this.score = score;
     }
 
     @Override
@@ -33,9 +33,9 @@ public class LivesIndicator implements Sprite {
         rect.setColor(Color.LIGHT_GRAY);
         rect.drawOn(surface);
 
-        String text = String.valueOf(lives.getValue());
+        String text = String.valueOf(score.getValue());
         surface.setColor(Color.BLACK);
-        surface.drawText(25, (int) (rect.getUpperLeft().getY() + (rect.getHeight() / 10 * 7)), "Lives: " + text, 15);
+        surface.drawText(270, (int) (rect.getUpperLeft().getY() + (rect.getHeight() / 10 * 7)), "Score: " + text, 15);
     }
 
     @Override
@@ -52,4 +52,5 @@ public class LivesIndicator implements Sprite {
     public void removeFromGame(GameLevel g) {
         g.removeSprite(this);
     }
+
 }
