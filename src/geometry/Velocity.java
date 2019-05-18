@@ -1,6 +1,4 @@
-package backend;
-
-import geometry.Point;
+package geometry;
 
 /**
  * Velocity Model Object.

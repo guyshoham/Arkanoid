@@ -8,7 +8,7 @@ import collisions.CollisionInfo;
 import backend.GameEnvironment;
 import geometry.Line;
 import geometry.Point;
-import backend.Velocity;
+import geometry.Velocity;
 import sprites.Sprite;
 
 import java.awt.Color;

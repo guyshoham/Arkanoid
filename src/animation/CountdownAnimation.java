@@ -4,7 +4,7 @@ import biuoop.DrawSurface;
 import biuoop.Sleeper;
 import sprites.SpriteCollection;
 
-import java.awt.*;
+import java.awt.Color;
 
 public class CountdownAnimation implements Animation {
     private Sleeper sleeper = new Sleeper();

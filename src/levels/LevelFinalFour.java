@@ -1,6 +1,6 @@
 package levels;
 
-import backend.Velocity;
+import geometry.Velocity;
 import backgrounds.BackgroundFinalFour;
 import gameobjects.Block;
 import geometry.Point;

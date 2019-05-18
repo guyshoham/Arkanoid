@@ -1,6 +1,6 @@
 package gameobjects;
 
-import backend.Velocity;
+import geometry.Velocity;
 import biuoop.DrawSurface;
 import collisions.Collidable;
 import backend.GameLevel;

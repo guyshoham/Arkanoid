@@ -1,7 +1,7 @@
 package collisions;
 
 import gameobjects.Ball;
-import backend.Velocity;
+import geometry.Velocity;
 import geometry.Point;
 import geometry.Rectangle;
 

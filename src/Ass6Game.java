@@ -1,5 +1,9 @@
 import backend.GameFlow;
-import levels.*;
+import levels.LevelDirectHit;
+import levels.LevelFinalFour;
+import levels.LevelGreenThree;
+import levels.LevelInformation;
+import levels.LevelWideEasy;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -5,7 +5,7 @@ import geometry.Point;
 import geometry.Rectangle;
 import sprites.Sprite;
 
-import java.awt.*;
+import java.awt.Color;
 
 public class BackgroundFinalFour extends Rectangle implements Sprite {
 

@@ -6,7 +6,7 @@ import collisions.Collidable;
 import backend.GameLevel;
 import geometry.Point;
 import geometry.Rectangle;
-import backend.Velocity;
+import geometry.Velocity;
 import sprites.Sprite;
 
 import java.awt.Color;
