@@ -3,15 +3,12 @@ package animation;
 import biuoop.DrawSurface;
 import biuoop.KeyboardSensor;
 
-public class EndScreen implements Animation {
-    private KeyboardSensor keyboard;
-    private boolean stop;
+public class EndScreen extends KeyPressStoppableAnimation implements Animation {
     private boolean isWon;
     private int score;
 
     public EndScreen(KeyboardSensor k, boolean isWon, int score) {
-        this.keyboard = k;
-        this.stop = false;
+        super(k, KeyboardSensor.SPACE_KEY);
         this.isWon = isWon;
         this.score = score;
     }
@@ -22,12 +19,10 @@ public class EndScreen implements Animation {
         } else {
             d.drawText(10, d.getHeight() / 2, "Game Over. Your Score is " + score, 32);
         }
-        if (this.keyboard.isPressed(KeyboardSensor.SPACE_KEY)) {
-            this.stop = true;
-        }
+        super.doOneFrame(d);
     }
 
     public boolean shouldStop() {
-        return this.stop;
+        return super.shouldStop();
     }
 }

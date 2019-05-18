@@ -28,7 +28,7 @@ public class LevelFinalFour implements LevelInformation {
 
     @Override
     public int paddleSpeed() {
-        return 5;
+        return 6;
     }
 
     @Override

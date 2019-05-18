@@ -1,9 +1,6 @@
 package backend;
 
-import animation.Animation;
-import animation.AnimationRunner;
-import animation.CountdownAnimation;
-import animation.PauseScreen;
+import animation.*;
 import biuoop.DrawSurface;
 import biuoop.GUI;
 import biuoop.KeyboardSensor;
