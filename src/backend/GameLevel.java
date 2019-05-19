@@ -1,10 +1,6 @@
 package backend;
 
-import animation.Animation;
-import animation.AnimationRunner;
-import animation.CountdownAnimation;
-import animation.DefaultAnimation;
-import animation.PauseScreen;
+import animation.*;
 import biuoop.DrawSurface;
 import biuoop.GUI;
 import biuoop.KeyboardSensor;
@@ -198,6 +194,7 @@ public class GameLevel implements Animation {
         this.sprites.notifyAllTimePassed();
         if (this.keyboard.isPressed("p")) {
             this.runner.run(new PauseScreen(new DefaultAnimation(this.keyboard, KeyboardSensor.SPACE_KEY)));
+            this.runner.run(new TestScreen(new DefaultAnimation(this.keyboard, KeyboardSensor.SPACE_KEY)));
         }
         if (blocksCounter.getValue() == 0 || ballsCounter.getValue() == 0) {
             running = false;

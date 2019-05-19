@@ -8,6 +8,7 @@ public class DefaultAnimation implements Animation {
     private boolean stop;
     private String key;
     private KeyboardSensor keyboard;
+    private boolean isAlreadyPressed = true;
 
     public DefaultAnimation(KeyboardSensor sensor, String key) {
         this.keyboard = sensor;
@@ -17,8 +18,15 @@ public class DefaultAnimation implements Animation {
 
     @Override
     public void doOneFrame(DrawSurface d) {
-        if (this.keyboard.isPressed(key)) {
-            this.stop = true;
+        if (!isAlreadyPressed) {
+            if (this.keyboard.isPressed(key)) {
+                this.stop = true;
+            }
+        }
+        else{
+            if (!this.keyboard.isPressed(key)) {
+                this.isAlreadyPressed = false;
+            }
         }
     }
 
