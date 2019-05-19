@@ -21,19 +21,33 @@ public class Ass6Game {
      * @param args ignored
      */
     public static void main(String[] args) {
-        runGame();
+        runGame(args);
     }
 
     /**
      * this method runs a game of Arkanoid.
      */
-    public static void runGame() {
+    public static void runGame(String[] args) {
         GameFlow gameFlow = new GameFlow();
         List<LevelInformation> levels = new ArrayList<>();
-        levels.add(new LevelDirectHit());
-        levels.add(new LevelFinalFour());
-        levels.add(new LevelWideEasy());
-        levels.add(new LevelGreenThree());
+        for (String str : args) {
+            switch (str) {
+                case "1":
+                    levels.add(new LevelDirectHit());
+                    break;
+                case "2":
+                    levels.add(new LevelWideEasy());
+                    break;
+                case "3":
+                    levels.add(new LevelGreenThree());
+                    break;
+                case "4":
+                    levels.add(new LevelFinalFour());
+                    break;
+                default:
+                    break;
+            }
+        }
         gameFlow.runLevels(levels);
     }
 }
