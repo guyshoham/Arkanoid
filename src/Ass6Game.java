@@ -30,8 +30,8 @@ public class Ass6Game {
     public static void runGame() {
         GameFlow gameFlow = new GameFlow();
         List<LevelInformation> levels = new ArrayList<>();
-        levels.add(new LevelFinalFour());
         levels.add(new LevelDirectHit());
+        levels.add(new LevelFinalFour());
         levels.add(new LevelWideEasy());
         levels.add(new LevelGreenThree());
         gameFlow.runLevels(levels);

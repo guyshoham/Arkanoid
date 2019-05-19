@@ -19,7 +19,7 @@ public class GameFlow {
 
     private static final int GUI_WIDTH = 800;
     private static final int GUI_HEIGHT = 600;
-    private static final int LIVES = 1;
+    private static final int LIVES = 7;
 
     public GameFlow() {
         this.score = new Counter();

@@ -31,7 +31,9 @@ public class CountdownAnimation implements Animation {
         this.gameScreen.drawAllOn(d);
         d.setColor(Color.PINK);
         d.drawText(d.getWidth() / 2, d.getHeight() / 3 * 2, String.valueOf(countState), 50);
-        sleeper.sleepFor((long) (numOfSeconds / countFrom));
+        if (countFrom != countState) {
+            sleeper.sleepFor((long) (numOfSeconds / countFrom));
+        }
         countState--;
 
         if (countState == -1) {
