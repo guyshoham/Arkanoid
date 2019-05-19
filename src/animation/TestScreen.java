@@ -1,11 +1,12 @@
 package animation;
 
 import biuoop.DrawSurface;
+import biuoop.KeyboardSensor;
 
 public class TestScreen extends KeyPressStoppableAnimation {
 
-    public TestScreen(Animation decorated) {
-        super(decorated);
+    public TestScreen(KeyboardSensor sensor, String key, Animation decorated) {
+        super(sensor, key, decorated);
     }
 
     @Override

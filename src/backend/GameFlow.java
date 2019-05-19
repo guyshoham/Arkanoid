@@ -38,8 +38,8 @@ public class GameFlow {
         }
         boolean isWon;
         isWon = lives.getValue() != 0;
-        this.runner.run(new EndScreen(isWon, score.getValue(),
-                new DefaultAnimation(this.keyboard, KeyboardSensor.SPACE_KEY)));
+        this.runner.run(new EndScreen(this.keyboard, KeyboardSensor.SPACE_KEY, isWon, score.getValue(),
+                new DefaultAnimation()));
 
         gui.close();
     }

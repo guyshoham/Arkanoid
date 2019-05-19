@@ -193,8 +193,8 @@ public class GameLevel implements Animation {
         this.sprites.drawAllOn(d);
         this.sprites.notifyAllTimePassed();
         if (this.keyboard.isPressed("p")) {
-            this.runner.run(new PauseScreen(new DefaultAnimation(this.keyboard, KeyboardSensor.SPACE_KEY)));
-            this.runner.run(new TestScreen(new DefaultAnimation(this.keyboard, KeyboardSensor.SPACE_KEY)));
+            this.runner.run(new PauseScreen(this.keyboard, KeyboardSensor.SPACE_KEY, new DefaultAnimation()));
+            this.runner.run(new TestScreen(this.keyboard, KeyboardSensor.SPACE_KEY, new DefaultAnimation()));
         }
         if (blocksCounter.getValue() == 0 || ballsCounter.getValue() == 0) {
             running = false;
