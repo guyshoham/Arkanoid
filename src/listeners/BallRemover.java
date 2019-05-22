@@ -25,9 +25,6 @@ public class BallRemover implements HitListener {
         this.remainingBalls = numOfBalls;
     }
 
-    // Balls that are out of bounds should be removed
-    // from the game. Remember to remove this listener from the block
-    // that is being removed from the game.
     @Override
     public void hitEvent(Block beingHit, Ball hitter) {
         hitter.removeFromGame(game);

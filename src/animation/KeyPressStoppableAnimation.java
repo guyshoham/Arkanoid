@@ -3,6 +3,11 @@ package animation;
 import biuoop.DrawSurface;
 import biuoop.KeyboardSensor;
 
+/**
+ * class KeyPressStoppableAnimation.
+ *
+ * @author Guy Shoham
+ */
 public abstract class KeyPressStoppableAnimation implements Animation {
 
     private Animation decorated;
@@ -11,6 +16,12 @@ public abstract class KeyPressStoppableAnimation implements Animation {
     private boolean stop;
     private String key;
 
+    /**
+     * Class Constructor.
+     * @param sensor keyboard
+     * @param key key
+     * @param decorated animation
+     */
     protected KeyPressStoppableAnimation(KeyboardSensor sensor, String key, Animation decorated) {
         this.decorated = decorated;
         this.keyboard = sensor;

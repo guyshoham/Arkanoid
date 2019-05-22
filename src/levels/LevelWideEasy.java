@@ -11,6 +11,11 @@ import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * class LevelWideEasy.
+ *
+ * @author Guy Shoham
+ */
 public class LevelWideEasy implements LevelInformation {
     @Override
     public int numberOfBalls() {

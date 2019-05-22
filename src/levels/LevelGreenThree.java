@@ -11,6 +11,11 @@ import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * class LevelGreenThree.
+ *
+ * @author Guy Shoham
+ */
 public class LevelGreenThree implements LevelInformation {
     @Override
     public int numberOfBalls() {
@@ -20,14 +25,14 @@ public class LevelGreenThree implements LevelInformation {
     @Override
     public List<Velocity> initialBallVelocities() {
         List<Velocity> velocities = new ArrayList<>();
-        velocities.add(Velocity.fromAngleAndSpeed(60, 5));
-        velocities.add(Velocity.fromAngleAndSpeed(300, 5));
+        velocities.add(Velocity.fromAngleAndSpeed(60, 6));
+        velocities.add(Velocity.fromAngleAndSpeed(300, 6));
         return velocities;
     }
 
     @Override
     public int paddleSpeed() {
-        return 6;
+        return 7;
     }
 
     @Override

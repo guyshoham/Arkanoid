@@ -7,6 +7,11 @@ import sprites.Sprite;
 
 import java.awt.Color;
 
+/**
+ * class BackgroundWideEasy.
+ *
+ * @author Guy Shoham
+ */
 public class BackgroundWideEasy extends Rectangle implements Sprite {
 
     private Point upperLeft;
@@ -14,7 +19,6 @@ public class BackgroundWideEasy extends Rectangle implements Sprite {
 
     /**
      * Class Constructor.
-     * Creates a new rectangle with location and width/height.
      */
     public BackgroundWideEasy() {
         super(new Point(0, 0), 800, 600);

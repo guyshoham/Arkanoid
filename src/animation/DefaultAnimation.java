@@ -2,10 +2,18 @@ package animation;
 
 import biuoop.DrawSurface;
 
+/**
+ * class DefaultAnimation.
+ *
+ * @author Guy Shoham
+ */
 public class DefaultAnimation implements Animation {
 
     private boolean stop;
 
+    /**
+     * Class Constructor.
+     */
     public DefaultAnimation() {
         this.stop = false;
     }

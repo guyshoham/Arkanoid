@@ -11,6 +11,11 @@ import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * class LevelDirectHit.
+ *
+ * @author Guy Shoham
+ */
 public class LevelDirectHit implements LevelInformation {
     @Override
     public int numberOfBalls() {

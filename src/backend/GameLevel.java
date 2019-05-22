@@ -1,8 +1,11 @@
 package backend;
 
-import animation.*;
+import animation.Animation;
+import animation.AnimationRunner;
+import animation.CountdownAnimation;
+import animation.DefaultAnimation;
+import animation.PauseScreen;
 import biuoop.DrawSurface;
-import biuoop.GUI;
 import biuoop.KeyboardSensor;
 import collisions.Collidable;
 import gameobjects.Ball;
@@ -47,9 +50,16 @@ public class GameLevel implements Animation {
     private boolean isPaddleExist;
 
     /**
-     * class Constructor.
+     * Class Constructor.
+     *
+     * @param info     level information
+     * @param keyboard keyboard
+     * @param runner   animation runner
+     * @param score    score counter
+     * @param lives    lives counter
      */
-    public GameLevel(LevelInformation info, KeyboardSensor keyboard, AnimationRunner runner, Counter score, Counter lives, GUI gui) {
+    public GameLevel(LevelInformation info, KeyboardSensor keyboard,
+                     AnimationRunner runner, Counter score, Counter lives) {
         this.sprites = new SpriteCollection();
         this.environment = new GameEnvironment();
         this.blocksCounter = new Counter();
@@ -102,27 +112,29 @@ public class GameLevel implements Animation {
     }
 
     /**
-     * Initialize a new game: create the Blocks and Ball (and Paddle)
-     * and add them to the game.
+     * Initialize a new game: create the background, walls, and blocks.
      */
     public void initialize() {
         //init background
         Sprite background = info.getBackground();
         background.addToGame(this);
 
-        //init walls, lives rect and score rect
+        //init lives rect
         Rectangle livesRect = new Rectangle(new Point(0, 0), 100, 25);
         LivesIndicator livesIndicator = new LivesIndicator(livesRect, lives);
         livesIndicator.addToGame(this);
 
+        //init score rect
         Rectangle scoreRect = new Rectangle(new Point(100, 0), 400, 25);
         ScoreIndicator scoreIndicator = new ScoreIndicator(scoreRect, score);
         scoreIndicator.addToGame(this);
 
+        //init level name rect
         Rectangle levelNameRect = new Rectangle(new Point(500, 0), 300, 25);
         LevelNameIndicator levelNameIndicator = new LevelNameIndicator(levelNameRect, info.levelName());
         levelNameIndicator.addToGame(this);
 
+        //init walls
         Rectangle rectTop = new Rectangle(new Point(0, 25), 800, 25);
         Rectangle rectLeft = new Rectangle(new Point(0, 25), 25, 600);
         Rectangle rectRight = new Rectangle(new Point(775, 25), 25, 600);
@@ -159,6 +171,10 @@ public class GameLevel implements Animation {
         this.runner.run(this);
     }
 
+    /**
+     * created the paddle and the balls before the level starts.
+     * if the paddle is already exist, we move it to the middle.
+     */
     private void createBallOnTopOfPaddle() {
         //init paddle if needed
         if (isPaddleExist) {
@@ -169,6 +185,7 @@ public class GameLevel implements Animation {
         paddle.addToGame(this);
         isPaddleExist = true;
 
+        //init balls
         for (int i = 0; i < info.numberOfBalls(); i++) {
             Ball ball = new Ball(new Point(400, 500), BALL_RADIUS, Color.WHITE);
             Velocity v = info.initialBallVelocities().get(i);

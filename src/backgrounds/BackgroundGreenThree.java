@@ -7,6 +7,11 @@ import sprites.Sprite;
 
 import java.awt.Color;
 
+/**
+ * class BackgroundGreenThree.
+ *
+ * @author Guy Shoham
+ */
 public class BackgroundGreenThree extends Rectangle implements Sprite {
 
     private Point upperLeft;
@@ -14,7 +19,6 @@ public class BackgroundGreenThree extends Rectangle implements Sprite {
 
     /**
      * Class Constructor.
-     * Creates a new rectangle with location and width/height.
      */
     public BackgroundGreenThree() {
         super(new Point(0, 0), 800, 600);

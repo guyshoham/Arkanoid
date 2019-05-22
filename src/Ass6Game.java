@@ -18,7 +18,7 @@ public class Ass6Game {
     /**
      * this main method calls runGame method.
      *
-     * @param args ignored
+     * @param args list of levels
      */
     public static void main(String[] args) {
         runGame(args);
@@ -26,6 +26,7 @@ public class Ass6Game {
 
     /**
      * this method runs a game of Arkanoid.
+     * @param args list of levels
      */
     public static void runGame(String[] args) {
         GameFlow gameFlow = new GameFlow();
