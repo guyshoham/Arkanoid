@@ -25,16 +25,17 @@ public class LevelWideEasy implements LevelInformation {
     @Override
     public List<Velocity> initialBallVelocities() {
         List<Velocity> velocities = new ArrayList<>();
-        velocities.add(Velocity.fromAngleAndSpeed(10, 7));
         velocities.add(Velocity.fromAngleAndSpeed(20, 7));
         velocities.add(Velocity.fromAngleAndSpeed(30, 7));
         velocities.add(Velocity.fromAngleAndSpeed(40, 7));
         velocities.add(Velocity.fromAngleAndSpeed(50, 7));
-        velocities.add(Velocity.fromAngleAndSpeed(350, 7));
+        velocities.add(Velocity.fromAngleAndSpeed(60, 7));
+
         velocities.add(Velocity.fromAngleAndSpeed(340, 7));
         velocities.add(Velocity.fromAngleAndSpeed(330, 7));
         velocities.add(Velocity.fromAngleAndSpeed(320, 7));
         velocities.add(Velocity.fromAngleAndSpeed(310, 7));
+        velocities.add(Velocity.fromAngleAndSpeed(300, 7));
         return velocities;
     }
 
