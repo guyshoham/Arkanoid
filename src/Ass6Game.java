@@ -26,6 +26,7 @@ public class Ass6Game {
 
     /**
      * this method runs a game of Arkanoid.
+     *
      * @param args list of levels
      */
     public static void runGame(String[] args) {
@@ -48,6 +49,12 @@ public class Ass6Game {
                 default:
                     break;
             }
+        }
+        if (levels.isEmpty()) {
+            levels.add(new LevelDirectHit());
+            levels.add(new LevelWideEasy());
+            levels.add(new LevelGreenThree());
+            levels.add(new LevelFinalFour());
         }
         gameFlow.runLevels(levels);
     }
