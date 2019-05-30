@@ -1,9 +1,12 @@
 package io;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -13,9 +16,9 @@ import java.util.List;
  *
  * @author Guy Shoham
  */
-public class HighScoresTable {
+public class HighScoresTable implements Serializable {
 
-    //private static final String FILE_PATH = "highscores.txt";
+    private static final String FILE_PATH = "highscores.txt";
     private int size;
     //private File filename;
     private ArrayList<ScoreInfo> highScores;
@@ -115,7 +118,7 @@ public class HighScoresTable {
         try {
             FileWriter output = new FileWriter(filename);
             for (int i = 0; i < size; i++) {
-                output.write(highScores.get(i).getName() + ":" + highScores.get(i).getScore() + ";");
+                output.write(highScores.get(i).getName() + ":" + highScores.get(i).getScore() + "\n");
             }
             output.close();
         } catch (IOException ex) {
@@ -126,23 +129,28 @@ public class HighScoresTable {
     // Read a table from file and return it.
     // If the file does not exist, or there is a problem with
     // reading it, an empty table is returned.
-    public static HighScoresTable loadFromFile(File filename) {
-        ArrayList<ScoreInfo> scores = new ArrayList<>();
-
-        /*String s=""
+    public static HighScoresTable loadFromFile(File filename) throws IOException {
+        HighScoresTable retVal = new HighScoresTable(5);
+        BufferedReader reader = null;
         try {
-            FileReader output = new FileReader(filename);
-            int c = output.read();
-            while (c != -1) {
-                System.out.print(((char) c));
-                if (c == ';') {
-                    System.out.println();
-                }
-                c = output.read();
+            reader = new BufferedReader(new FileReader(filename));
+            String s;
+            while ((s = reader.readLine()) != null) {
+                int delimiter = s.indexOf(":");
+                String name = s.substring(0, delimiter);
+                int score = Integer.parseInt(s.substring(delimiter + 1));
+                retVal.add(new ScoreInfo(name, score));
             }
-            output.close();
-        }*/
-        return null;
+        } catch (FileNotFoundException ex) {
+            throw new FileNotFoundException(ex.toString());
+        } catch (IOException ex) {
+            throw new IOException(ex);
+        } finally {
+            if (reader != null)
+                reader.close();
+        }
+
+        return retVal;
     }
 
     /**

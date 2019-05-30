@@ -44,13 +44,13 @@ public class Ass7Game {
         highScores.add(new ScoreInfo("Best", 3000));
         highScores.sortTable();
         highScores.save(file);
-        highScores.load(file);
+
 
         GUI gui = new GUI("Arkanoid", 800, 600);
         AnimationRunner runner = new AnimationRunner(gui);
         KeyboardSensor keyboard = gui.getKeyboardSensor();
         runner.run(new KeyPressStoppableAnimation(keyboard, KeyboardSensor.SPACE_KEY,
-                new HighScoresAnimation(highScores)));
+                new HighScoresAnimation(HighScoresTable.loadFromFile(file))));
         gui.close();
     }
 
