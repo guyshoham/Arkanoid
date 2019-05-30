@@ -17,16 +17,14 @@ import java.util.List;
  */
 public class GameFlow {
 
-    private Counter score, lives;
-    private GUI gui = new GUI(GAME_TITLE, GUI_WIDTH, GUI_HEIGHT);
-    private AnimationRunner runner;
-    private KeyboardSensor keyboard;
-
-
     private static final String GAME_TITLE = "Arkanoid";
     private static final int GUI_WIDTH = 800;
     private static final int GUI_HEIGHT = 600;
     private static final int LIVES = 7;
+    private Counter score, lives;
+    private GUI gui = new GUI(GAME_TITLE, GUI_WIDTH, GUI_HEIGHT);
+    private AnimationRunner runner;
+    private KeyboardSensor keyboard;
 
     /**
      * Class Constructor.

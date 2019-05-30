@@ -39,6 +39,34 @@ public class Line {
     }
 
     /**
+     * this method calculates the determinant of 2x2 matrix.
+     *
+     * @param a first parameter.
+     * @param b second parameter.
+     * @param c third parameter.
+     * @param d forth parameter.
+     * @return the determinant of the 2x2 matrix.
+     */
+    public static double calcDet(double a, double b, double c, double d) {
+        return a * d - b * c;
+    }
+
+    /**
+     * @param line  the line.
+     * @param point the point.
+     * @return true if the points is in line, false otherwise.
+     */
+    public static boolean isPointInLine(Line line, Point point) {
+        Line a = new Line(line.start(), point);
+        Line b = new Line(point, line.end());
+
+        double whole = Math.floor(line.length());
+        double sumParts = Math.floor(a.length() + b.length());
+
+        return Math.abs(whole - sumParts) <= 1;
+    }
+
+    /**
      * @return the start point of the line.
      */
     public Point start() {
@@ -198,34 +226,6 @@ public class Line {
      */
     public double calcIntercept() {
         return start.getY() - slope * start.getX();
-    }
-
-    /**
-     * this method calculates the determinant of 2x2 matrix.
-     *
-     * @param a first parameter.
-     * @param b second parameter.
-     * @param c third parameter.
-     * @param d forth parameter.
-     * @return the determinant of the 2x2 matrix.
-     */
-    public static double calcDet(double a, double b, double c, double d) {
-        return a * d - b * c;
-    }
-
-    /**
-     * @param line  the line.
-     * @param point the point.
-     * @return true if the points is in line, false otherwise.
-     */
-    public static boolean isPointInLine(Line line, Point point) {
-        Line a = new Line(line.start(), point);
-        Line b = new Line(point, line.end());
-
-        double whole = Math.floor(line.length());
-        double sumParts = Math.floor(a.length() + b.length());
-
-        return Math.abs(whole - sumParts) <= 1;
     }
 
     /**

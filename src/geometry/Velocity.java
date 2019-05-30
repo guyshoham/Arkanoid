@@ -38,19 +38,19 @@ public class Velocity {
     }
 
     /**
-     * @return dy the change of yaxis.
-     */
-    public double getDy() {
-        return dy;
-    }
-
-    /**
      * set the dx of the velocity.
      *
      * @param newDx the change of x axis.
      */
     public void setDx(double newDx) {
         dx = newDx;
+    }
+
+    /**
+     * @return dy the change of yaxis.
+     */
+    public double getDy() {
+        return dy;
     }
 
     /**

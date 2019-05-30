@@ -151,17 +151,17 @@ public class Block implements Collidable, Sprite, HitNotifier {
     }
 
     /**
-     * @param hits numberOfHits.
-     */
-    public void setNumberOfHits(int hits) {
-        this.numberOfHits = hits;
-    }
-
-    /**
      * @return number of hits.
      */
     public int getNumberOfHits() {
         return numberOfHits;
+    }
+
+    /**
+     * @param hits numberOfHits.
+     */
+    public void setNumberOfHits(int hits) {
+        this.numberOfHits = hits;
     }
 
     /**

@@ -22,13 +22,13 @@ import java.util.List;
  */
 public class Ball implements Sprite, HitNotifier {
 
+    private static GameEnvironment environment;
     private List<HitListener> hitListeners;
     private Color color; //the color of the ball
     private Point center; //the location of the ball
     private int size; //the size of the ball (radius)
     private Velocity velocity; //the velocity of the ball
     private Point topLeftCorner, bottomRightCorner; //the position of the corners of the frame of the ball
-    private static GameEnvironment environment;
 
     /**
      * Class constructor.
@@ -56,6 +56,15 @@ public class Ball implements Sprite, HitNotifier {
      */
     public Ball(int x, int y, int r, java.awt.Color color) {
         this(new Point(x, y), r, color);
+    }
+
+    /**
+     * this method sets the gameEnvironment of the ball.
+     *
+     * @param env the gameEnvironment.
+     */
+    public static void setEnvironment(GameEnvironment env) {
+        Ball.environment = env;
     }
 
     /**
@@ -119,25 +128,6 @@ public class Ball implements Sprite, HitNotifier {
     }
 
     /**
-     * this method sets the gameEnvironment of the ball.
-     *
-     * @param env the gameEnvironment.
-     */
-    public static void setEnvironment(GameEnvironment env) {
-        Ball.environment = env;
-    }
-
-    /**
-     * set the velocity of the ball.
-     *
-     * @param v the velocity of the ball(x and y).
-     */
-    public void setVelocity(Velocity v) {
-        velocity.setDx(v.getDx());
-        velocity.setDy(v.getDy());
-    }
-
-    /**
      * set the velocity of the ball.
      *
      * @param dx the x velocity of the ball.
@@ -171,6 +161,16 @@ public class Ball implements Sprite, HitNotifier {
      */
     public Velocity getVelocity() {
         return velocity;
+    }
+
+    /**
+     * set the velocity of the ball.
+     *
+     * @param v the velocity of the ball(x and y).
+     */
+    public void setVelocity(Velocity v) {
+        velocity.setDx(v.getDx());
+        velocity.setDy(v.getDy());
     }
 
     /**

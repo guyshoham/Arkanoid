@@ -32,6 +32,9 @@ import java.awt.Color;
  * @author Guy Shoham
  */
 public class GameLevel implements Animation {
+    private static final int GUI_WIDTH = 800;
+    private static final int GUI_HEIGHT = 600;
+    private static final int BALL_RADIUS = 5;
     private AnimationRunner runner;
     private boolean running;
     private SpriteCollection sprites;
@@ -43,10 +46,6 @@ public class GameLevel implements Animation {
     private ScoreTrackingListener scoreTrackingListener;
     private LevelInformation info;
     private Paddle paddle;
-
-    private static final int GUI_WIDTH = 800;
-    private static final int GUI_HEIGHT = 600;
-    private static final int BALL_RADIUS = 5;
     private boolean isPaddleExist;
 
     /**

@@ -20,12 +20,12 @@ import static biuoop.KeyboardSensor.RIGHT_KEY;
  * @author Guy Shoham
  */
 public class Paddle implements Sprite, Collidable {
+    private static final double LEFT_CORNER = 25; //min X value paddle can go
+    private static final double RIGHT_CORNER = 775; //max X value paddle can go
     private KeyboardSensor keyboard;
     private Rectangle rect;
     private Color color;
     private int speed;
-    private static final double LEFT_CORNER = 25; //min X value paddle can go
-    private static final double RIGHT_CORNER = 775; //max X value paddle can go
 
     /**
      * Class constructor.
