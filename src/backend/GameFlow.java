@@ -1,7 +1,7 @@
 package backend;
 
 import animation.AnimationRunner;
-import animation.DefaultAnimation;
+import animation.KeyPressStoppableAnimation;
 import animation.YouLoseScreen;
 import animation.YouWinScreen;
 import biuoop.GUI;
@@ -53,11 +53,11 @@ public class GameFlow {
         }
         //check if user won or lost, and show proper screen.
         if (lives.getValue() != 0) {
-            this.runner.run(new YouWinScreen(this.keyboard, KeyboardSensor.SPACE_KEY, score.getValue(),
-                    new DefaultAnimation()));
+            this.runner.run(new KeyPressStoppableAnimation(this.keyboard, KeyboardSensor.SPACE_KEY,
+                    new YouWinScreen(score.getValue())));
         } else {
-            this.runner.run(new YouLoseScreen(this.keyboard, KeyboardSensor.SPACE_KEY, score.getValue(),
-                    new DefaultAnimation()));
+            this.runner.run(new KeyPressStoppableAnimation(this.keyboard, KeyboardSensor.SPACE_KEY,
+                    new YouLoseScreen(score.getValue())));
         }
         gui.close();
     }
