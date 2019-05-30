@@ -1,7 +1,7 @@
 package levels;
 
-import geometry.Velocity;
 import gameobjects.Block;
+import geometry.Velocity;
 import sprites.Sprite;
 
 import java.util.List;

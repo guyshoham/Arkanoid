@@ -1,10 +1,10 @@
 package levels;
 
-import geometry.Velocity;
 import backgrounds.BackgroundDirectHit;
 import gameobjects.Block;
 import geometry.Point;
 import geometry.Rectangle;
+import geometry.Velocity;
 import sprites.Sprite;
 
 import java.awt.Color;

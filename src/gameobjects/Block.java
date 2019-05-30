@@ -1,12 +1,12 @@
 package gameobjects;
 
-import geometry.Velocity;
+import backend.GameLevel;
 import biuoop.DrawSurface;
 import collisions.Collidable;
-import backend.GameLevel;
 import geometry.Line;
 import geometry.Point;
 import geometry.Rectangle;
+import geometry.Velocity;
 import listeners.HitListener;
 import listeners.HitNotifier;
 import sprites.Sprite;

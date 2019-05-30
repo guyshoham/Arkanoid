@@ -1,9 +1,9 @@
 package gameobjects;
 
+import backend.GameLevel;
 import biuoop.DrawSurface;
 import biuoop.KeyboardSensor;
 import collisions.Collidable;
-import backend.GameLevel;
 import geometry.Point;
 import geometry.Rectangle;
 import geometry.Velocity;
