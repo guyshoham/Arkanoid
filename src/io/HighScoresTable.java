@@ -1,12 +1,6 @@
 package io;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.Serializable;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -116,11 +110,13 @@ public class HighScoresTable implements Serializable {
     // Save table data to the specified file.
     public void save(File filename) throws IOException {
         try {
-            FileWriter output = new FileWriter(filename);
-            for (int i = 0; i < size; i++) {
-                output.write(highScores.get(i).getName() + ":" + highScores.get(i).getScore() + "\n");
+            FileWriter writer = new FileWriter(filename);
+            if (!highScores.isEmpty()) {
+                for (int i = 0; i < size; i++) {
+                    writer.write(highScores.get(i).getName() + ":" + highScores.get(i).getScore() + "\n");
+                }
             }
-            output.close();
+            writer.close();
         } catch (IOException ex) {
             throw new IOException(ex);
         }

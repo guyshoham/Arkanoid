@@ -29,8 +29,8 @@ public class Ass7Game {
      * @param args list of levels
      */
     public static void main(String[] args) throws IOException {
-        ioTest();
-        //runGame(args);
+        //ioTest();
+        runGame(args);
     }
 
     private static void ioTest() throws IOException {
@@ -59,8 +59,9 @@ public class Ass7Game {
      *
      * @param args list of levels
      */
-    public static void runGame(String[] args) {
+    public static void runGame(String[] args) throws IOException {
         GameFlow gameFlow = new GameFlow();
+
         List<LevelInformation> levels = new ArrayList<>();
         for (String str : args) {
             switch (str) {

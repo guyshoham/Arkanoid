@@ -1,13 +1,13 @@
 package backend;
 
-import animation.AnimationRunner;
-import animation.KeyPressStoppableAnimation;
-import animation.YouLoseScreen;
-import animation.YouWinScreen;
+import animation.*;
 import biuoop.GUI;
 import biuoop.KeyboardSensor;
+import io.HighScoresTable;
 import levels.LevelInformation;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -18,22 +18,38 @@ import java.util.List;
 public class GameFlow {
 
     private static final String GAME_TITLE = "Arkanoid";
+    private static final String FILE_PATH = "test2.txt";
     private static final int GUI_WIDTH = 800;
     private static final int GUI_HEIGHT = 600;
     private static final int LIVES = 7;
+    private static final int TABLE_SIZE = 5;
     private Counter score, lives;
     private GUI gui = new GUI(GAME_TITLE, GUI_WIDTH, GUI_HEIGHT);
     private AnimationRunner runner;
     private KeyboardSensor keyboard;
+    private HighScoresTable highScoresTable;
 
     /**
      * Class Constructor.
      */
-    public GameFlow() {
+    public GameFlow() throws IOException {
         this.score = new Counter();
         this.lives = new Counter(LIVES);
         this.runner = new AnimationRunner(gui);
         this.keyboard = gui.getKeyboardSensor();
+        handleScoresTable();
+    }
+
+    private void handleScoresTable() throws IOException {
+        File file = new File(FILE_PATH);
+        if (!file.exists()) {
+            //no file. create one
+            this.highScoresTable = new HighScoresTable(TABLE_SIZE);
+            highScoresTable.save(file);
+        } else {
+            //load file
+            this.highScoresTable = HighScoresTable.loadFromFile(file);
+        }
     }
 
     /**
@@ -57,6 +73,8 @@ public class GameFlow {
             this.runner.run(new KeyPressStoppableAnimation(this.keyboard, KeyboardSensor.SPACE_KEY,
                     new YouLoseScreen(score.getValue())));
         }
+        this.runner.run(new KeyPressStoppableAnimation(this.keyboard, KeyboardSensor.SPACE_KEY,
+                new HighScoresAnimation(highScoresTable)));
         gui.close();
     }
 }

@@ -28,9 +28,11 @@ public class HighScoresAnimation implements Animation {
 
         d.drawText(10, 70, "High Scores:", 20);
 
-        for (int i = 0; i < scores.size(); i++) {
-            d.drawText(10, 100 + i * 20, (i + 1) + ". " +
-                    scoreInfos.get(i).getName() + ":" + scoreInfos.get(i).getScore(), 20);
+        if (scores.getHighScores().size() != 0) {
+            for (int i = 0; i < scores.size(); i++) {
+                d.drawText(10, 100 + i * 20, (i + 1) + ". " +
+                        scoreInfos.get(i).getName() + ":" + scoreInfos.get(i).getScore(), 20);
+            }
         }
     }
 
