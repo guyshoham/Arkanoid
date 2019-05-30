@@ -1,9 +1,11 @@
 package backend;
 
 import animation.*;
+import biuoop.DialogManager;
 import biuoop.GUI;
 import biuoop.KeyboardSensor;
 import io.HighScoresTable;
+import io.ScoreInfo;
 import levels.LevelInformation;
 
 import java.io.File;
@@ -25,9 +27,11 @@ public class GameFlow {
     private static final int TABLE_SIZE = 5;
     private Counter score, lives;
     private GUI gui = new GUI(GAME_TITLE, GUI_WIDTH, GUI_HEIGHT);
+    private DialogManager dialog;
     private AnimationRunner runner;
     private KeyboardSensor keyboard;
     private HighScoresTable highScoresTable;
+    private File file = new File(FILE_PATH);
 
     /**
      * Class Constructor.
@@ -37,11 +41,11 @@ public class GameFlow {
         this.lives = new Counter(LIVES);
         this.runner = new AnimationRunner(gui);
         this.keyboard = gui.getKeyboardSensor();
+        this.dialog = gui.getDialogManager();
         handleScoresTable();
     }
 
     private void handleScoresTable() throws IOException {
-        File file = new File(FILE_PATH);
         if (!file.exists()) {
             //no file. create one
             this.highScoresTable = new HighScoresTable(TABLE_SIZE);
@@ -57,7 +61,7 @@ public class GameFlow {
      *
      * @param levels levels
      */
-    public void runLevels(List<LevelInformation> levels) {
+    public void runLevels(List<LevelInformation> levels) throws IOException {
         //run levels one by one
         for (LevelInformation levelInfo : levels) {
             GameLevel level = new GameLevel(levelInfo, this.keyboard,
@@ -65,6 +69,10 @@ public class GameFlow {
             level.initialize();
             level.run();
         }
+        String name = dialog.showQuestionDialog("Name", "What is your name?", "");
+        System.out.println(name);
+        highScoresTable.add(new ScoreInfo(name, score.getValue()));
+        highScoresTable.save(file);
         //check if user won or lost, and show proper screen.
         if (lives.getValue() != 0) {
             this.runner.run(new KeyPressStoppableAnimation(this.keyboard, KeyboardSensor.SPACE_KEY,

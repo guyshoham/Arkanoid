@@ -112,7 +112,7 @@ public class HighScoresTable implements Serializable {
         try {
             FileWriter writer = new FileWriter(filename);
             if (!highScores.isEmpty()) {
-                for (int i = 0; i < size; i++) {
+                for (int i = 0; i < highScores.size(); i++) {
                     writer.write(highScores.get(i).getName() + ":" + highScores.get(i).getScore() + "\n");
                 }
             }
