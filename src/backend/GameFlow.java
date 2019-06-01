@@ -22,7 +22,7 @@ import java.util.List;
 public class GameFlow {
 
     private static final String GAME_TITLE = "Arkanoid";
-    private static final String FILE_PATH = "test2.txt";
+    private static final String FILE_PATH = "test.txt";
     private static final int GUI_WIDTH = 800;
     private static final int GUI_HEIGHT = 600;
     private static final int LIVES = 7;
