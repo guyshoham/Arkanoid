@@ -27,6 +27,7 @@ public class HighScoresAnimation implements Animation {
         List<ScoreInfo> scoreInfos = scores.getHighScores();
 
         d.drawText(10, 70, "High Scores:", 20);
+        d.drawText(11, 71, "High Scores:", 20);
 
         if (scores.getHighScores().size() != 0) {
             for (int i = 0; i < scores.getHighScores().size(); i++) {
@@ -34,6 +35,8 @@ public class HighScoresAnimation implements Animation {
                         scoreInfos.get(i).getName() + ":" + scoreInfos.get(i).getScore(), 20);
             }
         }
+
+        d.drawText(300, 500, "Press Space to Continue", 20);
     }
 
     @Override

@@ -7,6 +7,8 @@ import biuoop.KeyboardSensor;
 import io.HighScoresTable;
 import io.ScoreInfo;
 import levels.LevelInformation;
+import tasks.ExitTask;
+import tasks.Task;
 
 import java.io.File;
 import java.io.IOException;
@@ -25,8 +27,8 @@ public class GameFlow {
     private static final int GUI_HEIGHT = 600;
     private static final int LIVES = 7;
     private static final int TABLE_SIZE = 5;
-    private Counter score, lives;
     private GUI gui = new GUI(GAME_TITLE, GUI_WIDTH, GUI_HEIGHT);
+    private Counter score, lives;
     private DialogManager dialog;
     private AnimationRunner runner;
     private KeyboardSensor keyboard;
@@ -84,5 +86,26 @@ public class GameFlow {
         this.runner.run(new KeyPressStoppableAnimation(this.keyboard, KeyboardSensor.SPACE_KEY,
                 new HighScoresAnimation(highScoresTable)));
         gui.close();
+    }
+
+    public void showMenu() {
+        Menu<Task<Void>> menu = new MenuAnimation<>(GAME_TITLE, runner, keyboard);
+        //menu.addSelection("s", "new game", "option a");
+        menu.addSelection("h", "High Scores Table", new Task<Void>() {
+            @Override
+            public Void run() {
+                runner.run(new KeyPressStoppableAnimation(keyboard, KeyboardSensor.SPACE_KEY,
+                        new HighScoresAnimation(highScoresTable)));
+                return null;
+            }
+        });
+        menu.addSelection("q", "Quit", new ExitTask());
+        while (true) {
+            runner.run(menu);
+            // wait for user selection
+            Task<Void> task = menu.getStatus();
+            task.run();
+            menu.resetStatus();
+        }
     }
 }

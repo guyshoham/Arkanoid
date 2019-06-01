@@ -20,6 +20,13 @@ import java.util.List;
  */
 public class Ass7Game {
 
+    //private static final int GUI_WIDTH = 800;
+    //private static final int GUI_HEIGHT = 600;
+    //private static final String GAME_TITLE = "Arkanoid";
+    //private GUI gui = new GUI(GAME_TITLE, GUI_WIDTH, GUI_HEIGHT);
+    //private AnimationRunner runner = new AnimationRunner(gui);
+    //private KeyboardSensor keyboard = gui.getKeyboardSensor();
+
     private static final String FILE_PATH = "test.txt";
     private static final int TABLE_SIZE = 5;
 
@@ -30,7 +37,11 @@ public class Ass7Game {
      */
     public static void main(String[] args) throws IOException {
         //ioTest();
+        //runMenu();
         runGame(args);
+    }
+
+    private static void runMenu() {
     }
 
     private static void ioTest() throws IOException {
@@ -87,6 +98,7 @@ public class Ass7Game {
             levels.add(new LevelGreenThree());
             levels.add(new LevelFinalFour());
         }
-        gameFlow.runLevels(levels);
+        //gameFlow.runLevels(levels);
+        gameFlow.showMenu();
     }
 }
