@@ -5,11 +5,11 @@ import backend.GameFlow;
 import biuoop.GUI;
 import biuoop.KeyboardSensor;
 import io.HighScoresTable;
+import io.LevelSpecificationReader;
 import io.ScoreInfo;
 import levels.*;
 
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,11 +37,15 @@ public class Ass7Game {
      */
     public static void main(String[] args) throws IOException {
         //ioTest();
-        //runMenu();
-        runGame(args);
+        test();
+        //runGame(args);
     }
 
-    private static void runMenu() {
+    private static void test() throws IOException {
+        LevelSpecificationReader levelSpecificationReader = new LevelSpecificationReader();
+        Reader reader = new FileReader(new File("levelTest.txt"));
+        levelSpecificationReader.fromReader(reader);
+
     }
 
     private static void ioTest() throws IOException {

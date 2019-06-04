@@ -110,7 +110,7 @@ public class HighScoresTable implements Serializable {
     // Save table data to the specified file.
     public void save(File filename) throws IOException {
         try {
-            FileWriter writer = new FileWriter(filename);
+            PrintWriter writer = new PrintWriter(filename);
             if (!highScores.isEmpty()) {
                 for (int i = 0; i < highScores.size(); i++) {
                     writer.write(highScores.get(i).getName() + ":" + highScores.get(i).getScore() + "\n");
