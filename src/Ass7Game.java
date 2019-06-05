@@ -1,6 +1,4 @@
-import animation.AnimationRunner;
-import animation.HighScoresAnimation;
-import animation.KeyPressStoppableAnimation;
+import animation.*;
 import backend.GameFlow;
 import biuoop.GUI;
 import biuoop.KeyboardSensor;

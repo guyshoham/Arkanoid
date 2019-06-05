@@ -2,6 +2,8 @@ package animation;
 
 import biuoop.DrawSurface;
 
+import java.awt.*;
+
 /**
  * class YouWinScreen.
  *
@@ -21,7 +23,13 @@ public class YouWinScreen implements Animation {
 
     @Override
     public void doOneFrame(DrawSurface d) {
-        d.drawText(10, d.getHeight() / 2, "You Win! Your Score is " + score, 32);
+        d.setColor(Color.BLUE);
+        d.drawText(300, 200, "You Win!", 50);
+        d.setColor(Color.BLACK);
+        d.drawText(250, 300, "Your Score is " + score, 40);
+
+        d.drawText(250, 500, "Press Space to Continue", 30);
+
     }
 
     @Override

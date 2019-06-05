@@ -111,6 +111,24 @@ public class GameFlow {
             }
         });
         menu.addSelection("q", "Quit", new ExitTask());
+        menu.addSelection("y", "You Win!", new Task<Void>() {
+            @Override
+            public Void run() {
+                runner.run(new KeyPressStoppableAnimation(keyboard, KeyboardSensor.SPACE_KEY,
+                        new YouWinScreen(1000)));
+                return null;
+            }
+        });
+        menu.addSelection("l", "You Lose!", new Task<Void>() {
+            @Override
+            public Void run() {
+                runner.run(new KeyPressStoppableAnimation(keyboard, KeyboardSensor.SPACE_KEY,
+                        new YouLoseScreen(1000)));
+                return null;
+            }
+        });
+
+
         while (true) {
             runner.run(menu);
             // wait for user selection
