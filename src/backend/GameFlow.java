@@ -1,12 +1,6 @@
 package backend;
 
-import animation.AnimationRunner;
-import animation.HighScoresAnimation;
-import animation.KeyPressStoppableAnimation;
-import animation.Menu;
-import animation.MenuAnimation;
-import animation.YouLoseScreen;
-import animation.YouWinScreen;
+import animation.*;
 import biuoop.DialogManager;
 import biuoop.GUI;
 import biuoop.KeyboardSensor;
@@ -45,8 +39,6 @@ public class GameFlow {
      * Class Constructor.
      */
     public GameFlow() throws IOException {
-        this.score = new Counter();
-        this.lives = new Counter(LIVES);
         this.runner = new AnimationRunner(gui);
         this.keyboard = gui.getKeyboardSensor();
         this.dialog = gui.getDialogManager();
@@ -70,6 +62,9 @@ public class GameFlow {
      * @param levels levels
      */
     public void runLevels(List<LevelInformation> levels) throws IOException {
+        score = new Counter();
+        lives = new Counter(LIVES);
+
         //run levels one by one
         for (LevelInformation levelInfo : levels) {
             GameLevel level = new GameLevel(levelInfo, this.keyboard,
@@ -91,12 +86,22 @@ public class GameFlow {
         }
         this.runner.run(new KeyPressStoppableAnimation(this.keyboard, KeyboardSensor.SPACE_KEY,
                 new HighScoresAnimation(highScoresTable)));
-        gui.close();
+        showMenu(levels);
     }
 
-    public void showMenu() {
+    public void showMenu(List<LevelInformation> levels) {
         Menu<Task<Void>> menu = new MenuAnimation<>(GAME_TITLE, runner, keyboard);
-        //menu.addSelection("s", "new game", "option a");
+        menu.addSelection("s", "New Game", new Task<Void>() {
+            @Override
+            public Void run() {
+                try {
+                    runLevels(levels);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                return null;
+            }
+        });
         menu.addSelection("h", "High Scores Table", new Task<Void>() {
             @Override
             public Void run() {

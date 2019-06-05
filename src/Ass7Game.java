@@ -110,6 +110,6 @@ public class Ass7Game {
             levels.add(new LevelFinalFour());
         }
         //gameFlow.runLevels(levels);
-        gameFlow.showMenu();
+        gameFlow.showMenu(levels);
     }
 }
