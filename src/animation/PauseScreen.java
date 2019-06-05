@@ -17,7 +17,8 @@ public class PauseScreen implements Animation {
 
     @Override
     public void doOneFrame(DrawSurface d) {
-        d.drawText(10, d.getHeight() / 2, "paused -- press space to continue", 32);
+        d.drawText(330, 250, "Paused", 40);
+        d.drawText(250, 500, "Press Space to Continue", 30);
     }
 
     @Override

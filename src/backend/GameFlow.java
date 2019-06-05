@@ -127,6 +127,14 @@ public class GameFlow {
                 return null;
             }
         });
+        menu.addSelection("p", "Pause!", new Task<Void>() {
+            @Override
+            public Void run() {
+                runner.run(new KeyPressStoppableAnimation(keyboard, KeyboardSensor.SPACE_KEY,
+                        new PauseScreen()));
+                return null;
+            }
+        });
 
 
         while (true) {
