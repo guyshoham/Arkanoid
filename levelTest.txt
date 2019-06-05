@@ -1,7 +1,7 @@
 START_LEVEL
 level_name:first level
 ball_velocities:45,200 -45,200 0,300
-background:color(RGB(12,123,200))
+background:color(red)
 paddle_speed:650
 paddle_width:160
 block_definitions:blocks1.txt

@@ -1,5 +1,6 @@
 package io;
 
+import backend.ColorsParser;
 import backgrounds.BackgroundImage;
 import backgrounds.BackgroundSingleColor;
 import gameobjects.Block;
@@ -13,7 +14,6 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
 import java.io.Reader;
-import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -85,11 +85,10 @@ public class LevelSpecificationReader implements LevelInformation {
                                 String rgb = betterSubstring(value, "color(", ")");
                                 Color color;
                                 try {
-                                    Field field = Class.forName("java.awt.Color").getField(rgb);
-                                    color = (Color) field.get(null);
+                                    color = ColorsParser.colorFromString(rgb);
                                     currentLevel.setBackground(new BackgroundSingleColor(color));
-                                } catch (Exception e) {
-                                    color = null; // Not defined
+                                } catch (Exception ex) {
+                                    throw new IOException(ex);
                                 }
                             } else if (value.substring(0, 5).equals("image")) {
                                 String imagePath = betterSubstring(value, "image(", ")");
@@ -139,7 +138,7 @@ public class LevelSpecificationReader implements LevelInformation {
     public List<String> splitLevels(Reader reader) throws IOException {
         boolean done;
         List<String> levels = new ArrayList<>();
-        BufferedReader br;
+        BufferedReader br = null;
         try {
             br = new BufferedReader(reader);
             String s;
@@ -164,6 +163,10 @@ public class LevelSpecificationReader implements LevelInformation {
             }
         } catch (IOException ex) {
             throw new IOException(ex);
+        } finally {
+            if (br != null) {
+                br.close();
+            }
         }
         return levels;
     }

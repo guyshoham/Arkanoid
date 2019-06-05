@@ -2,10 +2,14 @@
   <dictionary name="Guy">
     <words>
       <w>arkanoid</w>
+      <w>bdef</w>
       <w>collidable</w>
       <w>collidables</w>
       <w>sarit</w>
+      <w>sdef</w>
       <w>vals</w>
+      <w>xpos</w>
+      <w>ypos</w>
     </words>
   </dictionary>
 </component>
