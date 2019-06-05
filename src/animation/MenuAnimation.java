@@ -43,16 +43,25 @@ public class MenuAnimation<T> implements Menu<T> {
 
     @Override
     public void doOneFrame(DrawSurface d) {
-        d.drawText(d.getWidth() / 2, 30, title, 32);
+        d.drawText(300, 70, title, 40);
+        d.drawText(301, 71, title, 40);
+        for (int i = 0; i < 5; i++) {
+            d.drawLine(0, 80 + i, 800, 80 + i);
+        }
+
+        int gap = 50;
+        int tableStart = 200;
+        int y;
 
         for (int i = 0; i < menuNames.size(); i++) {
-            d.drawText(30, d.getHeight() / 2 + (i * 30), "(" + menuKeys.get(i) + ") " + menuNames.get(i), 20);
+            y = tableStart + i * gap;
+            d.drawText(30, y, "(" + menuKeys.get(i) + ") " + menuNames.get(i), 30);
         }
 
         for (int i = 0; i < menuRetVals.size(); i++) {
             if (keyboard.isPressed(menuKeys.get(i))) {
                 this.status = menuRetVals.get(i);
-                this.done=true;
+                this.done = true;
             }
         }
     }
