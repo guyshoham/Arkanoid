@@ -20,6 +20,8 @@ public class BackgroundImage extends Rectangle implements Sprite {
 
     /**
      * Class Constructor.
+     *
+     * @param image image
      */
     public BackgroundImage(Image image) {
         super(new Point(0, 0), 800, 600);

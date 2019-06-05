@@ -1,6 +1,12 @@
 package backend;
 
-import animation.*;
+import animation.AnimationRunner;
+import animation.HighScoresAnimation;
+import animation.KeyPressStoppableAnimation;
+import animation.Menu;
+import animation.MenuAnimation;
+import animation.YouLoseScreen;
+import animation.YouWinScreen;
 import biuoop.DialogManager;
 import biuoop.GUI;
 import biuoop.KeyboardSensor;

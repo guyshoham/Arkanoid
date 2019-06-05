@@ -2,6 +2,11 @@ package io;
 
 import gameobjects.Block;
 
+/**
+ * interface BlockCreator.
+ *
+ * @author Guy Shoham
+ */
 public interface BlockCreator {
     /**
      * @param xpos x pos

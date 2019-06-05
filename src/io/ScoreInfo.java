@@ -9,6 +9,12 @@ public class ScoreInfo implements Comparable<ScoreInfo> {
     private String name;
     private int score;
 
+    /**
+     * Class constructor.
+     *
+     * @param name  name
+     * @param score score
+     */
     public ScoreInfo(String name, int score) {
         this.name = name;
         this.score = score;

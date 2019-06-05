@@ -6,6 +6,11 @@ import java.io.Reader;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Class BlocksDefinitionReader .
+ *
+ * @author Guy Shoham
+ */
 public class BlocksDefinitionReader {
     private static final String DEFAULT = "default";
     private static final String BDEF = "bdef";

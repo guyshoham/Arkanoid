@@ -7,7 +7,11 @@ import biuoop.KeyboardSensor;
 import io.BlocksDefinitionReader;
 import io.HighScoresTable;
 import io.ScoreInfo;
-import levels.*;
+import levels.LevelDirectHit;
+import levels.LevelFinalFour;
+import levels.LevelGreenThree;
+import levels.LevelInformation;
+import levels.LevelWideEasy;
 
 import java.io.File;
 import java.io.FileReader;

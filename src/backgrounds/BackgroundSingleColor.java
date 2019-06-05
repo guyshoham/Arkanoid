@@ -20,6 +20,8 @@ public class BackgroundSingleColor extends Rectangle implements Sprite {
 
     /**
      * Class Constructor.
+     *
+     * @param color color
      */
     public BackgroundSingleColor(Color color) {
         super(new Point(0, 0), 800, 600);

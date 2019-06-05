@@ -9,6 +9,11 @@ import java.awt.*;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Class BlocksFromSymbolsFactory.
+ *
+ * @author Guy Shoham
+ */
 public class BlocksFromSymbolsFactory implements BlockCreator {
     private static final String DEFAULT = "default";
     private static final String BDEF = "bdef";

@@ -181,8 +181,8 @@ public class LevelSpecificationReader implements LevelInformation {
         return value.substring(start.length(), value.length() - end.length());
     }
 
-    private void setBackground(Sprite background) {
-        this.background = background;
+    private void setBackground(Sprite b) {
+        this.background = b;
     }
 
     public void setPaddle_speed(int paddle_speed) {

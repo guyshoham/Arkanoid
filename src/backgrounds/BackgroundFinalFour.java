@@ -15,7 +15,7 @@ import java.awt.Color;
 public class BackgroundFinalFour extends Rectangle implements Sprite {
 
     private Point upperLeft;
-    private double width, height;
+    private double width = 800, height = 600;
 
     /**
      * Class Constructor.
@@ -23,8 +23,6 @@ public class BackgroundFinalFour extends Rectangle implements Sprite {
     public BackgroundFinalFour() {
         super(new Point(0, 0), 800, 600);
         this.upperLeft = new Point(0, 0);
-        this.width = 800;
-        this.height = 600;
     }
 
     @Override

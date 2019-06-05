@@ -1,8 +1,13 @@
 package backend;
 
-import java.awt.*;
+import java.awt.Color;
 import java.lang.reflect.Field;
 
+/**
+ * Class ColorParser.
+ *
+ * @author Guy Shoham
+ */
 public class ColorsParser {
 
     /**
