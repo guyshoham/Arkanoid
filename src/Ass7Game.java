@@ -1,16 +1,16 @@
-import animation.*;
+import animation.AnimationRunner;
+import animation.HighScoresAnimation;
+import animation.KeyPressStoppableAnimation;
 import backend.GameFlow;
 import biuoop.GUI;
 import biuoop.KeyboardSensor;
 import io.BlocksDefinitionReader;
 import io.HighScoresTable;
+import io.LevelSpecificationReader;
 import io.ScoreInfo;
-import levels.LevelDirectHit;
-import levels.LevelFinalFour;
-import levels.LevelGreenThree;
 import levels.LevelInformation;
-import levels.LevelWideEasy;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
@@ -42,8 +42,8 @@ public class Ass7Game {
      */
     public static void main(String[] args) throws IOException {
         //ioTest();
-        test();
-        //runGame(args);
+        //test();
+        runGame(args);
     }
 
     private static void test() throws IOException {
@@ -81,9 +81,9 @@ public class Ass7Game {
      */
     public static void runGame(String[] args) throws IOException {
         GameFlow gameFlow = new GameFlow();
-
         List<LevelInformation> levels = new ArrayList<>();
-        for (String str : args) {
+
+        /*for (String str : args) {
             switch (str) {
                 case "1":
                     levels.add(new LevelDirectHit());
@@ -106,8 +106,16 @@ public class Ass7Game {
             levels.add(new LevelWideEasy());
             levels.add(new LevelGreenThree());
             levels.add(new LevelFinalFour());
-        }
-        //gameFlow.runLevels(levels);
+        }*/
+
+        File fileLevel = new File("levelTest.txt");
+        File fileBlock = new File("blockTest.txt");
+        Reader readerLevel = new BufferedReader(new FileReader(fileLevel));
+        Reader readerBlock = new BufferedReader(new FileReader(fileBlock));
+
+        LevelSpecificationReader levelSpecificationReader = new LevelSpecificationReader();
+        levels = levelSpecificationReader.fromReader(readerLevel);
+
         gameFlow.showMenu(levels);
     }
 }
