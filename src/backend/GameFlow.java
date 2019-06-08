@@ -48,11 +48,11 @@ public class GameFlow {
     private void handleScoresTable() throws IOException {
         if (!file.exists()) {
             //no file. create one
-            this.highScoresTable = new HighScoresTable(TABLE_SIZE);
+            highScoresTable = new HighScoresTable(TABLE_SIZE);
             highScoresTable.save(file);
         } else {
             //load file
-            this.highScoresTable = HighScoresTable.loadFromFile(file);
+            highScoresTable = HighScoresTable.loadFromFile(file);
         }
     }
 
