@@ -11,7 +11,7 @@ import listeners.HitListener;
 import listeners.HitNotifier;
 import sprites.Sprite;
 
-import java.awt.Color;
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -174,5 +174,21 @@ public class Block implements Collidable, Sprite, HitNotifier {
     @Override
     public String toString() {
         return "Block{" + "rect=" + rect + "}\n";
+    }
+
+    public void setWidth(int width) {
+        this.rect = new Rectangle(rect.getUpperLeft(), width, rect.getHeight());
+    }
+
+    public void setHeight(int height) {
+        this.rect = new Rectangle(rect.getUpperLeft(), rect.getWidth(), height);
+    }
+
+    public void setHitPoints(int hitPoints) {
+        this.numberOfHits = hitPoints;
+    }
+
+    public void setColor(Color color) {
+        this.color = color;
     }
 }

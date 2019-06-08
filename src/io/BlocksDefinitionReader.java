@@ -1,5 +1,11 @@
 package io;
 
+import blocks.BlockCreator;
+import gameobjects.Block;
+import geometry.Point;
+import geometry.Rectangle;
+
+import java.awt.*;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.Reader;
@@ -29,7 +35,7 @@ public class BlocksDefinitionReader {
             br = new BufferedReader(reader);
             Map<String, String> defaultMap = new HashMap<>();
             String key, value;
-            String line = null;
+            String line;
             while ((line = br.readLine()) != null) {
                 if (!line.startsWith("#") && !line.isEmpty()) {
                     if (!line.startsWith(SDEF) && !line.startsWith(BDEF)) {
@@ -57,7 +63,19 @@ public class BlocksDefinitionReader {
 
                             BlocksFromSymbolsFactory blockCreator = new BlocksFromSymbolsFactory();
                             //todo: complete put keys and values
-                            //blockCreator.addBlockCreator(HEIGHT, 1);
+                            blockCreator.addBlockCreator(symbol, new BlockCreator() {
+
+                                @Override
+                                public Block create(int xpos, int ypos) {
+                                    int width = Integer.parseInt(propertiesMap.get(WIDTH));
+                                    int height = Integer.parseInt(propertiesMap.get(HEIGHT));
+                                    int hitPoints = Integer.parseInt(propertiesMap.get(HIT_POINTS));
+                                    //todo: change color.BLACK
+                                    Color color = Color.BLACK;
+
+                                    return new Block(new Rectangle(new Point(xpos, ypos), width, height), color, hitPoints);
+                                }
+                            });
 
                             retVal.addBlockCreator(symbol, blockCreator);
                         }
@@ -75,7 +93,7 @@ public class BlocksDefinitionReader {
         }
 
 
-        return null;
+        return retVal;
     }
 
     public static String getSymbol(Map<String, String> map) {

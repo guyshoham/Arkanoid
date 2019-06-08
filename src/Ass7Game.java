@@ -42,8 +42,8 @@ public class Ass7Game {
      */
     public static void main(String[] args) throws IOException {
         //ioTest();
-        //test();
-        runGame(args);
+        test();
+        //runGame(args);
     }
 
     private static void test() throws IOException {

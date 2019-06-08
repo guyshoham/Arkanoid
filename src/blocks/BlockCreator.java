@@ -1,4 +1,4 @@
-package io;
+package blocks;
 
 import gameobjects.Block;
 

@@ -1,6 +1,7 @@
 package io;
 
 import backend.ColorsParser;
+import blocks.BlockCreator;
 import gameobjects.Block;
 import geometry.Point;
 import geometry.Rectangle;
