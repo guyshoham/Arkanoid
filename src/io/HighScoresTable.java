@@ -91,6 +91,7 @@ public class HighScoresTable implements Serializable {
     // Load table data from file.
     // Current table data is cleared.
     public void load(File filename) throws IOException {
+        //todo: when calling function, load all stuff to ArrayList<ScoreInfo> highScores
         try {
             FileReader output = new FileReader(filename);
             int c = output.read();
@@ -126,6 +127,7 @@ public class HighScoresTable implements Serializable {
     // If the file does not exist, or there is a problem with
     // reading it, an empty table is returned.
     public static HighScoresTable loadFromFile(File filename) throws IOException {
+        //todo: use load() and than return retVal
         HighScoresTable retVal = new HighScoresTable(5);
         BufferedReader reader = null;
         try {
