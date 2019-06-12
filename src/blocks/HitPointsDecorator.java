@@ -10,6 +10,7 @@ public class HitPointsDecorator extends BlockCreatorDecorator {
         this.hitPoints = Integer.parseInt(propertyValue);
     }
 
+    @Override
     public Block create(int x, int y) {
         Block b = super.create(x, y);
         b.setHitPoints(hitPoints);

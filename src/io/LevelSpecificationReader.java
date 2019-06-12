@@ -8,14 +8,13 @@ import geometry.Velocity;
 import levels.LevelInformation;
 import sprites.Sprite;
 
-import javax.imageio.ImageIO;
 import java.awt.*;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.IOException;
-import java.io.Reader;
+import java.awt.image.BufferedImage;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
+
+import static javax.imageio.ImageIO.read;
 
 public class LevelSpecificationReader implements LevelInformation {
     private static final String START_LEVEL = "START_LEVEL";
@@ -32,8 +31,15 @@ public class LevelSpecificationReader implements LevelInformation {
     private static final String BLOCKS_START_Y = "blocks_start_y";
     private static final String ROW_HEIGHT = "row_height";
     private static final String NUM_BLOCKS = "num_blocks";
+    private static final String RGB_PREFIX = "color(RGB(";
+    private static final String RGB_POSTFIX = "))";
+    private static final String COLOR_PREFIX = "color(";
+    private static final String COLOR_POSTFIX = ")";
+    private static final String IMAGE_PREFIX = "image(";
+    private static final String IMAGE_POSTFIX = ")";
+    private static final String IMAGE = "image";
     private int paddle_speed, paddle_width, num_blocks, block_start_x, block_start_y, row_height;
-    private String level_name, block_definitions;
+    private String level_name, block_definitions = "";
     private Sprite background;
     private List<Velocity> velocities = new ArrayList<>();
     private List<Block> blocks = new ArrayList<>();
@@ -41,21 +47,54 @@ public class LevelSpecificationReader implements LevelInformation {
     public List<LevelInformation> fromReader(Reader reader) throws IOException {
         List<LevelInformation> levels = new ArrayList<>();
         List<String> StringLevels = splitLevels(reader);
-        Sprite background;
         LevelSpecificationReader currentLevel;
+        Sprite background;
+        boolean isBlockLine = false;
 
+        //for each level
         for (String level : StringLevels) {
             currentLevel = new LevelSpecificationReader();
-            String delimiter = ":";
             String key, value;
+            int posY = 0;
+            List<Block> blocks = new ArrayList<>();
+            BlocksFromSymbolsFactory factory = null;
+            String blockText = level.substring(level.indexOf(START_BLOCKS) + START_BLOCKS.length(), level.indexOf(END_BLOCKS));
             String[] lines = level.split("\n");
 
+            //for each line in level
             for (String line : lines) {
-                if (line.equals(START_BLOCKS)) {
-                    break;
+                if (isBlockLine && !line.equals(END_BLOCKS)) {
+                    //todo: start build blocks
+                    int posX = block_start_x;
+
+                    for (int i = 0; i < line.length(); i++) {
+                        String symbol = String.valueOf(line.charAt(i));
+                        if (factory.isSpaceSymbol(symbol)) {
+                            posX += factory.getSpaceWidth(symbol);
+                        } else if (factory.isBlockSymbol(symbol)) {
+                            Block b = factory.getBlock(symbol, posX, posY);
+                            if (b == null) {
+                                throw new RuntimeException("Failed creating block (type '" + symbol + "'");
+                            }
+                            blocks.add(b);
+                            posX += b.getCollisionRectangle().getWidth();
+                        }
+                    }//done reading line of blocks
+                    posY += row_height;
+
+                } else if (line.equals(START_BLOCKS)) {
+                    isBlockLine = true;
+                    if (block_definitions.equals("")) {
+                        throw new IOException("'block definitions' file is missing");
+                    }
+                    Reader blockDefinitionsReader = new FileReader(new File("resources/" + block_definitions));
+                    factory = BlocksDefinitionReader.fromReader(blockDefinitionsReader);
+                } else if (line.equals(END_BLOCKS)) {
+                    isBlockLine = false;
+                    currentLevel.setBlocks(blocks);
                 } else {
-                    key = line.substring(0, line.indexOf(delimiter));
-                    value = line.substring(line.indexOf(delimiter) + 1);
+                    key = line.substring(0, line.indexOf(":"));
+                    value = line.substring(line.indexOf(":") + 1);
                     switch (key) {
                         case LEVEL_NAME:
                             level_name = value;
@@ -73,16 +112,16 @@ public class LevelSpecificationReader implements LevelInformation {
                             currentLevel.setVelocities(velocities);
                             break;
                         case BACKGROUND:
-                            if (value.startsWith("color(RGB(") && value.endsWith("))")) {
-                                String rgb = betterSubstring(value, "color(RGB(", "))");
+                            if (value.startsWith(RGB_PREFIX) && value.endsWith(RGB_POSTFIX)) {
+                                String rgb = betterSubstring(value, RGB_PREFIX, RGB_POSTFIX);
                                 String[] colors = rgb.split(",");
                                 int r = Integer.parseInt(colors[0]);
                                 int g = Integer.parseInt(colors[1]);
                                 int b = Integer.parseInt(colors[2]);
                                 Color color = new Color(r, g, b);
                                 currentLevel.setBackground(new BackgroundSingleColor(color));
-                            } else if (value.startsWith("color(") && value.endsWith(")")) {
-                                String rgb = betterSubstring(value, "color(", ")");
+                            } else if (value.startsWith(COLOR_PREFIX) && value.endsWith(COLOR_POSTFIX)) {
+                                String rgb = betterSubstring(value, COLOR_PREFIX, COLOR_POSTFIX);
                                 Color color;
                                 try {
                                     color = ColorsParser.colorFromString(rgb);
@@ -90,10 +129,11 @@ public class LevelSpecificationReader implements LevelInformation {
                                 } catch (Exception ex) {
                                     throw new IOException(ex);
                                 }
-                            } else if (value.substring(0, 5).equals("image")) {
-                                String imagePath = betterSubstring(value, "image(", ")");
+                            } else if (value.substring(0, 5).equals(IMAGE)) {
+                                String imagePath = betterSubstring(value, IMAGE_PREFIX, IMAGE_POSTFIX);
                                 try {
-                                    Image image = ImageIO.read(new File(imagePath));
+                                    InputStream is = ClassLoader.getSystemClassLoader().getResourceAsStream(imagePath);
+                                    BufferedImage image = read(is);
                                     currentLevel.setBackground(new BackgroundImage(image));
                                 } catch (IOException ex) {
                                     throw new IOException(ex);
@@ -110,6 +150,7 @@ public class LevelSpecificationReader implements LevelInformation {
                             break;
                         case BLOCK_DEFINITIONS:
                             block_definitions = value;
+                            currentLevel.setBlock_definitions(block_definitions);
                             break;
                         case BLOCKS_START_X:
                             block_start_x = Integer.parseInt(value);
@@ -118,6 +159,7 @@ public class LevelSpecificationReader implements LevelInformation {
                         case BLOCKS_START_Y:
                             block_start_y = Integer.parseInt(value);
                             currentLevel.setBlock_start_y(Integer.parseInt(value));
+                            posY = block_start_y;
                             break;
                         case ROW_HEIGHT:
                             row_height = Integer.parseInt(value);
@@ -219,6 +261,10 @@ public class LevelSpecificationReader implements LevelInformation {
 
     public void setVelocities(List<Velocity> velocities) {
         this.velocities = velocities;
+    }
+
+    public void setBlocks(List<Block> blocks) {
+        this.blocks = blocks;
     }
 
     public int getPaddle_speed() {

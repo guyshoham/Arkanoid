@@ -9,6 +9,7 @@ public abstract class BlockCreatorDecorator implements BlockCreator {
         this.decorated = decorated;
     }
 
+    @Override
     public Block create(int x, int y) {
         return this.decorated.create(x, y);
     }

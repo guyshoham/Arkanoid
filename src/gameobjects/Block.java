@@ -3,6 +3,9 @@ package gameobjects;
 import backend.GameLevel;
 import biuoop.DrawSurface;
 import collisions.Collidable;
+import drawer.Drawer;
+import drawer.FillDrawer;
+import drawer.StrokeDrawer;
 import geometry.Line;
 import geometry.Point;
 import geometry.Rectangle;
@@ -13,6 +16,7 @@ import sprites.Sprite;
 
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -26,6 +30,9 @@ public class Block implements Collidable, Sprite, HitNotifier {
     private Rectangle rect;
     private Color color;
     private int numberOfHits;
+    private Drawer defaultFillDrawer, defaultStrokeDrawer;
+    private HashMap<Integer, Drawer> fillDrawers, strokeDrawers;
+
 
     /**
      * Class constructor.
@@ -39,6 +46,11 @@ public class Block implements Collidable, Sprite, HitNotifier {
         this.color = color;
         this.numberOfHits = numberOfHits;
         this.hitListeners = new ArrayList<>();
+
+        this.defaultFillDrawer = new FillDrawer(color);
+        this.defaultStrokeDrawer = new StrokeDrawer(color);
+        this.strokeDrawers = new HashMap<>();
+        this.fillDrawers = new HashMap<>();
     }
 
 
@@ -50,6 +62,10 @@ public class Block implements Collidable, Sprite, HitNotifier {
      */
     public Block(Rectangle rectangle, Color color) {
         this(rectangle, color, 0);
+    }
+
+    public Block(int x, int y) {
+        this(new Rectangle(new Point(x, y), 1, 1), Color.PINK, 0);
     }
 
     @Override
@@ -190,5 +206,21 @@ public class Block implements Collidable, Sprite, HitNotifier {
 
     public void setColor(Color color) {
         this.color = color;
+    }
+
+    public void setDefaultStrokeDrawer(Drawer d) {
+        defaultStrokeDrawer = d;
+    }
+
+    public void setDefaultFillDrawer(Drawer d) {
+        defaultFillDrawer = d;
+    }
+
+    public void addStrokeDrawer(int hitPoints, Drawer d) {
+        strokeDrawers.put(hitPoints, d);
+    }
+
+    public void addFillDrawer(int hitPoints, Drawer d) {
+        fillDrawers.put(hitPoints, d);
     }
 }

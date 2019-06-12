@@ -1,12 +1,8 @@
 package io;
 
-import backend.ColorsParser;
 import blocks.BlockCreator;
 import gameobjects.Block;
-import geometry.Point;
-import geometry.Rectangle;
 
-import java.awt.*;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -15,7 +11,7 @@ import java.util.Map;
  *
  * @author Guy Shoham
  */
-public class BlocksFromSymbolsFactory implements BlockCreator {
+public class BlocksFromSymbolsFactory  {
     private static final String DEFAULT = "default";
     private static final String BDEF = "bdef";
     private static final String SDEF = "sdef";
@@ -69,7 +65,7 @@ public class BlocksFromSymbolsFactory implements BlockCreator {
      * @return the width in pixels associated with the given spacer-symbol.
      */
     public int getSpaceWidth(String s) {
-        return this.spacerWidths.get(s);
+        return spacerWidths.get(s);
     }
 
     public void addSpacer(String key, int width) {
@@ -86,21 +82,6 @@ public class BlocksFromSymbolsFactory implements BlockCreator {
 
     public Map<String, BlockCreator> getBlockCreators() {
         return blockCreators;
-    }
-
-    @Override
-    public Block create(int xpos, int ypos) {
-        int width = Integer.parseInt(String.valueOf(blockCreators.get(WIDTH)));
-        int height = Integer.parseInt(String.valueOf(blockCreators.get(HEIGHT)));
-        int hitPoints = Integer.parseInt(String.valueOf(blockCreators.get(HIT_POINTS)));
-        Color color = null;
-        try {
-            color = ColorsParser.colorFromString(String.valueOf(blockCreators.get(FILL)));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        return new Block(new Rectangle(new Point(xpos, ypos), width, height), color, hitPoints);
     }
 
 }

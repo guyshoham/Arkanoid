@@ -1,15 +1,14 @@
 package io;
 
+import blocks.BasicBlockDecorator;
 import blocks.BlockCreator;
-import gameobjects.Block;
-import geometry.Point;
-import geometry.Rectangle;
+import blocks.DecoratorsFactory;
 
-import java.awt.*;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.Reader;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 
 /**
@@ -30,6 +29,7 @@ public class BlocksDefinitionReader {
 
     public static BlocksFromSymbolsFactory fromReader(Reader reader) throws IOException {
         BlocksFromSymbolsFactory retVal = new BlocksFromSymbolsFactory();
+        DecoratorsFactory decoratorsFactory = new DecoratorsFactory();
         BufferedReader br = null;
         try {
             br = new BufferedReader(reader);
@@ -57,26 +57,16 @@ public class BlocksDefinitionReader {
                         } else if (line.startsWith(BDEF)) {
                             line = line.substring(BDEF.length()).trim();
                             map = parseProperties(line);
-                            Map<String, String> propertiesMap = new HashMap(defaultMap);
+                            Map<String, String> propertiesMap = new HashMap<>(defaultMap);
                             propertiesMap.putAll(map);
                             String symbol = getSymbol(propertiesMap);
 
-                            BlocksFromSymbolsFactory blockCreator = new BlocksFromSymbolsFactory();
-                            //todo: complete put keys and values
-                            blockCreator.addBlockCreator(symbol, new BlockCreator() {
+                            BlockCreator blockCreator = new BasicBlockDecorator();
 
-                                @Override
-                                public Block create(int xpos, int ypos) {
-                                    int width = Integer.parseInt(propertiesMap.get(WIDTH));
-                                    int height = Integer.parseInt(propertiesMap.get(HEIGHT));
-                                    int hitPoints = Integer.parseInt(propertiesMap.get(HIT_POINTS));
-                                    //todo: change color.BLACK
-                                    Color color = Color.BLACK;
-
-                                    return new Block(new Rectangle(new Point(xpos, ypos), width, height), color, hitPoints);
-                                }
-                            });
-
+                            for (Iterator i = propertiesMap.keySet().iterator(); i.hasNext(); ) {
+                                key = String.valueOf(i.next());
+                                blockCreator = decoratorsFactory.decorate(blockCreator, key, propertiesMap.get(key));
+                            }
                             retVal.addBlockCreator(symbol, blockCreator);
                         }
                     }
@@ -97,7 +87,7 @@ public class BlocksDefinitionReader {
     }
 
     public static String getSymbol(Map<String, String> map) {
-        String symbol = map.get(SYMBOL);
+        String symbol = map.remove(SYMBOL);
         if (symbol.length() != 1) {
             throw new RuntimeException("Symbol (" + symbol + ") must be a single character.");
         } else {
@@ -106,7 +96,7 @@ public class BlocksDefinitionReader {
     }
 
     public static Map<String, String> parseProperties(String str) {
-        Map<String, String> retVal = new HashMap();
+        Map<String, String> retVal = new HashMap<>();
         String[] keyValues = str.split(" ");
 
         for (String keyValue : keyValues) {
