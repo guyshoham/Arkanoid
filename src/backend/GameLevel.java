@@ -17,7 +17,6 @@ import geometry.Velocity;
 import indicators.LevelNameIndicator;
 import indicators.LivesIndicator;
 import indicators.ScoreIndicator;
-import levels.LevelInformation;
 import listeners.BallRemover;
 import listeners.BlockRemover;
 import listeners.ScoreTrackingListener;

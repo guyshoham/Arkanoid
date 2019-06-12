@@ -1,4 +1,4 @@
-package levels;
+package backend;
 
 import gameobjects.Block;
 import geometry.Velocity;

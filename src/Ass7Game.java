@@ -7,10 +7,9 @@ import biuoop.KeyboardSensor;
 import io.HighScoresTable;
 import io.LevelSpecificationReader;
 import io.ScoreInfo;
-import levels.LevelInformation;
+import backend.LevelInformation;
 
 import java.io.*;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -19,13 +18,6 @@ import java.util.List;
  * @author Guy Shoham
  */
 public class Ass7Game {
-
-    //private static final int GUI_WIDTH = 800;
-    //private static final int GUI_HEIGHT = 600;
-    //private static final String GAME_TITLE = "Arkanoid";
-    //private GUI gui = new GUI(GAME_TITLE, GUI_WIDTH, GUI_HEIGHT);
-    //private AnimationRunner runner = new AnimationRunner(gui);
-    //private KeyboardSensor keyboard = gui.getKeyboardSensor();
 
     private static final String FILE_PATH = "test.txt";
     private static final int TABLE_SIZE = 5;
@@ -75,39 +67,12 @@ public class Ass7Game {
      */
     public static void runGame(String[] args) throws IOException {
         GameFlow gameFlow = new GameFlow();
-        List<LevelInformation> levels = new ArrayList<>();
-
-        /*for (String str : args) {
-            switch (str) {
-                case "1":
-                    levels.add(new LevelDirectHit());
-                    break;
-                case "2":
-                    levels.add(new LevelWideEasy());
-                    break;
-                case "3":
-                    levels.add(new LevelGreenThree());
-                    break;
-                case "4":
-                    levels.add(new LevelFinalFour());
-                    break;
-                default:
-                    break;
-            }
-        }
-        if (levels.isEmpty()) {
-            levels.add(new LevelDirectHit());
-            levels.add(new LevelWideEasy());
-            levels.add(new LevelGreenThree());
-            levels.add(new LevelFinalFour());
-        }*/
 
         File fileLevel = new File("resources/definitions/level_definitions.txt");
         Reader readerLevel = new BufferedReader(new FileReader(fileLevel));
 
         LevelSpecificationReader levelSpecificationReader = new LevelSpecificationReader();
-        levels = levelSpecificationReader.fromReader(readerLevel);
-
+        List<LevelInformation> levels = levelSpecificationReader.fromReader(readerLevel);
         gameFlow.showMenu(levels);
     }
 }

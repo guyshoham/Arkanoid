@@ -33,7 +33,7 @@ public class LevelNameIndicator implements Sprite {
         rect.drawOn(surface);
 
         surface.setColor(Color.BLACK);
-        surface.drawText(580, (int) (rect.getUpperLeft().getY() + (rect.getHeight() / 10 * 7)),
+        surface.drawText(520, (int) (rect.getUpperLeft().getY() + (rect.getHeight() / 10 * 7)),
                 "Level Name: " + name, 15);
     }
 

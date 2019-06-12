@@ -5,7 +5,7 @@ import backgrounds.BackgroundImage;
 import backgrounds.BackgroundSingleColor;
 import gameobjects.Block;
 import geometry.Velocity;
-import levels.LevelInformation;
+import backend.LevelInformation;
 import sprites.Sprite;
 
 import java.awt.*;
@@ -38,8 +38,8 @@ public class LevelSpecificationReader implements LevelInformation {
     private static final String IMAGE_PREFIX = "image(";
     private static final String IMAGE_POSTFIX = ")";
     private static final String IMAGE = "image";
-    private int paddle_speed, paddle_width, num_blocks, block_start_x, block_start_y, row_height;
-    private String level_name, block_definitions = "";
+    private int paddleSpeed, paddleWidth, numBlocks, blockStartX, blockStartY, rowHeight;
+    private String levelName, blockDefinitions = "";
     private Sprite background;
     private List<Velocity> velocities = new ArrayList<>();
     private List<Block> blocks = new ArrayList<>();
@@ -47,7 +47,6 @@ public class LevelSpecificationReader implements LevelInformation {
     public List<LevelInformation> fromReader(Reader reader) throws IOException {
         List<LevelInformation> levels = new ArrayList<>();
         List<String> StringLevels = splitLevels(reader);
-        Sprite background;
         boolean isBlockLine = false;
 
         //for each level
@@ -64,7 +63,7 @@ public class LevelSpecificationReader implements LevelInformation {
             for (String line : lines) {
                 if (isBlockLine && !line.equals(END_BLOCKS)) {
                     //todo: start build blocks
-                    int posX = block_start_x;
+                    int posX = blockStartX;
 
                     for (int i = 0; i < line.length(); i++) {
                         String symbol = String.valueOf(line.charAt(i));
@@ -79,14 +78,14 @@ public class LevelSpecificationReader implements LevelInformation {
                             posX += b.getCollisionRectangle().getWidth();
                         }
                     }//done reading line of blocks
-                    posY += row_height;
+                    posY += rowHeight;
 
                 } else if (line.equals(START_BLOCKS)) {
                     isBlockLine = true;
-                    if (block_definitions.equals("")) {
+                    if (blockDefinitions.equals("")) {
                         throw new IOException("'block definitions' file is missing");
                     }
-                    Reader blockDefinitionsReader = new FileReader(new File("resources/" + block_definitions));
+                    Reader blockDefinitionsReader = new FileReader(new File("resources/" + blockDefinitions));
                     factory = BlocksDefinitionReader.fromReader(blockDefinitionsReader);
                 } else if (line.equals(END_BLOCKS)) {
                     isBlockLine = false;
@@ -96,8 +95,8 @@ public class LevelSpecificationReader implements LevelInformation {
                     value = line.substring(line.indexOf(":") + 1);
                     switch (key) {
                         case LEVEL_NAME:
-                            level_name = value;
-                            currentLevel.setLevel_name(value);
+                            levelName = value;
+                            currentLevel.setLevelName(value);
                             break;
                         case BALL_VELOCITIES:
                             List<Velocity> velocities = new ArrayList<>();
@@ -140,33 +139,33 @@ public class LevelSpecificationReader implements LevelInformation {
                             }
                             break;
                         case PADDLE_SPEED:
-                            paddle_speed = Integer.parseInt(value);
-                            currentLevel.setPaddle_speed(Integer.parseInt(value));
+                            paddleSpeed = Integer.parseInt(value);
+                            currentLevel.setPaddleSpeed(Integer.parseInt(value));
                             break;
                         case PADDLE_WIDTH:
-                            paddle_width = Integer.parseInt(value);
-                            currentLevel.setPaddle_width(Integer.parseInt(value));
+                            paddleWidth = Integer.parseInt(value);
+                            currentLevel.setPaddleWidth(Integer.parseInt(value));
                             break;
                         case BLOCK_DEFINITIONS:
-                            block_definitions = value;
-                            currentLevel.setBlock_definitions(block_definitions);
+                            blockDefinitions = value;
+                            currentLevel.setBlockDefinitions(blockDefinitions);
                             break;
                         case BLOCKS_START_X:
-                            block_start_x = Integer.parseInt(value);
-                            currentLevel.setBlock_start_x(Integer.parseInt(value));
+                            blockStartX = Integer.parseInt(value);
+                            currentLevel.setBlockStartX(Integer.parseInt(value));
                             break;
                         case BLOCKS_START_Y:
-                            block_start_y = Integer.parseInt(value);
-                            currentLevel.setBlock_start_y(Integer.parseInt(value));
-                            posY = block_start_y;
+                            blockStartY = Integer.parseInt(value);
+                            currentLevel.setBlockStartY(Integer.parseInt(value));
+                            posY = blockStartY;
                             break;
                         case ROW_HEIGHT:
-                            row_height = Integer.parseInt(value);
-                            currentLevel.setRow_height(Integer.parseInt(value));
+                            rowHeight = Integer.parseInt(value);
+                            currentLevel.setRowHeight(Integer.parseInt(value));
                             break;
                         case NUM_BLOCKS:
-                            num_blocks = Integer.parseInt(value);
-                            currentLevel.setNum_blocks(Integer.parseInt(value));
+                            numBlocks = Integer.parseInt(value);
+                            currentLevel.setNumBlocks(Integer.parseInt(value));
                             break;
                     }//end of switch
                 }
@@ -226,36 +225,36 @@ public class LevelSpecificationReader implements LevelInformation {
         this.background = b;
     }
 
-    public void setPaddle_speed(int paddle_speed) {
-        this.paddle_speed = paddle_speed;
+    public void setPaddleSpeed(int paddleSpeed) {
+        this.paddleSpeed = paddleSpeed;
     }
 
-    public void setPaddle_width(int paddle_width) {
-        this.paddle_width = paddle_width;
+    public void setPaddleWidth(int paddleWidth) {
+        this.paddleWidth = paddleWidth;
     }
 
-    public void setNum_blocks(int num_blocks) {
-        this.num_blocks = num_blocks;
+    public void setNumBlocks(int numBlocks) {
+        this.numBlocks = numBlocks;
     }
 
-    public void setBlock_start_x(int block_start_x) {
-        this.block_start_x = block_start_x;
+    public void setBlockStartX(int blockStartX) {
+        this.blockStartX = blockStartX;
     }
 
-    public void setBlock_start_y(int block_start_y) {
-        this.block_start_y = block_start_y;
+    public void setBlockStartY(int blockStartY) {
+        this.blockStartY = blockStartY;
     }
 
-    public void setRow_height(int row_height) {
-        this.row_height = row_height;
+    public void setRowHeight(int rowHeight) {
+        this.rowHeight = rowHeight;
     }
 
-    public void setLevel_name(String level_name) {
-        this.level_name = level_name;
+    public void setLevelName(String levelName) {
+        this.levelName = levelName;
     }
 
-    public void setBlock_definitions(String block_definitions) {
-        this.block_definitions = block_definitions;
+    public void setBlockDefinitions(String blockDefinitions) {
+        this.blockDefinitions = blockDefinitions;
     }
 
     public void setVelocities(List<Velocity> velocities) {
@@ -266,36 +265,36 @@ public class LevelSpecificationReader implements LevelInformation {
         this.blocks = blocks;
     }
 
-    public int getPaddle_speed() {
-        return paddle_speed;
+    public int getPaddleSpeed() {
+        return paddleSpeed;
     }
 
-    public int getPaddle_width() {
-        return paddle_width;
+    public int getPaddleWidth() {
+        return paddleWidth;
     }
 
-    public int getNum_blocks() {
-        return num_blocks;
+    public int getNumBlocks() {
+        return numBlocks;
     }
 
-    public int getBlock_start_x() {
-        return block_start_x;
+    public int getBlockStartX() {
+        return blockStartX;
     }
 
-    public int getBlock_start_y() {
-        return block_start_y;
+    public int getBlockStartY() {
+        return blockStartY;
     }
 
-    public int getRow_height() {
-        return row_height;
+    public int getRowHeight() {
+        return rowHeight;
     }
 
-    public String getLevel_name() {
-        return level_name;
+    public String getLevelName() {
+        return levelName;
     }
 
-    public String getBlock_definitions() {
-        return block_definitions;
+    public String getBlockDefinitions() {
+        return blockDefinitions;
     }
 
     public List<Velocity> getVelocities() {
@@ -314,17 +313,17 @@ public class LevelSpecificationReader implements LevelInformation {
 
     @Override
     public int paddleSpeed() {
-        return this.paddle_speed;
+        return this.paddleSpeed;
     }
 
     @Override
     public int paddleWidth() {
-        return this.paddle_width;
+        return this.paddleWidth;
     }
 
     @Override
     public String levelName() {
-        return this.level_name;
+        return this.levelName;
     }
 
     @Override
@@ -339,6 +338,6 @@ public class LevelSpecificationReader implements LevelInformation {
 
     @Override
     public int numberOfBlocksToRemove() {
-        return this.num_blocks;
+        return this.numBlocks;
     }
 }
