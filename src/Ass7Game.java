@@ -42,10 +42,6 @@ public class Ass7Game {
     }
 
     private static void test() throws IOException {
-        /*BlocksDefinitionReader blocksDefinitionReader = new BlocksDefinitionReader();
-        Reader reader = new FileReader(new File("blockTest.txt"));
-        BlocksDefinitionReader.fromReader(reader);
-*/
         LevelSpecificationReader levelSpecificationReader = new LevelSpecificationReader();
         Reader reader = new FileReader(new File("resources/definitions/level_definitions.txt"));
         levelSpecificationReader.fromReader(reader);

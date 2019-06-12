@@ -12,15 +12,15 @@ import java.util.Map;
  * @author Guy Shoham
  */
 public class BlocksFromSymbolsFactory  {
-    private static final String DEFAULT = "default";
-    private static final String BDEF = "bdef";
-    private static final String SDEF = "sdef";
-    private static final String SYMBOL = "symbol";
-    private static final String WIDTH = "width";
-    private static final String HIT_POINTS = "hit_points";
-    private static final String FILL = "fill";
-    private static final String STROKE = "stroke";
-    private static final String HEIGHT = "height";
+    //private static final String DEFAULT = "default";
+    //private static final String BDEF = "bdef";
+    //private static final String SDEF = "sdef";
+    //private static final String SYMBOL = "symbol";
+    //private static final String WIDTH = "width";
+    //private static final String HIT_POINTS = "hit_points";
+    //private static final String FILL = "fill";
+    //private static final String STROKE = "stroke";
+    //private static final String HEIGHT = "height";
     private Map<String, Integer> spacerWidths;
     private Map<String, BlockCreator> blockCreators;
 

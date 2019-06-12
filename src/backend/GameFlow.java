@@ -111,7 +111,7 @@ public class GameFlow {
             }
         });
         menu.addSelection("q", "Quit", new ExitTask());
-        menu.addSelection("w", "You Win!", new Task<Void>() {
+        /*menu.addSelection("w", "You Win!", new Task<Void>() {
             @Override
             public Void run() {
                 runner.run(new KeyPressStoppableAnimation(keyboard, KeyboardSensor.SPACE_KEY,
@@ -134,8 +134,7 @@ public class GameFlow {
                         new PauseScreen()));
                 return null;
             }
-        });
-
+        });*/
 
         while (true) {
             runner.run(menu);

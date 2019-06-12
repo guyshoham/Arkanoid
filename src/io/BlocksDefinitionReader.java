@@ -22,10 +22,10 @@ public class BlocksDefinitionReader {
     private static final String SDEF = "sdef";
     private static final String SYMBOL = "symbol";
     private static final String WIDTH = "width";
-    private static final String HIT_POINTS = "hit_points";
-    private static final String FILL = "fill";
-    private static final String STROKE = "stroke";
-    private static final String HEIGHT = "height";
+    //private static final String HIT_POINTS = "hit_points";
+    //private static final String FILL = "fill";
+    //private static final String STROKE = "stroke";
+    //private static final String HEIGHT = "height";
 
     public static BlocksFromSymbolsFactory fromReader(Reader reader) throws IOException {
         BlocksFromSymbolsFactory retVal = new BlocksFromSymbolsFactory();

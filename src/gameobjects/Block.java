@@ -65,7 +65,14 @@ public class Block implements Collidable, Sprite, HitNotifier {
     }
 
     public Block(int x, int y) {
-        this(new Rectangle(new Point(x, y), 1, 1), Color.PINK, 0);
+        this.rect = new Rectangle(new Point(x, y), 1, 1);
+        this.numberOfHits = 0;
+        this.hitListeners = new ArrayList<>();
+
+        this.defaultFillDrawer = null;
+        this.defaultStrokeDrawer = null;
+        this.strokeDrawers = new HashMap<>();
+        this.fillDrawers = new HashMap<>();
     }
 
     @Override
@@ -102,17 +109,18 @@ public class Block implements Collidable, Sprite, HitNotifier {
     @Override
 
     public void drawOn(DrawSurface surface) {
-        rect.setColor(color);
-        rect.drawOn(surface);
-
-        /*String text = "x";
-        if (numberOfHits != 0) {
-            text = String.valueOf(numberOfHits);
+        if (fillDrawers.containsKey(numberOfHits)) {
+            fillDrawers.get(numberOfHits).drawAt(surface, rect);
+        } else {
+            defaultFillDrawer.drawAt(surface, rect);
         }
-        surface.setColor(Color.WHITE);
-        surface.drawText((int) (rect.getUpperLeft().getX() + (rect.getWidth() / 2)),
-                (int) (rect.getUpperLeft().getY() + (rect.getHeight() / 10 * 7)), text, 15);
-        */
+        if(!strokeDrawers.isEmpty()||defaultStrokeDrawer!=null) {
+            if (strokeDrawers.containsKey(numberOfHits)) {
+                strokeDrawers.get(numberOfHits).drawAt(surface, rect);
+            } else {
+                defaultStrokeDrawer.drawAt(surface, rect);
+            }
+        }
     }
 
     /**

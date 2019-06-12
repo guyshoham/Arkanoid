@@ -47,13 +47,12 @@ public class LevelSpecificationReader implements LevelInformation {
     public List<LevelInformation> fromReader(Reader reader) throws IOException {
         List<LevelInformation> levels = new ArrayList<>();
         List<String> StringLevels = splitLevels(reader);
-        LevelSpecificationReader currentLevel;
         Sprite background;
         boolean isBlockLine = false;
 
         //for each level
         for (String level : StringLevels) {
-            currentLevel = new LevelSpecificationReader();
+            LevelSpecificationReader currentLevel = new LevelSpecificationReader();
             String key, value;
             int posY = 0;
             List<Block> blocks = new ArrayList<>();
@@ -101,12 +100,12 @@ public class LevelSpecificationReader implements LevelInformation {
                             currentLevel.setLevel_name(value);
                             break;
                         case BALL_VELOCITIES:
-                            velocities.clear();
+                            List<Velocity> velocities = new ArrayList<>();
                             String[] split1 = value.split(" ");
                             for (String s : split1) {
-                                int dx = Integer.parseInt(s.substring(0, s.indexOf(",")));
-                                int dy = Integer.parseInt(s.substring(s.indexOf(",") + 1));
-                                Velocity v = new Velocity(dx, dy);
+                                int angle = Integer.parseInt(s.substring(0, s.indexOf(",")));
+                                int speed = Integer.parseInt(s.substring(s.indexOf(",") + 1));
+                                Velocity v = Velocity.fromAngleAndSpeed(angle, speed);
                                 velocities.add(v);
                             }
                             currentLevel.setVelocities(velocities);

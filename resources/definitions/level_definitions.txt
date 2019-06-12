@@ -1,12 +1,11 @@
-
 # Level 1
 # Image Background and big blocks with 3 lives
 
 START_LEVEL
 level_name:Square Moon
-ball_velocities:45,500
+ball_velocities:-45,7 -45,7 -45,7 -45,7 -45,7 -45,7 -45,7 -45,7 -45,7 -45,7 -45,7 -45,7 -45,7 -45,7
 background:image(background_images/night.jpg)
-paddle_speed:650
+paddle_speed:7
 paddle_width:160
 block_definitions:definitions/moon_block_definitions.txt
 blocks_start_x:25
@@ -24,9 +23,9 @@ END_LEVEL
 
 START_LEVEL
 level_name:Welcome to the Jungle
-ball_velocities:45,500 -45,500 -30,500 30,500
+ball_velocities:45,7 -45,7 45,7 -45,7 45,7 -45,7 45,7 -45,7 45,7 -45,7 45,7 -45,7 45,7 -45,7 45,7 -45,7 45,7 -45,7 45,7 -45,7 45,7 -45,7 45,7 -45,7 45,7 -45,7 45,7 -45,7 45,7 -45,7 45,7 -45,7 45,7 -45,7 45,7 -45,7 45,7 -45,7 45,7 -45,7 45,7 -45,7 45,7 -45,7 45,7 -45,7 45,7 -45,7 45,7 -45,7 45,7 -45,7 45,7 -45,7 45,7 -45,7 45,7 -45,7 45,7 -45,7 45,7 -45,7 45,7 -45,7 45,7 -45,7 45,7 -45,7 45,7 -45,7 45,7 -45,7 45,7 -45,7 45,7 -45,7 45,7 -45,7 45,7 -45,7 45,7 -45,7 45,7 -45,7 45,7 -45,7 45,7 -45,7 45,7 -45,7 45,7 -45,7 45,7 -45,7 45,7 -45,7 45,7 -45,7 45,7 -45,7 45,7 -45,7 45,7 -45,7 45,7 -45,7 45,7 -45,7 45,7 -45,7 45,7 -45,7 45,7 -45,7 45,7 -45,7
 background:image(background_images/jungle.jpg)
-paddle_speed:650
+paddle_speed:7
 paddle_width:160
 block_definitions:definitions/jungle_block_definitions.txt
 blocks_start_x:25
@@ -48,9 +47,9 @@ END_LEVEL
 
 START_LEVEL
 level_name: Retro Arrows
-ball_velocities:45,500 46,500 47,500
+ball_velocities:45,7 46,7 47,7 45,7 46,7 47,7 45,7 46,7 47,7 45,7 46,7 47,7 45,7 46,7 47,7 45,7 46,7 47,7 45,7 46,7 47,7 45,7 46,7 47,7 45,7 46,7 47,7 45,7 46,7 47,7 45,7 46,7 47,7 45,7 46,7 47,7 45,7 46,7 47,7 45,7 46,7 47,7 45,7 46,7 47,7 45,7 46,7 47,7 45,7 46,7 47,7 45,7 46,7 47,7 45,7 46,7 47,7 45,7 46,7 47,7 45,7 46,7 47,7 45,7 46,7 47,7 45,7 46,7 47,7 45,7 46,7 47,7 45,7 46,7 47,7 45,7 46,7 47,7 45,7 46,7 47,7 45,7 46,7 47,7 45,7 46,7 47,7 45,7 46,7 47,7 45,7 46,7 47,7 45,7 46,7 47,7 45,7 46,7 47,7 45,7 46,7 47,7 45,7 46,7 47,7 45,7 46,7 47,7 45,7 46,7 47,7 45,7 46,7 47,7 45,7 46,7 47,7 45,7 46,7 47,7 45,7 46,7 47,7 45,7 46,7 47,7 45,7 46,7 47,7 45,7 46,7 47,7 45,7 46,7 47,7 45,7 46,7 47,7 45,7 46,7 47,7 45,7 46,7 47,7 45,7 46,7 47,7 45,7 46,7 47,7 45,7 46,7 47,7
 background:color(RGB(142,0,0))
-paddle_speed:650
+paddle_speed:7
 paddle_width:250
 block_definitions:definitions/arrows_block_definitions.txt
 blocks_start_x:25
@@ -78,9 +77,9 @@ END_LEVEL
 
 START_LEVEL
 level_name: Final Four (V2)
-ball_velocities:45,500
+ball_velocities:45,7 45,7 45,7 45,7 45,7 45,7 45,7 45,7 45,7 45,7 45,7 45,7 45,7 45,7 45,7
 background:image(background_images/clouds.png)
-paddle_speed:650
+paddle_speed:7
 paddle_width:160
 block_definitions:definitions/final_four_block_definitions.txt
 blocks_start_x:25
