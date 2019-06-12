@@ -1,11 +1,11 @@
 package io;
 
 import backend.ColorsParser;
+import backend.LevelInformation;
 import backgrounds.BackgroundImage;
 import backgrounds.BackgroundSingleColor;
 import gameobjects.Block;
 import geometry.Velocity;
-import backend.LevelInformation;
 import sprites.Sprite;
 
 import java.awt.*;
@@ -51,6 +51,14 @@ public class LevelSpecificationReader implements LevelInformation {
 
         //for each level
         for (String level : StringLevels) {
+            if (!level.contains(LEVEL_NAME) || !level.contains(BALL_VELOCITIES) ||
+                    !level.contains(BACKGROUND) || !level.contains(PADDLE_SPEED) ||
+                    !level.contains(PADDLE_WIDTH) || !level.contains(BLOCK_DEFINITIONS) ||
+                    !level.contains(BLOCKS_START_X) || !level.contains(BLOCKS_START_Y) ||
+                    !level.contains(ROW_HEIGHT) || !level.contains(NUM_BLOCKS) ||
+                    !level.contains(START_BLOCKS) || !level.contains(END_BLOCKS)) {
+                throw new IOException("level definition is not valid");
+            }
             LevelSpecificationReader currentLevel = new LevelSpecificationReader();
             String key, value;
             int posY = 0;
@@ -299,6 +307,10 @@ public class LevelSpecificationReader implements LevelInformation {
 
     public List<Velocity> getVelocities() {
         return velocities;
+    }
+
+    public List<Block> getBlocks() {
+        return blocks;
     }
 
     @Override
