@@ -8,9 +8,14 @@ import gameobjects.Block;
 import geometry.Velocity;
 import sprites.Sprite;
 
-import java.awt.*;
+import java.awt.Color;
 import java.awt.image.BufferedImage;
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.Reader;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -42,21 +47,21 @@ public class LevelSpecificationReader implements LevelInformation {
     private String levelName, blockDefinitions = "";
     private Sprite background;
     private List<Velocity> velocities = new ArrayList<>();
-    private List<Block> blocks = new ArrayList<>();
+    private List<Block> blockList = new ArrayList<>();
 
     public List<LevelInformation> fromReader(Reader reader) throws IOException {
         List<LevelInformation> levels = new ArrayList<>();
-        List<String> StringLevels = splitLevels(reader);
+        List<String> stringLevels = splitLevels(reader);
         boolean isBlockLine = false;
 
         //for each level
-        for (String level : StringLevels) {
-            if (!level.contains(LEVEL_NAME) || !level.contains(BALL_VELOCITIES) ||
-                    !level.contains(BACKGROUND) || !level.contains(PADDLE_SPEED) ||
-                    !level.contains(PADDLE_WIDTH) || !level.contains(BLOCK_DEFINITIONS) ||
-                    !level.contains(BLOCKS_START_X) || !level.contains(BLOCKS_START_Y) ||
-                    !level.contains(ROW_HEIGHT) || !level.contains(NUM_BLOCKS) ||
-                    !level.contains(START_BLOCKS) || !level.contains(END_BLOCKS)) {
+        for (String level : stringLevels) {
+            if (!level.contains(LEVEL_NAME) || !level.contains(BALL_VELOCITIES)
+                    || !level.contains(BACKGROUND) || !level.contains(PADDLE_SPEED)
+                    || !level.contains(PADDLE_WIDTH) || !level.contains(BLOCK_DEFINITIONS)
+                    || !level.contains(BLOCKS_START_X) || !level.contains(BLOCKS_START_Y)
+                    || !level.contains(ROW_HEIGHT) || !level.contains(NUM_BLOCKS)
+                    || !level.contains(START_BLOCKS) || !level.contains(END_BLOCKS)) {
                 throw new IOException("level definition is not valid");
             }
             LevelSpecificationReader currentLevel = new LevelSpecificationReader();
@@ -64,13 +69,13 @@ public class LevelSpecificationReader implements LevelInformation {
             int posY = 0;
             List<Block> blocks = new ArrayList<>();
             BlocksFromSymbolsFactory factory = null;
-            String blockText = level.substring(level.indexOf(START_BLOCKS) + START_BLOCKS.length(), level.indexOf(END_BLOCKS));
+            String blockText = level.substring(level.indexOf(START_BLOCKS) + START_BLOCKS.length(),
+                    level.indexOf(END_BLOCKS));
             String[] lines = level.split("\n");
 
             //for each line in level
             for (String line : lines) {
                 if (isBlockLine && !line.equals(END_BLOCKS)) {
-                    //todo: start build blocks
                     int posX = blockStartX;
 
                     for (int i = 0; i < line.length(); i++) {
@@ -97,7 +102,7 @@ public class LevelSpecificationReader implements LevelInformation {
                     factory = BlocksDefinitionReader.fromReader(blockDefinitionsReader);
                 } else if (line.equals(END_BLOCKS)) {
                     isBlockLine = false;
-                    currentLevel.setBlocks(blocks);
+                    currentLevel.setBlockList(blocks);
                 } else {
                     key = line.substring(0, line.indexOf(":"));
                     value = line.substring(line.indexOf(":") + 1);
@@ -233,80 +238,80 @@ public class LevelSpecificationReader implements LevelInformation {
         return paddleSpeed;
     }
 
-    public void setPaddleSpeed(int paddleSpeed) {
-        this.paddleSpeed = paddleSpeed;
+    public void setPaddleSpeed(int speed) {
+        this.paddleSpeed = speed;
     }
 
     public int getPaddleWidth() {
         return paddleWidth;
     }
 
-    public void setPaddleWidth(int paddleWidth) {
-        this.paddleWidth = paddleWidth;
+    public void setPaddleWidth(int width) {
+        this.paddleWidth = width;
     }
 
     public int getNumBlocks() {
         return numBlocks;
     }
 
-    public void setNumBlocks(int numBlocks) {
-        this.numBlocks = numBlocks;
+    public void setNumBlocks(int num) {
+        this.numBlocks = num;
     }
 
     public int getBlockStartX() {
         return blockStartX;
     }
 
-    public void setBlockStartX(int blockStartX) {
-        this.blockStartX = blockStartX;
+    public void setBlockStartX(int newPos) {
+        this.blockStartX = newPos;
     }
 
     public int getBlockStartY() {
         return blockStartY;
     }
 
-    public void setBlockStartY(int blockStartY) {
-        this.blockStartY = blockStartY;
+    public void setBlockStartY(int newPos) {
+        this.blockStartY = newPos;
     }
 
     public int getRowHeight() {
         return rowHeight;
     }
 
-    public void setRowHeight(int rowHeight) {
-        this.rowHeight = rowHeight;
+    public void setRowHeight(int height) {
+        this.rowHeight = height;
     }
 
     public String getLevelName() {
         return levelName;
     }
 
-    public void setLevelName(String levelName) {
-        this.levelName = levelName;
+    public void setLevelName(String name) {
+        this.levelName = name;
     }
 
     public String getBlockDefinitions() {
         return blockDefinitions;
     }
 
-    public void setBlockDefinitions(String blockDefinitions) {
-        this.blockDefinitions = blockDefinitions;
+    public void setBlockDefinitions(String fileName) {
+        this.blockDefinitions = fileName;
     }
 
     public List<Velocity> getVelocities() {
         return velocities;
     }
 
-    public void setVelocities(List<Velocity> velocities) {
-        this.velocities = velocities;
+    public void setVelocities(List<Velocity> list) {
+        this.velocities = list;
     }
 
-    public List<Block> getBlocks() {
-        return blocks;
+    public List<Block> getBlockList() {
+        return blockList;
     }
 
-    public void setBlocks(List<Block> blocks) {
-        this.blocks = blocks;
+    public void setBlockList(List<Block> list) {
+        this.blockList = list;
     }
 
     @Override
@@ -345,7 +350,7 @@ public class LevelSpecificationReader implements LevelInformation {
 
     @Override
     public List<Block> blocks() {
-        return this.blocks;
+        return this.blockList;
     }
 
     @Override
