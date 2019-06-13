@@ -10,13 +10,15 @@ import java.util.List;
 public class MenuAnimation<T> implements Menu<T> {
 
     private T status;
-    private boolean done;
+    //private boolean done;
     private AnimationRunner runner;
     private KeyboardSensor keyboard;
     private String title;
     private List<T> menuRetVals;
     private List<String> menuNames;
     private List<String> menuKeys;
+    private List<Boolean> isSub;
+    private List<Menu> subMenus;
 
 
     public MenuAnimation(String title, AnimationRunner runner, KeyboardSensor keyboard) {
@@ -26,6 +28,8 @@ public class MenuAnimation<T> implements Menu<T> {
         this.menuKeys = new ArrayList();
         this.menuNames = new ArrayList();
         this.menuRetVals = new ArrayList();
+        this.isSub = new ArrayList();
+        this.subMenus = new ArrayList();
         this.resetStatus();
     }
 
@@ -34,16 +38,22 @@ public class MenuAnimation<T> implements Menu<T> {
         menuKeys.add(key);
         menuNames.add(message);
         menuRetVals.add(returnVal);
+        isSub.add(false);
+        subMenus.add(null);
+    }
+
+    @Override
+    public void addSubMenu(String key, String message, Menu<T> subMenu) {
+        menuKeys.add(key);
+        menuNames.add(message);
+        menuRetVals.add(null);
+        isSub.add(true);
+        subMenus.add(subMenu);
     }
 
     @Override
     public T getStatus() {
         return this.status;
-    }
-
-    @Override
-    public void addSubMenu(String key, String message, Menu<T> subMenu) {
-
     }
 
     @Override
@@ -65,8 +75,16 @@ public class MenuAnimation<T> implements Menu<T> {
 
         for (int i = 0; i < menuRetVals.size(); i++) {
             if (keyboard.isPressed(menuKeys.get(i))) {
-                this.status = menuRetVals.get(i);
-                this.done = true;
+                if (!isSub.get(i)) {
+                    status = menuRetVals.get(i);
+                    //done = true;
+                } else {
+                    Menu sub = subMenus.get(i);
+                    runner.run(sub);
+                    status = (T) sub.getStatus();
+                    //done = true;
+                    sub.resetStatus();
+                }
             }
         }
     }
@@ -83,6 +101,6 @@ public class MenuAnimation<T> implements Menu<T> {
     @Override
     public void resetStatus() {
         this.status = null;
-        this.done = false;
+        //this.done = false;
     }
 }

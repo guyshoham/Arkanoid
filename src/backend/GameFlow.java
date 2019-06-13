@@ -11,12 +11,20 @@ import biuoop.DialogManager;
 import biuoop.GUI;
 import biuoop.KeyboardSensor;
 import io.HighScoresTable;
+import io.LevelSet;
+import io.LevelSets;
+import io.LevelSpecificationReader;
 import io.ScoreInfo;
 import tasks.ExitTask;
 import tasks.Task;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.Reader;
 import java.util.List;
 
 /**
@@ -94,23 +102,44 @@ public class GameFlow {
         }
         this.runner.run(new KeyPressStoppableAnimation(this.keyboard, KeyboardSensor.SPACE_KEY,
                 new HighScoresAnimation(highScoresTable)));
-        showMenu(levels);
+        showMenu();
     }
 
-    public void showMenu(List<LevelInformation> levels) {
-        Menu<Task<Void>> menu = new MenuAnimation<>(GAME_TITLE, runner, keyboard);
-        menu.addSelection("s", "New Game", new Task<Void>() {
-            @Override
-            public Void run() {
-                try {
-                    runLevels(levels);
-                } catch (IOException e) {
-                    e.printStackTrace();
+    public void showMenu() {
+        LevelSets levelSets;
+        try {
+            InputStream is = ClassLoader.getSystemClassLoader().getResourceAsStream("definitions/level_sets.txt");
+            levelSets = LevelSets.fromReader(new InputStreamReader(is));
+        } catch (IOException ex) {
+            throw new RuntimeException("Failed loading level sets");
+        }
+
+        Menu<Task<Void>> levelsMenu = new MenuAnimation<>("Levels", runner, keyboard);
+        List<LevelSet> list = levelSets.getLevelSetList();
+        for (LevelSet set : list) {
+            levelsMenu.addSelection(set.getKey(), set.getMessage(), new Task<Void>() {
+                @Override
+                public Void run() {
+                    try {
+                        File fileLevel = new File(set.getFilePath());
+                        Reader readerLevel = new BufferedReader(new FileReader(fileLevel));
+
+                        LevelSpecificationReader levelSpecificationReader = new LevelSpecificationReader();
+                        List<LevelInformation> levels = levelSpecificationReader.fromReader(readerLevel);
+
+                        runLevels(levels);
+                    } catch (IOException ex) {
+                        ex.printStackTrace();
+                    } finally {
+                        return null;
+                    }
                 }
-                return null;
-            }
-        });
-        menu.addSelection("h", "High Scores Table", new Task<Void>() {
+            });
+        }
+
+        Menu<Task<Void>> mainMenu = new MenuAnimation<>(GAME_TITLE, runner, keyboard);
+        mainMenu.addSubMenu("s", "New Game", levelsMenu);
+        mainMenu.addSelection("h", "High Scores Table", new Task<Void>() {
             @Override
             public Void run() {
                 runner.run(new KeyPressStoppableAnimation(keyboard, KeyboardSensor.SPACE_KEY,
@@ -118,14 +147,14 @@ public class GameFlow {
                 return null;
             }
         });
-        menu.addSelection("q", "Quit", new ExitTask());
+        mainMenu.addSelection("q", "Quit", new ExitTask());
 
         while (true) {
-            runner.run(menu);
+            runner.run(mainMenu);
             // wait for user selection
-            Task<Void> task = menu.getStatus();
+            Task<Void> task = mainMenu.getStatus();
             task.run();
-            menu.resetStatus();
+            mainMenu.resetStatus();
         }
     }
 }
