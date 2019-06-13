@@ -2,6 +2,11 @@ package blocks;
 
 import gameobjects.Block;
 
+/**
+ * class HitPointsDecorator.
+ *
+ * @author Guy Shoham
+ */
 public class HitPointsDecorator extends BlockCreatorDecorator {
     private int hitPoints;
 
@@ -13,7 +18,7 @@ public class HitPointsDecorator extends BlockCreatorDecorator {
     @Override
     public Block create(int x, int y) {
         Block b = super.create(x, y);
-        b.setHitPoints(hitPoints);
+        b.setNumberOfHits(hitPoints);
         return b;
     }
 }

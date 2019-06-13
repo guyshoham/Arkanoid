@@ -5,6 +5,11 @@ import geometry.Rectangle;
 
 import java.awt.Color;
 
+/**
+ * Class FillDrawer.
+ *
+ * @author Guy Shoham
+ */
 public class FillDrawer implements Drawer {
 
     private Color color;

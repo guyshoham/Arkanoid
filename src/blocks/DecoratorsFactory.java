@@ -1,5 +1,10 @@
 package blocks;
 
+/**
+ * class DecoratorFactory.
+ *
+ * @author Guy Shoham
+ */
 public class DecoratorsFactory {
 
     private static final String HEIGHT = "height";

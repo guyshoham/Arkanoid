@@ -8,7 +8,7 @@ import sprites.Sprite;
 import java.awt.Color;
 
 /**
- * class BackgroundDirectHit.
+ * class BackgroundSingleColor.
  *
  * @author Guy Shoham
  */

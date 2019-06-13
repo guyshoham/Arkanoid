@@ -5,6 +5,11 @@ import geometry.Rectangle;
 
 import java.awt.Image;
 
+/**
+ * Class ImageDrawer.
+ *
+ * @author Guy Shoham
+ */
 public class ImageDrawer implements Drawer {
 
     private Image image;

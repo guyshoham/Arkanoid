@@ -64,6 +64,12 @@ public class Block implements Collidable, Sprite, HitNotifier {
         this(rectangle, color, 0);
     }
 
+    /**
+     * Class constructor.
+     *
+     * @param x x position
+     * @param y y position
+     */
     public Block(int x, int y) {
         this.rect = new Rectangle(new Point(x, y), 1, 1);
         this.numberOfHits = 0;
@@ -174,10 +180,6 @@ public class Block implements Collidable, Sprite, HitNotifier {
         return String.valueOf(numberOfHits);
     }
 
-    public void setHitPoints(int hitPoints) {
-        this.numberOfHits = hitPoints;
-    }
-
     /**
      * @return number of hits.
      */
@@ -204,30 +206,53 @@ public class Block implements Collidable, Sprite, HitNotifier {
         return "Block{" + "rect=" + rect + "}\n";
     }
 
+    /**
+     * @param width width
+     */
     public void setWidth(int width) {
         this.rect = new Rectangle(rect.getUpperLeft(), width, rect.getHeight());
     }
 
+    /**
+     * @param height height
+     */
     public void setHeight(int height) {
         this.rect = new Rectangle(rect.getUpperLeft(), rect.getWidth(), height);
     }
 
+    /**
+     * @param newColor color
+     */
     public void setColor(Color newColor) {
         this.color = newColor;
     }
 
+    /**
+     * @param d drawer
+     */
     public void setDefaultStrokeDrawer(Drawer d) {
         defaultStrokeDrawer = d;
     }
 
+    /**
+     * @param d drawer
+     */
     public void setDefaultFillDrawer(Drawer d) {
         defaultFillDrawer = d;
     }
 
+    /**
+     * @param hitPoints hit points
+     * @param d         drawer
+     */
     public void addStrokeDrawer(int hitPoints, Drawer d) {
         strokeDrawers.put(hitPoints, d);
     }
 
+    /**
+     * @param hitPoints hit points
+     * @param d         drawer
+     */
     public void addFillDrawer(int hitPoints, Drawer d) {
         fillDrawers.put(hitPoints, d);
     }

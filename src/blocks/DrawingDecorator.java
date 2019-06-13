@@ -14,6 +14,11 @@ import java.io.InputStream;
 
 import static javax.imageio.ImageIO.read;
 
+/**
+ * class DrawingDecorator.
+ *
+ * @author Guy Shoham
+ */
 public class DrawingDecorator extends BlockCreatorDecorator {
 
     private static final String RGB_PREFIX = "color(RGB(";

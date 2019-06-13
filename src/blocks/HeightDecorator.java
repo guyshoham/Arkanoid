@@ -2,6 +2,11 @@ package blocks;
 
 import gameobjects.Block;
 
+/**
+ * class HeightDecorator.
+ *
+ * @author Guy Shoham
+ */
 public class HeightDecorator extends BlockCreatorDecorator {
     private int height;
 

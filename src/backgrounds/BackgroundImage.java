@@ -8,7 +8,7 @@ import sprites.Sprite;
 import java.awt.Image;
 
 /**
- * class BackgroundDirectHit.
+ * class BackgroundImage.
  *
  * @author Guy Shoham
  */

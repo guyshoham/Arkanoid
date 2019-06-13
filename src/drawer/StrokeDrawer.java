@@ -5,6 +5,11 @@ import geometry.Rectangle;
 
 import java.awt.Color;
 
+/**
+ * Class StrokeDrawer.
+ *
+ * @author Guy Shoham
+ */
 public class StrokeDrawer implements Drawer {
 
     private Color color;

@@ -6,6 +6,11 @@ import gameobjects.Block;
 
 import java.awt.Color;
 
+/**
+ * class ColorDecorator.
+ *
+ * @author Guy Shoham
+ */
 public class ColorDecorator extends BlockCreatorDecorator {
     private Color color;
 
