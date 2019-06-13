@@ -114,7 +114,7 @@ public class Block implements Collidable, Sprite, HitNotifier {
         } else {
             defaultFillDrawer.drawAt(surface, rect);
         }
-        if(!strokeDrawers.isEmpty()||defaultStrokeDrawer!=null) {
+        if (!strokeDrawers.isEmpty() || defaultStrokeDrawer != null) {
             if (strokeDrawers.containsKey(numberOfHits)) {
                 strokeDrawers.get(numberOfHits).drawAt(surface, rect);
             } else {
@@ -174,6 +174,10 @@ public class Block implements Collidable, Sprite, HitNotifier {
         return String.valueOf(numberOfHits);
     }
 
+    public void setHitPoints(int hitPoints) {
+        this.numberOfHits = hitPoints;
+    }
+
     /**
      * @return number of hits.
      */
@@ -206,10 +210,6 @@ public class Block implements Collidable, Sprite, HitNotifier {
 
     public void setHeight(int height) {
         this.rect = new Rectangle(rect.getUpperLeft(), rect.getWidth(), height);
-    }
-
-    public void setHitPoints(int hitPoints) {
-        this.numberOfHits = hitPoints;
     }
 
     public void setColor(Color color) {

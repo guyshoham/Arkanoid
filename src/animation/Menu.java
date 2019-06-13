@@ -10,5 +10,7 @@ public interface Menu<T> extends Animation {
 
     T getStatus();
 
+    void addSubMenu(String key, String message, Menu<T> subMenu);
+
     void resetStatus();
 }

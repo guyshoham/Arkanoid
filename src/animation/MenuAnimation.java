@@ -42,6 +42,11 @@ public class MenuAnimation<T> implements Menu<T> {
     }
 
     @Override
+    public void addSubMenu(String key, String message, Menu<T> subMenu) {
+
+    }
+
+    @Override
     public void doOneFrame(DrawSurface d) {
         d.drawText(300, 70, title, 40);
         d.drawText(301, 71, title, 40);

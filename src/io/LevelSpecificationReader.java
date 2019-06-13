@@ -229,88 +229,84 @@ public class LevelSpecificationReader implements LevelInformation {
         return value.substring(start.length(), value.length() - end.length());
     }
 
-    private void setBackground(Sprite b) {
-        this.background = b;
+    public int getPaddleSpeed() {
+        return paddleSpeed;
     }
 
     public void setPaddleSpeed(int paddleSpeed) {
         this.paddleSpeed = paddleSpeed;
     }
 
-    public void setPaddleWidth(int paddleWidth) {
-        this.paddleWidth = paddleWidth;
-    }
-
-    public void setNumBlocks(int numBlocks) {
-        this.numBlocks = numBlocks;
-    }
-
-    public void setBlockStartX(int blockStartX) {
-        this.blockStartX = blockStartX;
-    }
-
-    public void setBlockStartY(int blockStartY) {
-        this.blockStartY = blockStartY;
-    }
-
-    public void setRowHeight(int rowHeight) {
-        this.rowHeight = rowHeight;
-    }
-
-    public void setLevelName(String levelName) {
-        this.levelName = levelName;
-    }
-
-    public void setBlockDefinitions(String blockDefinitions) {
-        this.blockDefinitions = blockDefinitions;
-    }
-
-    public void setVelocities(List<Velocity> velocities) {
-        this.velocities = velocities;
-    }
-
-    public void setBlocks(List<Block> blocks) {
-        this.blocks = blocks;
-    }
-
-    public int getPaddleSpeed() {
-        return paddleSpeed;
-    }
-
     public int getPaddleWidth() {
         return paddleWidth;
+    }
+
+    public void setPaddleWidth(int paddleWidth) {
+        this.paddleWidth = paddleWidth;
     }
 
     public int getNumBlocks() {
         return numBlocks;
     }
 
+    public void setNumBlocks(int numBlocks) {
+        this.numBlocks = numBlocks;
+    }
+
     public int getBlockStartX() {
         return blockStartX;
+    }
+
+    public void setBlockStartX(int blockStartX) {
+        this.blockStartX = blockStartX;
     }
 
     public int getBlockStartY() {
         return blockStartY;
     }
 
+    public void setBlockStartY(int blockStartY) {
+        this.blockStartY = blockStartY;
+    }
+
     public int getRowHeight() {
         return rowHeight;
+    }
+
+    public void setRowHeight(int rowHeight) {
+        this.rowHeight = rowHeight;
     }
 
     public String getLevelName() {
         return levelName;
     }
 
+    public void setLevelName(String levelName) {
+        this.levelName = levelName;
+    }
+
     public String getBlockDefinitions() {
         return blockDefinitions;
+    }
+
+    public void setBlockDefinitions(String blockDefinitions) {
+        this.blockDefinitions = blockDefinitions;
     }
 
     public List<Velocity> getVelocities() {
         return velocities;
     }
 
+    public void setVelocities(List<Velocity> velocities) {
+        this.velocities = velocities;
+    }
+
     public List<Block> getBlocks() {
         return blocks;
+    }
+
+    public void setBlocks(List<Block> blocks) {
+        this.blocks = blocks;
     }
 
     @Override
@@ -341,6 +337,10 @@ public class LevelSpecificationReader implements LevelInformation {
     @Override
     public Sprite getBackground() {
         return this.background;
+    }
+
+    private void setBackground(Sprite b) {
+        this.background = b;
     }
 
     @Override
