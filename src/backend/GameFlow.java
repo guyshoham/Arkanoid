@@ -35,7 +35,7 @@ import java.util.List;
 public class GameFlow {
 
     private static final String GAME_TITLE = "Arkanoid";
-    private static final String FILE_PATH = "test.txt";
+    private static final String FILE_PATH = "highscore.txt";
     private static final int GUI_WIDTH = 800;
     private static final int GUI_HEIGHT = 600;
     private static final int LIVES = 7;
@@ -102,7 +102,6 @@ public class GameFlow {
         }
         this.runner.run(new KeyPressStoppableAnimation(this.keyboard, KeyboardSensor.SPACE_KEY,
                 new HighScoresAnimation(highScoresTable)));
-        showMenu();
     }
 
     public void showMenu() {
@@ -114,7 +113,7 @@ public class GameFlow {
             throw new RuntimeException("Failed loading level sets");
         }
 
-        Menu<Task<Void>> levelsMenu = new MenuAnimation<>("Levels", runner, keyboard);
+        Menu<Task<Void>> levelsMenu = new MenuAnimation<>("Pick Difficulty", runner, keyboard);
         List<LevelSet> list = levelSets.getLevelSetList();
         for (LevelSet set : list) {
             levelsMenu.addSelection(set.getKey(), set.getMessage(), new Task<Void>() {
@@ -128,6 +127,7 @@ public class GameFlow {
                         List<LevelInformation> levels = levelSpecificationReader.fromReader(readerLevel);
 
                         runLevels(levels);
+
                     } catch (IOException ex) {
                         ex.printStackTrace();
                     } finally {

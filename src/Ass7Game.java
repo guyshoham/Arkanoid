@@ -9,9 +9,6 @@ import java.io.IOException;
  */
 public class Ass7Game {
 
-    private static final String FILE_PATH = "test.txt";
-    private static final int TABLE_SIZE = 5;
-
     /**
      * this main method calls runGame method.
      *

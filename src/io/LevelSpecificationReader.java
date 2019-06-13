@@ -124,6 +124,7 @@ public class LevelSpecificationReader implements LevelInformation {
                             break;
                         case BACKGROUND:
                             if (value.startsWith(RGB_PREFIX) && value.endsWith(RGB_POSTFIX)) {
+                                //RGB
                                 String rgb = betterSubstring(value, RGB_PREFIX, RGB_POSTFIX);
                                 String[] colors = rgb.split(",");
                                 int r = Integer.parseInt(colors[0]);
@@ -132,6 +133,7 @@ public class LevelSpecificationReader implements LevelInformation {
                                 Color color = new Color(r, g, b);
                                 currentLevel.setBackground(new BackgroundSingleColor(color));
                             } else if (value.startsWith(COLOR_PREFIX) && value.endsWith(COLOR_POSTFIX)) {
+                                //color
                                 String rgb = betterSubstring(value, COLOR_PREFIX, COLOR_POSTFIX);
                                 Color color;
                                 try {
@@ -141,6 +143,7 @@ public class LevelSpecificationReader implements LevelInformation {
                                     throw new IOException(ex);
                                 }
                             } else if (value.substring(0, 5).equals(IMAGE)) {
+                                //image
                                 String imagePath = betterSubstring(value, IMAGE_PREFIX, IMAGE_POSTFIX);
                                 try {
                                     InputStream is = ClassLoader.getSystemClassLoader().getResourceAsStream(imagePath);

@@ -10,7 +10,6 @@ import java.util.List;
 public class MenuAnimation<T> implements Menu<T> {
 
     private T status;
-    //private boolean done;
     private AnimationRunner runner;
     private KeyboardSensor keyboard;
     private String title;
@@ -77,12 +76,10 @@ public class MenuAnimation<T> implements Menu<T> {
             if (keyboard.isPressed(menuKeys.get(i))) {
                 if (!isSub.get(i)) {
                     status = menuRetVals.get(i);
-                    //done = true;
                 } else {
                     Menu sub = subMenus.get(i);
                     runner.run(sub);
                     status = (T) sub.getStatus();
-                    //done = true;
                     sub.resetStatus();
                 }
             }
@@ -101,6 +98,5 @@ public class MenuAnimation<T> implements Menu<T> {
     @Override
     public void resetStatus() {
         this.status = null;
-        //this.done = false;
     }
 }
