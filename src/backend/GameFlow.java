@@ -1,6 +1,12 @@
 package backend;
 
-import animation.*;
+import animation.AnimationRunner;
+import animation.HighScoresAnimation;
+import animation.KeyPressStoppableAnimation;
+import animation.Menu;
+import animation.MenuAnimation;
+import animation.YouLoseScreen;
+import animation.YouWinScreen;
 import biuoop.DialogManager;
 import biuoop.GUI;
 import biuoop.KeyboardSensor;
@@ -36,6 +42,8 @@ public class GameFlow {
 
     /**
      * Class Constructor.
+     *
+     * @throws IOException exception
      */
     public GameFlow() throws IOException {
         this.runner = new AnimationRunner(gui);
@@ -59,6 +67,7 @@ public class GameFlow {
      * run the levels one by one, until user is winning or losing the whole game.
      *
      * @param levels levels
+     * @throws IOException exception
      */
     public void runLevels(List<LevelInformation> levels) throws IOException {
         score = new Counter();

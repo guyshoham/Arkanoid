@@ -17,6 +17,8 @@ public class HighScoresAnimation implements Animation {
 
     /**
      * Class Constructor.
+     *
+     * @param scores scores
      */
     public HighScoresAnimation(HighScoresTable scores) {
         this.scores = scores;

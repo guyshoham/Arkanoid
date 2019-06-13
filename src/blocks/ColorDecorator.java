@@ -4,7 +4,7 @@ package blocks;
 import backend.ColorsParser;
 import gameobjects.Block;
 
-import java.awt.*;
+import java.awt.Color;
 
 public class ColorDecorator extends BlockCreatorDecorator {
     private Color color;

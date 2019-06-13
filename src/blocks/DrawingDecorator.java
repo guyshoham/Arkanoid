@@ -7,7 +7,7 @@ import drawer.ImageDrawer;
 import drawer.StrokeDrawer;
 import gameobjects.Block;
 
-import java.awt.*;
+import java.awt.Color;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;

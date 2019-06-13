@@ -15,7 +15,7 @@ public class ColorsParser {
      *
      * @param s string
      * @return Color
-     * @throws Exception e
+     * @throws Exception exception
      */
     public static Color colorFromString(String s) throws Exception {
         try {

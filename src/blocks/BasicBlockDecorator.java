@@ -4,6 +4,9 @@ import gameobjects.Block;
 
 import java.awt.Color;
 
+/**
+ * Class BasicBlockDecorator.
+ */
 public class BasicBlockDecorator implements BlockCreator {
     private Color color;
 

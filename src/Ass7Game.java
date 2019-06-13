@@ -2,7 +2,11 @@ import backend.GameFlow;
 import backend.LevelInformation;
 import io.LevelSpecificationReader;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.Reader;
 import java.util.List;
 
 /**
@@ -19,6 +23,7 @@ public class Ass7Game {
      * this main method calls runGame method.
      *
      * @param args list of levels
+     * @throws IOException exception
      */
     public static void main(String[] args) throws IOException {
         runGame(args);
@@ -28,6 +33,7 @@ public class Ass7Game {
      * this method runs a game of Arkanoid.
      *
      * @param args list of levels
+     * @throws IOException exception
      */
     public static void runGame(String[] args) throws IOException {
         GameFlow gameFlow = new GameFlow();

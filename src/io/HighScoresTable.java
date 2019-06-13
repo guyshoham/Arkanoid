@@ -1,6 +1,12 @@
 package io;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -56,8 +62,9 @@ public class HighScoresTable implements Serializable {
         } catch (IOException ex) {
             throw new IOException(ex);
         } finally {
-            if (reader != null)
+            if (reader != null) {
                 reader.close();
+            }
         }
 
         return retVal;
@@ -119,7 +126,7 @@ public class HighScoresTable implements Serializable {
     }
 
     /**
-     * Clears the table
+     * Clears the table.
      */
     public void clear() {
         highScores.clear();
@@ -148,8 +155,9 @@ public class HighScoresTable implements Serializable {
         } catch (IOException ex) {
             throw new IOException(ex);
         } finally {
-            if (reader != null)
+            if (reader != null) {
                 reader.close();
+            }
         }
     }
 

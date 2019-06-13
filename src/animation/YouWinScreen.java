@@ -2,7 +2,7 @@ package animation;
 
 import biuoop.DrawSurface;
 
-import java.awt.*;
+import java.awt.Color;
 
 /**
  * class YouWinScreen.

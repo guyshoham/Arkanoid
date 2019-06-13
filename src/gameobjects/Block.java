@@ -14,7 +14,7 @@ import listeners.HitListener;
 import listeners.HitNotifier;
 import sprites.Sprite;
 
-import java.awt.*;
+import java.awt.Color;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -212,8 +212,8 @@ public class Block implements Collidable, Sprite, HitNotifier {
         this.rect = new Rectangle(rect.getUpperLeft(), rect.getWidth(), height);
     }
 
-    public void setColor(Color color) {
-        this.color = color;
+    public void setColor(Color newColor) {
+        this.color = newColor;
     }
 
     public void setDefaultStrokeDrawer(Drawer d) {

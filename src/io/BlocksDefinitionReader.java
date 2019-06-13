@@ -63,7 +63,7 @@ public class BlocksDefinitionReader {
 
                             BlockCreator blockCreator = new BasicBlockDecorator();
 
-                            for (Iterator i = propertiesMap.keySet().iterator(); i.hasNext(); ) {
+                            for (Iterator i = propertiesMap.keySet().iterator(); i.hasNext(); i = i) {
                                 key = String.valueOf(i.next());
                                 blockCreator = decoratorsFactory.decorate(blockCreator, key, propertiesMap.get(key));
                             }
