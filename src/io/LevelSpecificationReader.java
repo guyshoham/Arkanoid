@@ -130,7 +130,7 @@ public class LevelSpecificationReader implements LevelInformation {
                                 int r = Integer.parseInt(colors[0]);
                                 int g = Integer.parseInt(colors[1]);
                                 int b = Integer.parseInt(colors[2]);
-                                Color color = new Color(r, g, b);
+                                Color color = new Color(202, 202, 202);
                                 currentLevel.setBackground(new BackgroundSingleColor(color));
                             } else if (value.startsWith(COLOR_PREFIX) && value.endsWith(COLOR_POSTFIX)) {
                                 //color

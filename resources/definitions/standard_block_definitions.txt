@@ -11,6 +11,7 @@ bdef symbol:p fill:color(pink)
 bdef symbol:w fill:color(white)
 bdef symbol:c fill:color(cyan)
 bdef symbol:o fill:color(orange)
+bdef symbol:x fill:color(gray)
 
 # spacers definitions
 sdef symbol:- width:50

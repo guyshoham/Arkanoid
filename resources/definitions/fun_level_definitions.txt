@@ -1,0 +1,63 @@
+
+# Level 1
+
+START_LEVEL
+level_name:Alien
+ball_velocities:0,7 75,7 -75,7
+background:image(background_images/space.jpg)
+paddle_speed:10
+paddle_width:160
+block_definitions:definitions/standard_block_definitions.txt
+blocks_start_x:75
+blocks_start_y:50
+row_height:25
+num_blocks:98
+START_BLOCKS
+---y-----y
+---y-----y
+----y---y
+----y---y
+---xxxxxxx
+---xxxxxxx
+--xxrxxxrxx
+--xxrxxxrxx
+-xxxxxxxxxxx
+-xxxxxxxxxxx
+-xxxxxxxxxxx
+-x-xxxxxxx-x
+-x-x-----x-x
+-x-x-----x-x
+----xx-xx
+----xx-xx
+END_BLOCKS
+END_LEVEL
+
+
+# Level 2
+
+START_LEVEL
+level_name:Ninja Turtle
+ball_velocities:0,7 75,7 -75,7
+background:image(background_images/ninja_turtle.jpg)
+paddle_speed:10
+paddle_width:160
+block_definitions:definitions/ninja_turtle_block_definitions.txt
+blocks_start_x:50
+blocks_start_y:50
+row_height:25
+num_blocks:65
+START_BLOCKS
+---------gg
+--------gggg
+--b-----bbbb
+---bbbbbbwbwb
+-----bbbw-w-b
+----bb-gggggg
+---b---ggggggg
+--b---gg-ggg-g
+------ggg---gg
+-------ggrggg
+--------gggg
+END_BLOCKS
+END_LEVEL
+

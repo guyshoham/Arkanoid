@@ -2,5 +2,5 @@ e:Easy
 resources/definitions/easy_level_definitions.txt
 h:Hard
 resources/definitions/hard_level_definitions.txt
-x:Extreme
-resources/definitions/extreme_level_definitions.txt
+f:Fun
+resources/definitions/fun_level_definitions.txt
