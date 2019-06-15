@@ -27,6 +27,10 @@ public class Ass7Game {
      */
     public static void runGame(String[] args) throws IOException {
         GameFlow gameFlow = new GameFlow();
-        gameFlow.showMenu(args[0]);
+        if (args.length == 0) {
+            gameFlow.showMenu("definitions/level_sets.txt");
+        } else {
+            gameFlow.showMenu(args[0]);
+        }
     }
 }
