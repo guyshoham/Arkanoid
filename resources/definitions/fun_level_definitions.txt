@@ -1,4 +1,3 @@
-
 # Level 1
 
 START_LEVEL
@@ -61,3 +60,36 @@ START_BLOCKS
 END_BLOCKS
 END_LEVEL
 
+
+# Level 3
+
+START_LEVEL
+level_name:Zig Zag
+ball_velocities:330,3 335,3 340,3 345,4 350,5 355,6 0,7 5,6 10,5 15,4 20,3 25,3 30,3 330,3 335,3 340,3 345,4 350,5 355,6 0,7 5,6 10,5 15,4 20,3 25,3 30,3 330,3 335,3 340,3 345,4 350,5 355,6 0,7 5,6 10,5 15,4 20,3 25,3 30,3
+background:image(background_images/spiral.jpg)
+paddle_speed:10
+paddle_width:160
+block_definitions:definitions/zig_zag_block_definitions.txt
+blocks_start_x:50
+blocks_start_y:50
+row_height:25
+num_blocks:112
+START_BLOCKS
+r-g-b-y-p-w-c
+-b-o-y-p-w-c-o
+p-c-w-o-r-g-b
+-g-w-o-c-r-x-c
+r-g-b-y-p-w-c
+-o-b-y-p-w-c-o
+p-c-w-o-r-g-b
+-g-b-o-r-r-x-c
+r-g-o-y-p-w-c
+-o-b-y-p-w-c-o
+p-c-w-o-r-g-b
+-g-b-o-g-r-x-c
+r-g-b-y-p-w-c
+-c-o-x-p-w-c-o
+p-c-w-o-r-g-b
+-g-b-o-p-r-x-c
+END_BLOCKS
+END_LEVEL
