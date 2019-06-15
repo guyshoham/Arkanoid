@@ -104,10 +104,10 @@ public class GameFlow {
                 new HighScoresAnimation(highScoresTable)));
     }
 
-    public void showMenu() {
+    public void showMenu(String filePath) {
         LevelSets levelSets;
         try {
-            InputStream is = ClassLoader.getSystemClassLoader().getResourceAsStream("definitions/level_sets.txt");
+            InputStream is = ClassLoader.getSystemClassLoader().getResourceAsStream(filePath);
             levelSets = LevelSets.fromReader(new InputStreamReader(is));
         } catch (IOException ex) {
             throw new RuntimeException("Failed loading level sets");

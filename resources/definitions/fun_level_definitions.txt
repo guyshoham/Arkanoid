@@ -2,7 +2,7 @@
 
 START_LEVEL
 level_name:Alien
-ball_velocities:0,7 75,7 -75,7
+ball_velocities:0,7 0,6 0,5 75,7 -75,7
 background:image(background_images/space.jpg)
 paddle_speed:10
 paddle_width:160

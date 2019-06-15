@@ -27,6 +27,6 @@ public class Ass7Game {
      */
     public static void runGame(String[] args) throws IOException {
         GameFlow gameFlow = new GameFlow();
-        gameFlow.showMenu();
+        gameFlow.showMenu(args[0]);
     }
 }
