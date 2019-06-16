@@ -3,7 +3,7 @@ package backgrounds;
 import biuoop.DrawSurface;
 import geometry.Point;
 import geometry.Rectangle;
-import sprites.Sprite;
+import backend.Sprite;
 
 import java.awt.Image;
 
