@@ -13,8 +13,8 @@ public class HeightBlock extends BlockCreatorDecorator {
     /**
      * Class constructor.
      *
-     * @param decorated     block creator
-     * @param height height
+     * @param decorated block creator
+     * @param height    height
      */
     public HeightBlock(BlockCreator decorated, String height) {
         super(decorated);

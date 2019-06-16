@@ -10,20 +10,20 @@ public class LevelSet {
         return this.key;
     }
 
-    public String getMessage() {
-        return this.message;
-    }
-
-    public String getFilePath() {
-        return this.filePath;
-    }
-
     public void setKey(String newKey) {
         this.key = newKey;
     }
 
+    public String getMessage() {
+        return this.message;
+    }
+
     public void setMessage(String msg) {
         this.message = msg;
+    }
+
+    public String getFilePath() {
+        return this.filePath;
     }
 
     public void setFilePath(String path) {

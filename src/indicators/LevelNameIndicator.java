@@ -1,9 +1,9 @@
 package indicators;
 
 import backend.GameLevel;
+import backend.Sprite;
 import biuoop.DrawSurface;
 import geometry.Rectangle;
-import backend.Sprite;
 
 import java.awt.Color;
 

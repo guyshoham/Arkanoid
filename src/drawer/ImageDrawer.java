@@ -17,6 +17,7 @@ public class ImageDrawer implements Drawer {
 
     /**
      * Class constructor.
+     *
      * @param img image
      */
     public ImageDrawer(Image img) {

@@ -36,11 +36,11 @@ public class DrawingBlock extends BlockCreatorDecorator {
         super(decorated);
         this.hitPoints = hitPoints;
         this.isFill = isFill;
-        this.drawer = this.parseDrawer(value, isFill);
+        this.drawer = parseDrawer(value, isFill);
     }
 
     private Drawer parseDrawer(String value, boolean isFill) {
-        Drawer result;
+        Drawer retVal;
         String param;
         InputStream stream = null;
         if (value.startsWith(RGB_PREFIX) && value.endsWith(RGB_POSTFIX)) {
@@ -51,9 +51,9 @@ public class DrawingBlock extends BlockCreatorDecorator {
             int b = Integer.parseInt(rgb[2].trim());
             Color color = new Color(r, g, b);
             if (isFill) {
-                result = new FillDrawer(color);
+                retVal = new FillDrawer(color);
             } else {
-                result = new StrokeDrawer(color);
+                retVal = new StrokeDrawer(color);
             }
         } else {
             if (value.startsWith(COLOR_PREFIX) && value.endsWith(COLOR_POSTFIX)) {
@@ -67,9 +67,9 @@ public class DrawingBlock extends BlockCreatorDecorator {
                 }
 
                 if (isFill) {
-                    result = new FillDrawer(color);
+                    retVal = new FillDrawer(color);
                 } else {
-                    result = new StrokeDrawer(color);
+                    retVal = new StrokeDrawer(color);
                 }
             } else {
                 if (!value.startsWith(IMAGE_PREFIX) || !value.endsWith(IMAGE_POSTFIX)) {
@@ -84,7 +84,7 @@ public class DrawingBlock extends BlockCreatorDecorator {
                 try {
                     stream = ClassLoader.getSystemClassLoader().getResourceAsStream(imagePath);
                     BufferedImage image = read(stream);
-                    result = new ImageDrawer(image);
+                    retVal = new ImageDrawer(image);
                 } catch (IOException ex) {
                     throw new RuntimeException("Failed loading image: " + imagePath, ex);
                 } finally {
@@ -100,7 +100,7 @@ public class DrawingBlock extends BlockCreatorDecorator {
             }
         }
 
-        return result;
+        return retVal;
     }
 
     /**

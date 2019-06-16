@@ -1,18 +1,18 @@
 package gameobjects;
 
-import backend.GameLevel;
-import biuoop.DrawSurface;
 import backend.Collidable;
+import backend.GameLevel;
+import backend.Sprite;
+import backend.Velocity;
+import biuoop.DrawSurface;
 import drawer.Drawer;
 import drawer.FillDrawer;
 import drawer.StrokeDrawer;
 import geometry.Line;
 import geometry.Point;
 import geometry.Rectangle;
-import backend.Velocity;
 import listeners.HitListener;
 import listeners.HitNotifier;
-import backend.Sprite;
 
 import java.awt.Color;
 import java.util.ArrayList;

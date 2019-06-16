@@ -40,6 +40,6 @@ public class BlocksGenerator {
                     }
                     return new DrawingBlock(creator, value, isFill, hitPointsValue);
                 }
-        }// end of switch
+        } // end of switch
     }
 }

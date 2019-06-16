@@ -87,8 +87,7 @@ public class GameFlow {
 
         //run levels one by one
         for (LevelInformation levelInfo : levels) {
-            GameLevel level = new GameLevel(levelInfo, this.keyboard,
-                    this.runner, score, lives);
+            GameLevel level = new GameLevel(levelInfo, keyboard, runner, score, lives);
             level.initialize();
             level.run();
         }

@@ -2,11 +2,11 @@ package io;
 
 import backend.ColorsParser;
 import backend.LevelInformation;
+import backend.Sprite;
+import backend.Velocity;
 import backgrounds.BackgroundImage;
 import backgrounds.BackgroundSingleColor;
 import gameobjects.Block;
-import backend.Velocity;
-import backend.Sprite;
 
 import java.awt.Color;
 import java.awt.image.BufferedImage;

@@ -1,13 +1,13 @@
 package gameobjects;
 
+import backend.Collidable;
 import backend.GameLevel;
+import backend.Sprite;
+import backend.Velocity;
 import biuoop.DrawSurface;
 import biuoop.KeyboardSensor;
-import backend.Collidable;
 import geometry.Point;
 import geometry.Rectangle;
-import backend.Velocity;
-import backend.Sprite;
 
 import java.awt.Color;
 

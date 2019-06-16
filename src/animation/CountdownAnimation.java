@@ -1,8 +1,8 @@
 package animation;
 
+import backend.SpriteCollection;
 import biuoop.DrawSurface;
 import biuoop.Sleeper;
-import backend.SpriteCollection;
 
 import java.awt.Color;
 
@@ -50,7 +50,7 @@ public class CountdownAnimation implements Animation {
         countState--;
 
         if (countState == -1) {
-            this.stop = true;
+            stop = true;
         }
     }
 

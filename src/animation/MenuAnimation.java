@@ -1,8 +1,8 @@
 package animation;
 
+import backend.Sprite;
 import biuoop.DrawSurface;
 import biuoop.KeyboardSensor;
-import backend.Sprite;
 
 import java.util.ArrayList;
 import java.util.List;

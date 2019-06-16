@@ -1,9 +1,9 @@
 package backgrounds;
 
+import backend.Sprite;
 import biuoop.DrawSurface;
 import geometry.Point;
 import geometry.Rectangle;
-import backend.Sprite;
 
 import java.awt.Color;
 
