@@ -18,15 +18,15 @@ public class LevelSet {
         return this.filePath;
     }
 
-    public void setKey(String key) {
-        this.key = key;
+    public void setKey(String newKey) {
+        this.key = newKey;
     }
 
-    public void setMessage(String message) {
-        this.message = message;
+    public void setMessage(String msg) {
+        this.message = msg;
     }
 
-    public void setFilePath(String filePath) {
-        this.filePath = filePath;
+    public void setFilePath(String path) {
+        this.filePath = path;
     }
 }

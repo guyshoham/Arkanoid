@@ -15,6 +15,10 @@ public class ImageDrawer implements Drawer {
     private Image image;
 
 
+    /**
+     * Class constructor.
+     * @param img image
+     */
     public ImageDrawer(Image img) {
         this.image = img;
     }

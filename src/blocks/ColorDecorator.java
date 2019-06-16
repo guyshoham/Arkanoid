@@ -14,10 +14,16 @@ import java.awt.Color;
 public class ColorDecorator extends BlockCreatorDecorator {
     private Color color;
 
-    public ColorDecorator(BlockCreator decorated, String propertyValue) {
+    /**
+     * Class constructor.
+     *
+     * @param decorated block creator
+     * @param color color
+     */
+    public ColorDecorator(BlockCreator decorated, String color) {
         super(decorated);
         try {
-            this.color = ColorsParser.colorFromString(propertyValue);
+            this.color = ColorsParser.colorFromString(color);
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -21,6 +21,11 @@ import java.util.List;
 
 import static javax.imageio.ImageIO.read;
 
+/**
+ * Class LevelSpecificationReader.
+ *
+ * @author Guy Shoham
+ */
 public class LevelSpecificationReader implements LevelInformation {
     private static final String START_LEVEL = "START_LEVEL";
     private static final String END_LEVEL = "END_LEVEL";
@@ -90,7 +95,7 @@ public class LevelSpecificationReader implements LevelInformation {
                             blocks.add(b);
                             posX += b.getCollisionRectangle().getWidth();
                         }
-                    }//done reading line of blocks
+                    } //done reading line of blocks
                     posY += rowHeight;
 
                 } else if (line.equals(START_BLOCKS)) {
@@ -183,9 +188,9 @@ public class LevelSpecificationReader implements LevelInformation {
                             numBlocks = Integer.parseInt(value);
                             currentLevel.setNumBlocks(Integer.parseInt(value));
                             break;
-                    }//end of switch
+                    } //end of switch
                 }
-            }// end of reading one level
+            } // end of reading one level
             levels.add(currentLevel);
         }
         return levels;

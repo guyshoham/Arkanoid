@@ -13,6 +13,12 @@ public class DecoratorsFactory {
     private static final String FILL = "fill";
     private static final String STROKE = "stroke";
 
+    /**
+     * @param creator block creator
+     * @param key     key
+     * @param value   value
+     * @return block creator out from the key and value
+     */
     public BlockCreator decorate(BlockCreator creator, String key, String value) {
         if (key.equals(HEIGHT)) {
             return new HeightDecorator(creator, value);

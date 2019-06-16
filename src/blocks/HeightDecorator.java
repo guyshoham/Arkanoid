@@ -10,9 +10,15 @@ import gameobjects.Block;
 public class HeightDecorator extends BlockCreatorDecorator {
     private int height;
 
-    public HeightDecorator(BlockCreator decorated, String propertyValue) {
+    /**
+     * Class constructor.
+     *
+     * @param decorated     block creator
+     * @param height height
+     */
+    public HeightDecorator(BlockCreator decorated, String height) {
         super(decorated);
-        this.height = Integer.parseInt(propertyValue);
+        this.height = Integer.parseInt(height);
     }
 
     @Override

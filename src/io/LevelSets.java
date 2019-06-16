@@ -6,6 +6,11 @@ import java.io.Reader;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Class LevelSets.
+ *
+ * @author Guy Shoham
+ */
 public class LevelSets {
     private List<LevelSet> levelSetList;
 

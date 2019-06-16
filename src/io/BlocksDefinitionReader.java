@@ -23,6 +23,13 @@ public class BlocksDefinitionReader {
     private static final String SYMBOL = "symbol";
     private static final String WIDTH = "width";
 
+    /**
+     * reading from a file and creating factory which we can creates blocks from.
+     *
+     * @param reader reader
+     * @return blocks factory
+     * @throws IOException exception
+     */
     public static BlocksFromSymbolsFactory fromReader(Reader reader) throws IOException {
         BlocksFromSymbolsFactory retVal = new BlocksFromSymbolsFactory();
         DecoratorsFactory decoratorsFactory = new DecoratorsFactory();
@@ -39,20 +46,20 @@ public class BlocksDefinitionReader {
                             throw new RuntimeException("Unsupported line format (" + line + ")");
                         } else {
                             line = line.substring(DEFAULT.length()).trim();
-                            defaultMap = parseProperties(line);
+                            defaultMap = pullProperties(line);
                         }
 
                     } else {
                         Map map;
                         if (line.startsWith(SDEF)) {
                             line = line.substring(SDEF.length()).trim();
-                            map = parseProperties(line);
+                            map = pullProperties(line);
                             String symbol = getSymbol(map);
                             int width = Integer.parseInt((String) map.get(WIDTH));
                             retVal.addSpacer(symbol, width);
                         } else if (line.startsWith(BDEF)) {
                             line = line.substring(BDEF.length()).trim();
-                            map = parseProperties(line);
+                            map = pullProperties(line);
                             Map<String, String> propertiesMap = new HashMap<>(defaultMap);
                             propertiesMap.putAll(map);
                             String symbol = getSymbol(propertiesMap);
@@ -82,6 +89,12 @@ public class BlocksDefinitionReader {
         return retVal;
     }
 
+    /**
+     * pops out the symbol from the map. the symbol will be a key to the map itself.
+     *
+     * @param map map
+     * @return a symbol representing the key for the map(value).
+     */
     public static String getSymbol(Map<String, String> map) {
         String symbol = map.remove(SYMBOL);
         if (symbol.length() != 1) {
@@ -91,7 +104,11 @@ public class BlocksDefinitionReader {
         }
     }
 
-    public static Map<String, String> parseProperties(String str) {
+    /**
+     * @param str string
+     * @return Map<String, String> contains key and value from str
+     */
+    public static Map<String, String> pullProperties(String str) {
         Map<String, String> retVal = new HashMap<>();
         String[] keyValues = str.split(" ");
 

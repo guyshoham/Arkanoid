@@ -10,9 +10,15 @@ import gameobjects.Block;
 public class HitPointsDecorator extends BlockCreatorDecorator {
     private int hitPoints;
 
-    public HitPointsDecorator(BlockCreator decorated, String propertyValue) {
+    /**
+     * Class constructor.
+     *
+     * @param decorated block creator
+     * @param hitPoints hit points
+     */
+    public HitPointsDecorator(BlockCreator decorated, String hitPoints) {
         super(decorated);
-        this.hitPoints = Integer.parseInt(propertyValue);
+        this.hitPoints = Integer.parseInt(hitPoints);
     }
 
     @Override

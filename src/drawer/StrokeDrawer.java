@@ -14,6 +14,11 @@ public class StrokeDrawer implements Drawer {
 
     private Color color;
 
+    /**
+     * Class constructor.
+     *
+     * @param color color
+     */
     public StrokeDrawer(Color color) {
         this.color = color;
     }

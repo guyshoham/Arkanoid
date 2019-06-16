@@ -15,7 +15,6 @@ import io.LevelSet;
 import io.LevelSets;
 import io.LevelSpecificationReader;
 import io.ScoreInfo;
-import tasks.ExitTask;
 import tasks.Task;
 
 import java.io.BufferedReader;
@@ -35,7 +34,7 @@ import java.util.List;
 public class GameFlow {
 
     private static final String GAME_TITLE = "Arkanoid";
-    private static final String FILE_PATH = "highscore.txt";
+    private static final String HIGH_SCORE_FILE_PATH = "highscore.txt";
     private static final int GUI_WIDTH = 800;
     private static final int GUI_HEIGHT = 600;
     private static final int LIVES = 7;
@@ -46,7 +45,7 @@ public class GameFlow {
     private AnimationRunner runner;
     private KeyboardSensor keyboard;
     private HighScoresTable highScoresTable;
-    private File file = new File(FILE_PATH);
+    private File file = new File(HIGH_SCORE_FILE_PATH);
 
     /**
      * Class Constructor.
@@ -60,6 +59,11 @@ public class GameFlow {
         handleScoresTable();
     }
 
+    /**
+     * if table exist, load the table. if not, create one.
+     *
+     * @throws IOException exception
+     */
     private void handleScoresTable() throws IOException {
         if (!file.exists()) {
             //no file. create one
@@ -104,6 +108,11 @@ public class GameFlow {
                 new HighScoresAnimation(highScoresTable)));
     }
 
+    /**
+     * display menu to user.
+     *
+     * @param filePath file path
+     */
     public void showMenu(String filePath) {
         LevelSets levelSets;
         try {
@@ -147,7 +156,13 @@ public class GameFlow {
                 return null;
             }
         });
-        mainMenu.addSelection("q", "Quit", new ExitTask());
+        mainMenu.addSelection("q", "Quit", new Task<Void>() {
+            @Override
+            public Void run() {
+                System.exit(0);
+                return null;
+            }
+        });
 
         while (true) {
             runner.run(mainMenu);

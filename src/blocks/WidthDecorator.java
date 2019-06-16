@@ -3,12 +3,23 @@ package blocks;
 
 import gameobjects.Block;
 
+/**
+ * Class WidthDecorator.
+ *
+ * @author Guy Shoham
+ */
 public class WidthDecorator extends BlockCreatorDecorator {
     private int width;
 
-    public WidthDecorator(BlockCreator decorated, String propertyValue) {
+    /**
+     * Class constructor.
+     *
+     * @param decorated block creator
+     * @param width     width
+     */
+    public WidthDecorator(BlockCreator decorated, String width) {
         super(decorated);
-        this.width = Integer.parseInt(propertyValue);
+        this.width = Integer.parseInt(width);
     }
 
     @Override

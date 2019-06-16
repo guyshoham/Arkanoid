@@ -15,6 +15,11 @@ public class FillDrawer implements Drawer {
     private Color color;
 
 
+    /**
+     * Class constructor.
+     *
+     * @param color color
+     */
     public FillDrawer(Color color) {
         this.color = color;
     }
