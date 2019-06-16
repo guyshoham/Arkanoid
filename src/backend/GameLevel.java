@@ -7,21 +7,17 @@ import animation.KeyPressStoppableAnimation;
 import animation.PauseScreen;
 import biuoop.DrawSurface;
 import biuoop.KeyboardSensor;
-import collisions.Collidable;
 import gameobjects.Ball;
 import gameobjects.Block;
 import gameobjects.Paddle;
 import geometry.Point;
 import geometry.Rectangle;
-import geometry.Velocity;
 import indicators.LevelNameIndicator;
 import indicators.LivesIndicator;
 import indicators.ScoreIndicator;
 import listeners.BallRemover;
 import listeners.BlockRemover;
 import listeners.ScoreTrackingListener;
-import sprites.Sprite;
-import sprites.SpriteCollection;
 
 import java.awt.Color;
 

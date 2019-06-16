@@ -3,13 +3,13 @@ package gameobjects;
 import backend.GameEnvironment;
 import backend.GameLevel;
 import biuoop.DrawSurface;
-import collisions.CollisionInfo;
+import backend.CollisionInfo;
 import geometry.Line;
 import geometry.Point;
-import geometry.Velocity;
+import backend.Velocity;
 import listeners.HitListener;
 import listeners.HitNotifier;
-import sprites.Sprite;
+import backend.Sprite;
 
 import java.awt.Color;
 import java.util.ArrayList;

@@ -1,4 +1,4 @@
-package sprites;
+package backend;
 
 import biuoop.DrawSurface;
 

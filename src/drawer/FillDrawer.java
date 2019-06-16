@@ -25,7 +25,7 @@ public class FillDrawer implements Drawer {
     }
 
     @Override
-    public void drawAt(DrawSurface d, Rectangle rect) {
+    public void draw(DrawSurface d, Rectangle rect) {
         d.setColor(color);
         d.fillRectangle((int) rect.getUpperLeft().getX(), (int) rect.getUpperLeft().getY(),
                 (int) rect.getWidth(), (int) rect.getHeight());

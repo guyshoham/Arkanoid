@@ -2,7 +2,7 @@ package animation;
 
 import biuoop.DrawSurface;
 import biuoop.KeyboardSensor;
-import sprites.Sprite;
+import backend.Sprite;
 
 import java.util.ArrayList;
 import java.util.List;

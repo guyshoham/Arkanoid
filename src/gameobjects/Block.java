@@ -2,17 +2,17 @@ package gameobjects;
 
 import backend.GameLevel;
 import biuoop.DrawSurface;
-import collisions.Collidable;
+import backend.Collidable;
 import drawer.Drawer;
 import drawer.FillDrawer;
 import drawer.StrokeDrawer;
 import geometry.Line;
 import geometry.Point;
 import geometry.Rectangle;
-import geometry.Velocity;
+import backend.Velocity;
 import listeners.HitListener;
 import listeners.HitNotifier;
-import sprites.Sprite;
+import backend.Sprite;
 
 import java.awt.Color;
 import java.util.ArrayList;
@@ -114,15 +114,15 @@ public class Block implements Collidable, Sprite, HitNotifier {
 
     public void drawOn(DrawSurface surface) {
         if (fillDrawers.containsKey(numberOfHits)) {
-            fillDrawers.get(numberOfHits).drawAt(surface, rect);
+            fillDrawers.get(numberOfHits).draw(surface, rect);
         } else {
-            defaultFillDrawer.drawAt(surface, rect);
+            defaultFillDrawer.draw(surface, rect);
         }
         if (!strokeDrawers.isEmpty() || defaultStrokeDrawer != null) {
             if (strokeDrawers.containsKey(numberOfHits)) {
-                strokeDrawers.get(numberOfHits).drawAt(surface, rect);
+                strokeDrawers.get(numberOfHits).draw(surface, rect);
             } else {
-                defaultStrokeDrawer.drawAt(surface, rect);
+                defaultStrokeDrawer.draw(surface, rect);
             }
         }
     }

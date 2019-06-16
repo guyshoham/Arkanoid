@@ -2,7 +2,7 @@ package geometry;
 
 import backend.GameLevel;
 import biuoop.DrawSurface;
-import sprites.Sprite;
+import backend.Sprite;
 
 import java.awt.Color;
 import java.util.ArrayList;

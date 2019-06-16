@@ -5,8 +5,8 @@ import backend.LevelInformation;
 import backgrounds.BackgroundImage;
 import backgrounds.BackgroundSingleColor;
 import gameobjects.Block;
-import geometry.Velocity;
-import sprites.Sprite;
+import backend.Velocity;
+import backend.Sprite;
 
 import java.awt.Color;
 import java.awt.image.BufferedImage;

@@ -1,7 +1,5 @@
 package backend;
 
-import collisions.Collidable;
-import collisions.CollisionInfo;
 import geometry.Line;
 import geometry.Point;
 import geometry.Rectangle;

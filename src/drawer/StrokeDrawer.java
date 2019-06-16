@@ -24,7 +24,7 @@ public class StrokeDrawer implements Drawer {
     }
 
     @Override
-    public void drawAt(DrawSurface d, Rectangle rect) {
+    public void draw(DrawSurface d, Rectangle rect) {
         d.setColor(color);
         d.drawRectangle((int) rect.getUpperLeft().getX(), (int) rect.getUpperLeft().getY(),
                 (int) rect.getWidth(), (int) rect.getHeight());

@@ -16,5 +16,5 @@ public interface Drawer {
      * @param d    surface
      * @param rect rectangle
      */
-    void drawAt(DrawSurface d, Rectangle rect);
+    void draw(DrawSurface d, Rectangle rect);
 }

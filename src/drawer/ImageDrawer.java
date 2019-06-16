@@ -24,7 +24,7 @@ public class ImageDrawer implements Drawer {
     }
 
     @Override
-    public void drawAt(DrawSurface d, Rectangle rect) {
+    public void draw(DrawSurface d, Rectangle rect) {
         d.drawImage((int) rect.getUpperLeft().getX(), (int) rect.getUpperLeft().getY(), image);
     }
 }

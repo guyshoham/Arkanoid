@@ -1,6 +1,5 @@
-package sprites;
+package backend;
 
-import backend.GameLevel;
 import biuoop.DrawSurface;
 
 /**

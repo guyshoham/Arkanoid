@@ -3,7 +3,7 @@ package indicators;
 import backend.GameLevel;
 import biuoop.DrawSurface;
 import geometry.Rectangle;
-import sprites.Sprite;
+import backend.Sprite;
 
 import java.awt.Color;
 

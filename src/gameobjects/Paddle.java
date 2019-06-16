@@ -3,11 +3,11 @@ package gameobjects;
 import backend.GameLevel;
 import biuoop.DrawSurface;
 import biuoop.KeyboardSensor;
-import collisions.Collidable;
+import backend.Collidable;
 import geometry.Point;
 import geometry.Rectangle;
-import geometry.Velocity;
-import sprites.Sprite;
+import backend.Velocity;
+import backend.Sprite;
 
 import java.awt.Color;
 

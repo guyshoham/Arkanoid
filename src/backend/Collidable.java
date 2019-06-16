@@ -1,9 +1,8 @@
-package collisions;
+package backend;
 
 import gameobjects.Ball;
 import geometry.Point;
 import geometry.Rectangle;
-import geometry.Velocity;
 
 /**
  * interface Collidable.

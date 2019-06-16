@@ -1,4 +1,4 @@
-package collisions;
+package backend;
 
 import geometry.Point;
 
