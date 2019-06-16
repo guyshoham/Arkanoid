@@ -1,8 +1,8 @@
 package io;
 
-import backend.UtilFunctions;
 import backend.LevelInformation;
 import backend.Sprite;
+import backend.UtilFunctions;
 import backend.Velocity;
 import backgrounds.BackgroundImage;
 import backgrounds.BackgroundSingleColor;
@@ -151,7 +151,8 @@ public class LevelSpecificationReader implements LevelInformation {
                                 //image
                                 String imagePath = UtilFunctions.trimString(value, IMAGE_PREFIX, IMAGE_POSTFIX);
                                 try {
-                                    InputStream stream = ClassLoader.getSystemClassLoader().getResourceAsStream(imagePath);
+                                    InputStream stream =
+                                            ClassLoader.getSystemClassLoader().getResourceAsStream(imagePath);
                                     BufferedImage image = read(stream);
                                     currentLevel.setBackground(new BackgroundImage(image));
                                 } catch (IOException ex) {
@@ -232,30 +233,6 @@ public class LevelSpecificationReader implements LevelInformation {
         return levels;
     }
 
-    public int getPaddleSpeed() {
-        return paddleSpeed;
-    }
-
-    public void setPaddleSpeed(int speed) {
-        this.paddleSpeed = speed;
-    }
-
-    public int getPaddleWidth() {
-        return paddleWidth;
-    }
-
-    public void setPaddleWidth(int width) {
-        this.paddleWidth = width;
-    }
-
-    public int getNumBlocks() {
-        return numBlocks;
-    }
-
-    public void setNumBlocks(int num) {
-        this.numBlocks = num;
-    }
-
     public int getBlockStartX() {
         return blockStartX;
     }
@@ -280,36 +257,12 @@ public class LevelSpecificationReader implements LevelInformation {
         this.rowHeight = height;
     }
 
-    public String getLevelName() {
-        return levelName;
-    }
-
-    public void setLevelName(String name) {
-        this.levelName = name;
-    }
-
     public String getBlockDefinitions() {
         return blockDefinitions;
     }
 
     public void setBlockDefinitions(String fileName) {
         this.blockDefinitions = fileName;
-    }
-
-    public List<Velocity> getVelocities() {
-        return velocities;
-    }
-
-    public void setVelocities(List<Velocity> list) {
-        this.velocities = list;
-    }
-
-    public List<Block> getBlockList() {
-        return blockList;
-    }
-
-    public void setBlockList(List<Block> list) {
-        this.blockList = list;
     }
 
     @Override
@@ -322,9 +275,17 @@ public class LevelSpecificationReader implements LevelInformation {
         return this.velocities;
     }
 
+    public void setVelocities(List<Velocity> list) {
+        this.velocities = list;
+    }
+
     @Override
     public int paddleSpeed() {
         return this.paddleSpeed;
+    }
+
+    public void setPaddleSpeed(int speed) {
+        this.paddleSpeed = speed;
     }
 
     @Override
@@ -332,9 +293,17 @@ public class LevelSpecificationReader implements LevelInformation {
         return this.paddleWidth;
     }
 
+    public void setPaddleWidth(int width) {
+        this.paddleWidth = width;
+    }
+
     @Override
     public String levelName() {
         return this.levelName;
+    }
+
+    public void setLevelName(String name) {
+        this.levelName = name;
     }
 
     @Override
@@ -351,8 +320,16 @@ public class LevelSpecificationReader implements LevelInformation {
         return this.blockList;
     }
 
+    public void setBlockList(List<Block> list) {
+        this.blockList = list;
+    }
+
     @Override
     public int numberOfBlocksToRemove() {
         return this.numBlocks;
+    }
+
+    public void setNumBlocks(int num) {
+        this.numBlocks = num;
     }
 }
