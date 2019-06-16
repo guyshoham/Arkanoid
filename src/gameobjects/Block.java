@@ -28,7 +28,6 @@ public class Block implements Collidable, Sprite, HitNotifier {
 
     private List<HitListener> hitListeners;
     private Rectangle rect;
-    private Color color;
     private int numberOfHits;
     private Drawer defaultFillDrawer, defaultStrokeDrawer;
     private HashMap<Integer, Drawer> fillDrawers, strokeDrawers;
@@ -43,7 +42,6 @@ public class Block implements Collidable, Sprite, HitNotifier {
      */
     public Block(Rectangle rectangle, Color color, int numberOfHits) {
         this.rect = rectangle;
-        this.color = color;
         this.numberOfHits = numberOfHits;
         this.hitListeners = new ArrayList<>();
 
@@ -218,13 +216,6 @@ public class Block implements Collidable, Sprite, HitNotifier {
      */
     public void setHeight(int height) {
         this.rect = new Rectangle(rect.getUpperLeft(), rect.getWidth(), height);
-    }
-
-    /**
-     * @param newColor color
-     */
-    public void setColor(Color newColor) {
-        this.color = newColor;
     }
 
     /**
