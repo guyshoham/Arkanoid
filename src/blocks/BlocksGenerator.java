@@ -20,23 +20,26 @@ public class BlocksGenerator {
      * @return block creator out from the key and value
      */
     public BlockCreator generate(BlockCreator creator, String key, String value) {
-        if (key.equals(HEIGHT)) {
-            return new HeightBlock(creator, value);
-        } else if (key.equals(WIDTH)) {
-            return new WidthBlock(creator, value);
-        } else if (key.equals(HIT_POINTS)) {
-            return new HitPointsBlock(creator, value);
-        } else if (!key.startsWith(FILL) && !key.startsWith(STROKE)) {
-            throw new RuntimeException("Unsupported property: " + key + " with value:" + value);
-        } else {
-            Integer hitPointsValue = null;
-            boolean isFill = key.startsWith(FILL);
-            int dividerIndex = key.indexOf("-");
-            if (dividerIndex != -1) {
-                hitPointsValue = Integer.parseInt(key.substring(dividerIndex + 1));
-            }
+        switch (key) {
+            case HEIGHT:
+                return new HeightBlock(creator, value);
+            case WIDTH:
+                return new WidthBlock(creator, value);
+            case HIT_POINTS:
+                return new HitPointsBlock(creator, value);
+            default:
+                if (!key.startsWith(FILL) && !key.startsWith(STROKE)) {
+                    throw new RuntimeException("Unsupported property: " + key + " with value:" + value);
 
-            return new DrawingBlock(creator, value, isFill, hitPointsValue);
-        }
+                } else {
+                    Integer hitPointsValue = null;
+                    boolean isFill = key.startsWith(FILL);
+                    int dividerIndex = key.indexOf("-");
+                    if (dividerIndex != -1) {
+                        hitPointsValue = Integer.parseInt(key.substring(dividerIndex + 1));
+                    }
+                    return new DrawingBlock(creator, value, isFill, hitPointsValue);
+                }
+        }// end of switch
     }
 }

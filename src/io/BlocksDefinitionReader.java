@@ -1,6 +1,6 @@
 package io;
 
-import blocks.BasicBlockDecorator;
+import blocks.BasicBlock;
 import blocks.BlockCreator;
 import blocks.BlocksGenerator;
 
@@ -64,7 +64,7 @@ public class BlocksDefinitionReader {
                             propertiesMap.putAll(map);
                             String symbol = getSymbol(propertiesMap);
 
-                            BlockCreator blockCreator = new BasicBlockDecorator();
+                            BlockCreator blockCreator = new BasicBlock();
 
                             for (Iterator i = propertiesMap.keySet().iterator(); i.hasNext(); i = i) {
                                 key = String.valueOf(i.next());

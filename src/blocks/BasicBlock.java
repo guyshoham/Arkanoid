@@ -2,13 +2,10 @@ package blocks;
 
 import gameobjects.Block;
 
-import java.awt.Color;
-
 /**
- * Class BasicBlockDecorator.
+ * Class BasicBlock.
  */
-public class BasicBlockDecorator implements BlockCreator {
-    private Color color;
+public class BasicBlock implements BlockCreator {
 
     @Override
     public Block create(int x, int y) {
