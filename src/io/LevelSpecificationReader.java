@@ -1,6 +1,6 @@
 package io;
 
-import backend.ColorsParser;
+import backend.UtilFunctions;
 import backend.LevelInformation;
 import backend.Sprite;
 import backend.Velocity;
@@ -130,7 +130,7 @@ public class LevelSpecificationReader implements LevelInformation {
                         case BACKGROUND:
                             if (value.startsWith(RGB_PREFIX) && value.endsWith(RGB_POSTFIX)) {
                                 //RGB
-                                String rgb = betterSubstring(value, RGB_PREFIX, RGB_POSTFIX);
+                                String rgb = UtilFunctions.trimString(value, RGB_PREFIX, RGB_POSTFIX);
                                 String[] colors = rgb.split(",");
                                 int r = Integer.parseInt(colors[0]);
                                 int g = Integer.parseInt(colors[1]);
@@ -139,17 +139,17 @@ public class LevelSpecificationReader implements LevelInformation {
                                 currentLevel.setBackground(new BackgroundSingleColor(color));
                             } else if (value.startsWith(COLOR_PREFIX) && value.endsWith(COLOR_POSTFIX)) {
                                 //color
-                                String rgb = betterSubstring(value, COLOR_PREFIX, COLOR_POSTFIX);
+                                String rgb = UtilFunctions.trimString(value, COLOR_PREFIX, COLOR_POSTFIX);
                                 Color color;
                                 try {
-                                    color = ColorsParser.colorFromString(rgb);
+                                    color = UtilFunctions.colorFromString(rgb);
                                     currentLevel.setBackground(new BackgroundSingleColor(color));
                                 } catch (Exception ex) {
                                     throw new IOException(ex);
                                 }
                             } else if (value.substring(0, 5).equals(IMAGE)) {
                                 //image
-                                String imagePath = betterSubstring(value, IMAGE_PREFIX, IMAGE_POSTFIX);
+                                String imagePath = UtilFunctions.trimString(value, IMAGE_PREFIX, IMAGE_POSTFIX);
                                 try {
                                     InputStream stream = ClassLoader.getSystemClassLoader().getResourceAsStream(imagePath);
                                     BufferedImage image = read(stream);
@@ -230,16 +230,6 @@ public class LevelSpecificationReader implements LevelInformation {
             }
         }
         return levels;
-    }
-
-    /**
-     * @param value original string.
-     * @param start start of the string we want.
-     * @param end   end of the string we want.
-     * @return a substring between start and end.
-     */
-    public String betterSubstring(String value, String start, String end) {
-        return value.substring(start.length(), value.length() - end.length());
     }
 
     public int getPaddleSpeed() {

@@ -8,7 +8,7 @@ import java.lang.reflect.Field;
  *
  * @author Guy Shoham
  */
-public class ColorsParser {
+public class UtilFunctions {
 
     /**
      * parse color definition and return the specified color.
@@ -24,5 +24,15 @@ public class ColorsParser {
         } catch (Exception e) {
             throw new Exception(e);
         }
+    }
+
+    /**
+     * @param value original string.
+     * @param start start of the string we want.
+     * @param end   end of the string we want.
+     * @return a substring between start and end.
+     */
+    public static String trimString(String value, String start, String end) {
+        return value.substring(start.length(), value.length() - end.length());
     }
 }

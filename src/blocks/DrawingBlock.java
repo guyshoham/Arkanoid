@@ -1,6 +1,6 @@
 package blocks;
 
-import backend.ColorsParser;
+import backend.UtilFunctions;
 import drawer.Drawer;
 import drawer.FillDrawer;
 import drawer.ImageDrawer;
@@ -59,7 +59,7 @@ public class DrawingBlock extends BlockCreatorDecorator {
         String param;
         InputStream stream = null;
         if (value.startsWith(RGB_PREFIX) && value.endsWith(RGB_POSTFIX)) {
-            param = betterSubstring(value, RGB_PREFIX, RGB_POSTFIX);
+            param = UtilFunctions.trimString(value, RGB_PREFIX, RGB_POSTFIX);
             String[] rgb = param.split(",");
             int r = Integer.parseInt(rgb[0].trim());
             int g = Integer.parseInt(rgb[1].trim());
@@ -72,11 +72,11 @@ public class DrawingBlock extends BlockCreatorDecorator {
             }
         } else {
             if (value.startsWith(COLOR_PREFIX) && value.endsWith(COLOR_POSTFIX)) {
-                param = betterSubstring(value, COLOR_PREFIX, COLOR_POSTFIX);
+                param = UtilFunctions.trimString(value, COLOR_PREFIX, COLOR_POSTFIX);
 
                 Color color;
                 try {
-                    color = ColorsParser.colorFromString(param);
+                    color = UtilFunctions.colorFromString(param);
                 } catch (Exception e) {
                     throw new RuntimeException("Unsupported color name: " + param);
                 }
@@ -91,7 +91,7 @@ public class DrawingBlock extends BlockCreatorDecorator {
                     throw new RuntimeException("Unsupported definition: " + value);
                 }
 
-                String imagePath = betterSubstring(value, IMAGE_PREFIX, IMAGE_POSTFIX);
+                String imagePath = UtilFunctions.trimString(value, IMAGE_PREFIX, IMAGE_POSTFIX);
                 if (!isFillValue) {
                     throw new RuntimeException("Image type not supported for stroke");
                 }
@@ -116,16 +116,6 @@ public class DrawingBlock extends BlockCreatorDecorator {
         }
 
         return retVal;
-    }
-
-    /**
-     * @param value original string.
-     * @param start start of the string we want.
-     * @param end   end of the string we want.
-     * @return a substring between start and end.
-     */
-    public String betterSubstring(String value, String start, String end) {
-        return value.substring(start.length(), value.length() - end.length());
     }
 
     @Override
