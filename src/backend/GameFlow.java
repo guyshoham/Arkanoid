@@ -12,7 +12,7 @@ import biuoop.GUI;
 import biuoop.KeyboardSensor;
 import io.HighScoresTable;
 import io.LevelSet;
-import io.LevelSets;
+import io.LevelSetsList;
 import io.LevelSpecificationReader;
 import io.ScoreInfo;
 import tasks.Task;
@@ -114,16 +114,16 @@ public class GameFlow {
      * @param filePath file path
      */
     public void showMenu(String filePath) {
-        LevelSets levelSets;
+        LevelSetsList levelSetsList;
         try {
-            InputStream is = ClassLoader.getSystemClassLoader().getResourceAsStream(filePath);
-            levelSets = LevelSets.fromReader(new InputStreamReader(is));
+            InputStream stream = ClassLoader.getSystemClassLoader().getResourceAsStream(filePath);
+            levelSetsList = LevelSetsList.fromReader(new InputStreamReader(stream));
         } catch (IOException ex) {
             throw new RuntimeException("Failed loading level sets");
         }
 
         Menu<Task<Void>> levelsMenu = new MenuAnimation<>("Pick Difficulty", runner, keyboard);
-        List<LevelSet> list = levelSets.getLevelSetList();
+        List<LevelSet> list = levelSetsList.getLevelSetList();
         for (LevelSet set : list) {
             levelsMenu.addSelection(set.getKey(), set.getMessage(), new Task<Void>() {
                 @Override

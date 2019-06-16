@@ -7,19 +7,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Class LevelSets.
+ * Class LevelSetsList.
  *
  * @author Guy Shoham
  */
-public class LevelSets {
+public class LevelSetsList {
     private List<LevelSet> levelSetList;
 
-    public LevelSets() {
+    public LevelSetsList() {
         this.levelSetList = new ArrayList<>();
     }
 
-    public static LevelSets fromReader(Reader reader) throws IOException {
-        LevelSets retVal = new LevelSets();
+    public static LevelSetsList fromReader(Reader reader) throws IOException {
+        LevelSetsList retVal = new LevelSetsList();
         LevelSet currentSet = null;
         LineNumberReader lineReader = null;
 

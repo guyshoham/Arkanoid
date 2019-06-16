@@ -42,7 +42,7 @@ public class DrawingBlock extends BlockCreatorDecorator {
     private Drawer parseDrawer(String value, boolean isFill) {
         Drawer result;
         String param;
-        InputStream is = null;
+        InputStream stream = null;
         if (value.startsWith(RGB_PREFIX) && value.endsWith(RGB_POSTFIX)) {
             param = betterSubstring(value, RGB_PREFIX, RGB_POSTFIX);
             String[] rgb = param.split(",");
@@ -82,15 +82,15 @@ public class DrawingBlock extends BlockCreatorDecorator {
                 }
 
                 try {
-                    is = ClassLoader.getSystemClassLoader().getResourceAsStream(imagePath);
-                    BufferedImage image = read(is);
+                    stream = ClassLoader.getSystemClassLoader().getResourceAsStream(imagePath);
+                    BufferedImage image = read(stream);
                     result = new ImageDrawer(image);
                 } catch (IOException ex) {
                     throw new RuntimeException("Failed loading image: " + imagePath, ex);
                 } finally {
-                    if (is != null) {
+                    if (stream != null) {
                         try {
-                            is.close();
+                            stream.close();
                         } catch (IOException ex) {
                             throw new RuntimeException("Failed loading image: " + imagePath, ex);
                         }

@@ -151,8 +151,8 @@ public class LevelSpecificationReader implements LevelInformation {
                                 //image
                                 String imagePath = betterSubstring(value, IMAGE_PREFIX, IMAGE_POSTFIX);
                                 try {
-                                    InputStream is = ClassLoader.getSystemClassLoader().getResourceAsStream(imagePath);
-                                    BufferedImage image = read(is);
+                                    InputStream stream = ClassLoader.getSystemClassLoader().getResourceAsStream(imagePath);
+                                    BufferedImage image = read(stream);
                                     currentLevel.setBackground(new BackgroundImage(image));
                                 } catch (IOException ex) {
                                     throw new IOException(ex);
