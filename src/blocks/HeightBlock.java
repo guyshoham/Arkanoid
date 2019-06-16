@@ -3,11 +3,11 @@ package blocks;
 import gameobjects.Block;
 
 /**
- * class HeightDecorator.
+ * class HeightBlock.
  *
  * @author Guy Shoham
  */
-public class HeightDecorator extends BlockCreatorDecorator {
+public class HeightBlock extends BlockCreatorDecorator {
     private int height;
 
     /**
@@ -16,7 +16,7 @@ public class HeightDecorator extends BlockCreatorDecorator {
      * @param decorated     block creator
      * @param height height
      */
-    public HeightDecorator(BlockCreator decorated, String height) {
+    public HeightBlock(BlockCreator decorated, String height) {
         super(decorated);
         this.height = Integer.parseInt(height);
     }

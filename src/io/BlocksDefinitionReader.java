@@ -2,7 +2,7 @@ package io;
 
 import blocks.BasicBlockDecorator;
 import blocks.BlockCreator;
-import blocks.DecoratorsFactory;
+import blocks.BlocksGenerator;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -32,7 +32,7 @@ public class BlocksDefinitionReader {
      */
     public static BlocksFromSymbolsFactory fromReader(Reader reader) throws IOException {
         BlocksFromSymbolsFactory retVal = new BlocksFromSymbolsFactory();
-        DecoratorsFactory decoratorsFactory = new DecoratorsFactory();
+        BlocksGenerator blocksGenerator = new BlocksGenerator();
         BufferedReader br = null;
         try {
             br = new BufferedReader(reader);
@@ -68,7 +68,7 @@ public class BlocksDefinitionReader {
 
                             for (Iterator i = propertiesMap.keySet().iterator(); i.hasNext(); i = i) {
                                 key = String.valueOf(i.next());
-                                blockCreator = decoratorsFactory.decorate(blockCreator, key, propertiesMap.get(key));
+                                blockCreator = blocksGenerator.generate(blockCreator, key, propertiesMap.get(key));
                             }
                             retVal.addBlockCreator(symbol, blockCreator);
                         }

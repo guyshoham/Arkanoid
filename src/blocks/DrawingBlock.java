@@ -15,11 +15,11 @@ import java.io.InputStream;
 import static javax.imageio.ImageIO.read;
 
 /**
- * class DrawingDecorator.
+ * class DrawingBlock.
  *
  * @author Guy Shoham
  */
-public class DrawingDecorator extends BlockCreatorDecorator {
+public class DrawingBlock extends BlockCreatorDecorator {
 
     private static final String RGB_PREFIX = "color(RGB(";
     private static final String RGB_POSTFIX = "))";
@@ -32,7 +32,7 @@ public class DrawingDecorator extends BlockCreatorDecorator {
     private Drawer drawer;
 
 
-    public DrawingDecorator(BlockCreator decorated, String value, boolean isFill, Integer hitPoints) {
+    public DrawingBlock(BlockCreator decorated, String value, boolean isFill, Integer hitPoints) {
         super(decorated);
         this.hitPoints = hitPoints;
         this.isFill = isFill;

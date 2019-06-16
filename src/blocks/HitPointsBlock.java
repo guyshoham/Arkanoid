@@ -1,32 +1,30 @@
 package blocks;
 
-
 import gameobjects.Block;
 
 /**
- * Class WidthDecorator.
+ * class HitPointsBlock.
  *
  * @author Guy Shoham
  */
-public class WidthDecorator extends BlockCreatorDecorator {
-    private int width;
+public class HitPointsBlock extends BlockCreatorDecorator {
+    private int hitPoints;
 
     /**
      * Class constructor.
      *
      * @param decorated block creator
-     * @param width     width
+     * @param hitPoints hit points
      */
-    public WidthDecorator(BlockCreator decorated, String width) {
+    public HitPointsBlock(BlockCreator decorated, String hitPoints) {
         super(decorated);
-        this.width = Integer.parseInt(width);
+        this.hitPoints = Integer.parseInt(hitPoints);
     }
 
     @Override
     public Block create(int x, int y) {
         Block b = super.create(x, y);
-        b.setWidth(width);
+        b.setNumberOfHits(hitPoints);
         return b;
     }
-
 }

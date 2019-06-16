@@ -5,7 +5,7 @@ package blocks;
  *
  * @author Guy Shoham
  */
-public class DecoratorsFactory {
+public class BlocksGenerator {
 
     private static final String HEIGHT = "height";
     private static final String WIDTH = "width";
@@ -19,13 +19,13 @@ public class DecoratorsFactory {
      * @param value   value
      * @return block creator out from the key and value
      */
-    public BlockCreator decorate(BlockCreator creator, String key, String value) {
+    public BlockCreator generate(BlockCreator creator, String key, String value) {
         if (key.equals(HEIGHT)) {
-            return new HeightDecorator(creator, value);
+            return new HeightBlock(creator, value);
         } else if (key.equals(WIDTH)) {
-            return new WidthDecorator(creator, value);
+            return new WidthBlock(creator, value);
         } else if (key.equals(HIT_POINTS)) {
-            return new HitPointsDecorator(creator, value);
+            return new HitPointsBlock(creator, value);
         } else if (!key.startsWith(FILL) && !key.startsWith(STROKE)) {
             throw new RuntimeException("Unsupported property: " + key + " with value:" + value);
         } else {
@@ -36,7 +36,7 @@ public class DecoratorsFactory {
                 hitPointsValue = Integer.parseInt(key.substring(dividerIndex + 1));
             }
 
-            return new DrawingDecorator(creator, value, isFill, hitPointsValue);
+            return new DrawingBlock(creator, value, isFill, hitPointsValue);
         }
     }
 }
