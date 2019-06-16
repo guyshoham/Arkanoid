@@ -32,14 +32,29 @@ public class DrawingBlock extends BlockCreatorDecorator {
     private Drawer drawer;
 
 
+    /**
+     * Class constructor.
+     *
+     * @param decorated block creator
+     * @param value     value
+     * @param isFill    is fill value
+     * @param hitPoints hit points
+     */
     public DrawingBlock(BlockCreator decorated, String value, boolean isFill, Integer hitPoints) {
         super(decorated);
         this.hitPoints = hitPoints;
         this.isFill = isFill;
-        this.drawer = parseDrawer(value, isFill);
+        this.drawer = generateDrawer(value, isFill);
     }
 
-    private Drawer parseDrawer(String value, boolean isFill) {
+    /**
+     * generate drawer from value.
+     *
+     * @param value       value
+     * @param isFillValue isFill
+     * @return Drawer
+     */
+    private Drawer generateDrawer(String value, boolean isFillValue) {
         Drawer retVal;
         String param;
         InputStream stream = null;
@@ -50,7 +65,7 @@ public class DrawingBlock extends BlockCreatorDecorator {
             int g = Integer.parseInt(rgb[1].trim());
             int b = Integer.parseInt(rgb[2].trim());
             Color color = new Color(r, g, b);
-            if (isFill) {
+            if (isFillValue) {
                 retVal = new FillDrawer(color);
             } else {
                 retVal = new StrokeDrawer(color);
@@ -66,7 +81,7 @@ public class DrawingBlock extends BlockCreatorDecorator {
                     throw new RuntimeException("Unsupported color name: " + param);
                 }
 
-                if (isFill) {
+                if (isFillValue) {
                     retVal = new FillDrawer(color);
                 } else {
                     retVal = new StrokeDrawer(color);
@@ -77,7 +92,7 @@ public class DrawingBlock extends BlockCreatorDecorator {
                 }
 
                 String imagePath = betterSubstring(value, IMAGE_PREFIX, IMAGE_POSTFIX);
-                if (!isFill) {
+                if (!isFillValue) {
                     throw new RuntimeException("Image type not supported for stroke");
                 }
 
@@ -113,6 +128,7 @@ public class DrawingBlock extends BlockCreatorDecorator {
         return value.substring(start.length(), value.length() - end.length());
     }
 
+    @Override
     public Block create(int x, int y) {
         Block block = super.create(x, y);
         if (isFill) {
