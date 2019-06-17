@@ -54,6 +54,11 @@ public class LevelSpecificationReader implements LevelInformation {
     private List<Velocity> velocities = new ArrayList<>();
     private List<Block> blockList = new ArrayList<>();
 
+    /**
+     * @param reader reader
+     * @return List<LevelInformation> contains levelInformations from text
+     * @throws IOException exception
+     */
     public List<LevelInformation> fromReader(Reader reader) throws IOException {
         List<LevelInformation> levels = new ArrayList<>();
         List<String> stringLevels = splitLevels(reader);
@@ -189,6 +194,8 @@ public class LevelSpecificationReader implements LevelInformation {
                             numBlocks = Integer.parseInt(value);
                             currentLevel.setNumBlocks(Integer.parseInt(value));
                             break;
+                        default:
+                            throw new IOException("illegal tag: " + key);
                     } //end of switch
                 }
             } // end of reading one level
@@ -197,6 +204,11 @@ public class LevelSpecificationReader implements LevelInformation {
         return levels;
     }
 
+    /**
+     * @param reader reader
+     * @return List<String>. each item contains one level without START_LEVEL and END_LEVEL
+     * @throws IOException exception
+     */
     public List<String> splitLevels(Reader reader) throws IOException {
         boolean done;
         List<String> levels = new ArrayList<>();
@@ -233,34 +245,58 @@ public class LevelSpecificationReader implements LevelInformation {
         return levels;
     }
 
+    /**
+     * @return blockStartX
+     */
     public int getBlockStartX() {
         return blockStartX;
     }
 
+    /**
+     * @param newPos x position
+     */
     public void setBlockStartX(int newPos) {
         this.blockStartX = newPos;
     }
 
+    /**
+     * @return blockStartY
+     */
     public int getBlockStartY() {
         return blockStartY;
     }
 
+    /**
+     * @param newPos y position
+     */
     public void setBlockStartY(int newPos) {
         this.blockStartY = newPos;
     }
 
+    /**
+     * @return rowHeight
+     */
     public int getRowHeight() {
         return rowHeight;
     }
 
+    /**
+     * @param height height
+     */
     public void setRowHeight(int height) {
         this.rowHeight = height;
     }
 
+    /**
+     * @return blockDefinitions
+     */
     public String getBlockDefinitions() {
         return blockDefinitions;
     }
 
+    /**
+     * @param fileName file name
+     */
     public void setBlockDefinitions(String fileName) {
         this.blockDefinitions = fileName;
     }
@@ -275,6 +311,9 @@ public class LevelSpecificationReader implements LevelInformation {
         return this.velocities;
     }
 
+    /**
+     * @param list velocities list
+     */
     public void setVelocities(List<Velocity> list) {
         this.velocities = list;
     }
@@ -284,6 +323,9 @@ public class LevelSpecificationReader implements LevelInformation {
         return this.paddleSpeed;
     }
 
+    /**
+     * @param speed speed
+     */
     public void setPaddleSpeed(int speed) {
         this.paddleSpeed = speed;
     }
@@ -293,6 +335,9 @@ public class LevelSpecificationReader implements LevelInformation {
         return this.paddleWidth;
     }
 
+    /**
+     * @param width width
+     */
     public void setPaddleWidth(int width) {
         this.paddleWidth = width;
     }
@@ -302,6 +347,9 @@ public class LevelSpecificationReader implements LevelInformation {
         return this.levelName;
     }
 
+    /**
+     * @param name name
+     */
     public void setLevelName(String name) {
         this.levelName = name;
     }
@@ -311,6 +359,9 @@ public class LevelSpecificationReader implements LevelInformation {
         return this.background;
     }
 
+    /**
+     * @param b background
+     */
     private void setBackground(Sprite b) {
         this.background = b;
     }
@@ -320,6 +371,9 @@ public class LevelSpecificationReader implements LevelInformation {
         return this.blockList;
     }
 
+    /**
+     * @param list block list
+     */
     public void setBlockList(List<Block> list) {
         this.blockList = list;
     }
@@ -329,6 +383,9 @@ public class LevelSpecificationReader implements LevelInformation {
         return this.numBlocks;
     }
 
+    /**
+     * @param num num of blocks
+     */
     public void setNumBlocks(int num) {
         this.numBlocks = num;
     }

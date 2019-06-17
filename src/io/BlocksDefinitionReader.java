@@ -56,6 +56,10 @@ public class BlocksDefinitionReader {
                             map = pullProperties(line);
                             String symbol = getSymbol(map);
                             int width = Integer.parseInt((String) map.get(WIDTH));
+                            if (width <= 0) {
+                                throw new IOException("the width of the spacing element must be positive integer: "
+                                        + width);
+                            }
                             retVal.addSpacer(symbol, width);
                         } else if (line.startsWith(BDEF)) {
                             line = line.substring(BDEF.length()).trim();
@@ -85,7 +89,6 @@ public class BlocksDefinitionReader {
             }
         }
 
-
         return retVal;
     }
 
@@ -94,11 +97,12 @@ public class BlocksDefinitionReader {
      *
      * @param map map
      * @return a symbol representing the key for the map(value).
+     * @throws IOException exception.
      */
-    public static String getSymbol(Map<String, String> map) {
+    public static String getSymbol(Map<String, String> map) throws IOException {
         String symbol = map.remove(SYMBOL);
         if (symbol.length() != 1) {
-            throw new RuntimeException("Symbol (" + symbol + ") must be a single character.");
+            throw new IOException("Symbol (" + symbol + ") must be a single character.");
         } else {
             return symbol;
         }

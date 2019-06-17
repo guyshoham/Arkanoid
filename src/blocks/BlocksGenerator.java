@@ -1,5 +1,7 @@
 package blocks;
 
+import java.io.IOException;
+
 /**
  * class DecoratorFactory.
  *
@@ -18,14 +20,24 @@ public class BlocksGenerator {
      * @param key     key
      * @param value   value
      * @return block creator out from the key and value
+     * @throws IOException exception.
      */
-    public BlockCreator generate(BlockCreator creator, String key, String value) {
+    public BlockCreator generate(BlockCreator creator, String key, String value) throws IOException {
         switch (key) {
             case HEIGHT:
+                if (Integer.parseInt(value) <= 0) {
+                    throw new IOException("the height of the block must be positive integer: " + value);
+                }
                 return new HeightBlock(creator, value);
             case WIDTH:
+                if (Integer.parseInt(value) <= 0) {
+                    throw new IOException("the width of the block must be positive integer: " + value);
+                }
                 return new WidthBlock(creator, value);
             case HIT_POINTS:
+                if (Integer.parseInt(value) <= 0) {
+                    throw new IOException("the number of hit-points of the block must be positive integer: " + value);
+                }
                 return new HitPointsBlock(creator, value);
             default:
                 if (!key.startsWith(FILL) && !key.startsWith(STROKE)) {

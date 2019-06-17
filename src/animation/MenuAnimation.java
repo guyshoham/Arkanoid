@@ -7,6 +7,12 @@ import biuoop.KeyboardSensor;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * interface MenuAnimation.
+ *
+ * @param <T> general type
+ * @author Guy Shoham
+ */
 public class MenuAnimation<T> implements Menu<T> {
 
     private T status;
@@ -21,6 +27,13 @@ public class MenuAnimation<T> implements Menu<T> {
     private boolean doingLevels = false;
 
 
+    /**
+     * Class constructor.
+     *
+     * @param title    title
+     * @param runner   animation runner
+     * @param keyboard keyboard
+     */
     public MenuAnimation(String title, AnimationRunner runner, KeyboardSensor keyboard) {
         this.title = title;
         this.runner = runner;
@@ -76,7 +89,7 @@ public class MenuAnimation<T> implements Menu<T> {
         for (int i = 0; i < menuRetVals.size(); i++) {
             if (keyboard.isPressed(menuKeys.get(i))) {
                 if (!isSub.get(i)) {
-                    if(!doingLevels) {
+                    if (!doingLevels) {
                         //key is not belong to sub
                         status = menuRetVals.get(i);
                     }
@@ -97,6 +110,10 @@ public class MenuAnimation<T> implements Menu<T> {
         return this.status != null;
     }
 
+    /**
+     * @param d          surface
+     * @param background background
+     */
     public void showBackground(DrawSurface d, Sprite background) {
         background.drawOn(d);
     }

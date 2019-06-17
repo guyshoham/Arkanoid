@@ -12,12 +12,15 @@ import java.util.Map;
  * @author Guy Shoham
  */
 public class BlocksFromSymbolsFactory {
-    private Map<String, Integer> spacerWidths;
-    private Map<String, BlockCreator> blockCreators;
+    private Map<String, Integer> spacersMap;
+    private Map<String, BlockCreator> blockCreatorsMap;
 
+    /**
+     * Class constructor.
+     */
     public BlocksFromSymbolsFactory() {
-        this.spacerWidths = new HashMap<>();
-        this.blockCreators = new HashMap<>();
+        this.spacersMap = new HashMap<>();
+        this.blockCreatorsMap = new HashMap<>();
     }
 
     /**
@@ -25,7 +28,7 @@ public class BlocksFromSymbolsFactory {
      * @return true if 's' is a valid space symbol.
      */
     public boolean isSpaceSymbol(String s) {
-        return spacerWidths.containsKey(s);
+        return spacersMap.containsKey(s);
     }
 
     /**
@@ -33,7 +36,7 @@ public class BlocksFromSymbolsFactory {
      * @return true if 's' is a valid block symbol.
      */
     public boolean isBlockSymbol(String s) {
-        return blockCreators.containsKey(s);
+        return blockCreatorsMap.containsKey(s);
     }
 
     /**
@@ -45,7 +48,7 @@ public class BlocksFromSymbolsFactory {
      */
     public Block getBlock(String s, int xpos, int ypos) {
         if (isBlockSymbol(s)) {
-            return blockCreators.get(s).create(xpos, ypos);
+            return blockCreatorsMap.get(s).create(xpos, ypos);
         } else {
             return null;
         }
@@ -56,23 +59,41 @@ public class BlocksFromSymbolsFactory {
      * @return the width in pixels associated with the given spacer-symbol.
      */
     public int getSpaceWidth(String s) {
-        return spacerWidths.get(s);
+        return spacersMap.get(s);
     }
 
+    /**
+     * add spacer map.
+     *
+     * @param key   key
+     * @param width width
+     */
     public void addSpacer(String key, int width) {
-        spacerWidths.put(key, width);
+        spacersMap.put(key, width);
     }
 
+    /**
+     * add block creator to map.
+     *
+     * @param key     key
+     * @param creator block creator
+     */
     public void addBlockCreator(String key, BlockCreator creator) {
-        blockCreators.put(key, creator);
+        blockCreatorsMap.put(key, creator);
     }
 
-    public Map<String, Integer> getSpacerWidths() {
-        return spacerWidths;
+    /**
+     * @return spacers map
+     */
+    public Map<String, Integer> getSpacersMap() {
+        return spacersMap;
     }
 
-    public Map<String, BlockCreator> getBlockCreators() {
-        return blockCreators;
+    /**
+     * @return block creators map
+     */
+    public Map<String, BlockCreator> getBlockCreatorsMap() {
+        return blockCreatorsMap;
     }
 
 }

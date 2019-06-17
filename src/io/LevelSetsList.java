@@ -14,10 +14,18 @@ import java.util.List;
 public class LevelSetsList {
     private List<LevelSet> levelSetList;
 
+    /**
+     * Class constructor.
+     */
     public LevelSetsList() {
         this.levelSetList = new ArrayList<>();
     }
 
+    /**
+     * @param reader reader
+     * @return List<LevelSet> contains level set from the file
+     * @throws IOException exception
+     */
     public static LevelSetsList fromReader(Reader reader) throws IOException {
         LevelSetsList retVal = new LevelSetsList();
         LevelSet currentSet = null;
@@ -49,10 +57,17 @@ public class LevelSetsList {
         return retVal;
     }
 
+    /**
+     * add level set to the list.
+     * @param levelSet level set
+     */
     public void addLevelSet(LevelSet levelSet) {
         levelSetList.add(levelSet);
     }
 
+    /**
+     * @return levelSet list
+     */
     public List<LevelSet> getLevelSetList() {
         return levelSetList;
     }
