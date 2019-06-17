@@ -53,6 +53,7 @@ public class GameFlow {
      * @throws IOException exception
      */
     public GameFlow() throws IOException {
+        this.gui = new GUI(GAME_TITLE, GUI_WIDTH, GUI_HEIGHT);
         this.runner = new AnimationRunner(gui);
         this.keyboard = gui.getKeyboardSensor();
         this.dialog = gui.getDialogManager();
@@ -115,9 +116,13 @@ public class GameFlow {
     public void showMenu(String filePath) {
         LevelSetsList levelSetsList;
         try {
+            //todo: remove print log
+            System.out.println(filePath);
             InputStream stream = ClassLoader.getSystemClassLoader().getResourceAsStream(filePath);
-            levelSetsList = LevelSetsList.fromReader(new InputStreamReader(stream));
-        } catch (IOException ex) {
+            System.out.println(stream);
+            InputStreamReader reader = new InputStreamReader(stream);
+            levelSetsList = LevelSetsList.fromReader(reader);
+        } catch (Exception ex) {
             throw new RuntimeException("Failed loading level sets");
         }
 
