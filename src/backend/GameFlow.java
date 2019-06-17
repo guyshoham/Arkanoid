@@ -116,10 +116,7 @@ public class GameFlow {
     public void showMenu(String filePath) {
         LevelSetsList levelSetsList;
         try {
-            //todo: remove print log
-            System.out.println(filePath);
             InputStream stream = ClassLoader.getSystemClassLoader().getResourceAsStream(filePath);
-            System.out.println(stream);
             InputStreamReader reader = new InputStreamReader(stream);
             levelSetsList = LevelSetsList.fromReader(reader);
         } catch (Exception ex) {

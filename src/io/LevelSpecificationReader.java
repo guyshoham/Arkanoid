@@ -48,10 +48,10 @@ public class LevelSpecificationReader implements LevelInformation {
     private static final String IMAGE_PREFIX = "image(";
     private static final String IMAGE_POSTFIX = ")";
     private static final String IMAGE = "image";
-    private int paddleSpeed, paddleWidth, numBlocks, blockStartX, blockStartY, rowHeight;
+    private int paddleSpeed = -1, paddleWidth = -1, blockStartX = -1, blockStartY = -1, rowHeight = -1, numBlocks = -1;
     private String levelName, blockDefinitions = "";
     private Sprite background;
-    private List<Velocity> velocities = new ArrayList<>();
+    private List<Velocity> velocities;
     private List<Block> blockList = new ArrayList<>();
 
     /**
@@ -66,22 +66,15 @@ public class LevelSpecificationReader implements LevelInformation {
 
         //for each level
         for (String level : stringLevels) {
-            if (!level.contains(LEVEL_NAME) || !level.contains(BALL_VELOCITIES)
-                    || !level.contains(BACKGROUND) || !level.contains(PADDLE_SPEED)
-                    || !level.contains(PADDLE_WIDTH) || !level.contains(BLOCK_DEFINITIONS)
-                    || !level.contains(BLOCKS_START_X) || !level.contains(BLOCKS_START_Y)
-                    || !level.contains(ROW_HEIGHT) || !level.contains(NUM_BLOCKS)
-                    || !level.contains(START_BLOCKS) || !level.contains(END_BLOCKS)) {
-                throw new IOException("level definition is not valid");
-            }
             LevelSpecificationReader currentLevel = new LevelSpecificationReader();
             String key, value;
             int posY = 0;
             List<Block> blocks = new ArrayList<>();
             BlocksFromSymbolsFactory factory = null;
+            String[] lines = level.split("\n");
+            checkBlocksTagsValidation(lines);
             String blockText = level.substring(level.indexOf(START_BLOCKS) + START_BLOCKS.length(),
                     level.indexOf(END_BLOCKS));
-            String[] lines = level.split("\n");
 
             //for each line in level
             for (String line : lines) {
@@ -199,9 +192,75 @@ public class LevelSpecificationReader implements LevelInformation {
                     } //end of switch
                 }
             } // end of reading one level
+
+            checkTagsValidation(currentLevel);
             levels.add(currentLevel);
         }
         return levels;
+    }
+
+    /**
+     * checks if one of the tags is missing. if does missing - throws IOException.
+     *
+     * @param currentLevel level
+     * @throws IOException exception
+     */
+    private void checkTagsValidation(LevelSpecificationReader currentLevel) throws IOException {
+        if (currentLevel.levelName() == null) {
+            throw new IOException(LEVEL_NAME + " tag is missing");
+        }
+        if (currentLevel.initialBallVelocities() == null) {
+            throw new IOException(BALL_VELOCITIES + " tag is missing");
+        }
+        if (currentLevel.getBackground() == null) {
+            throw new IOException(BACKGROUND + " tag is missing");
+        }
+        if (currentLevel.paddleSpeed() < 0) {
+            throw new IOException(PADDLE_SPEED + " tag is missing or value is not valid");
+        }
+        if (currentLevel.paddleWidth() < 0) {
+            throw new IOException(PADDLE_WIDTH + " tag is missing or value is not valid");
+        }
+        if (currentLevel.getBlockStartX() < 0) {
+            throw new IOException(BLOCKS_START_X + " tag is missing or value is not valid");
+        }
+        if (currentLevel.getBlockStartY() < 0) {
+            throw new IOException(BLOCKS_START_Y + " tag is missing or value is not valid");
+        }
+        if (currentLevel.getRowHeight() < 0) {
+            throw new IOException(ROW_HEIGHT + " tag is missing or value is not valid");
+        }
+        if (currentLevel.numberOfBlocksToRemove() < 0) {
+            throw new IOException(NUM_BLOCKS + " tag is missing or value is not valid");
+        }
+    }
+
+    /**
+     * checks if both START_BLOCKS and END_BLOCKS tags is in list. if not - throws IOException.
+     *
+     * @param lines list of lines
+     * @throws IOException exception
+     */
+    private void checkBlocksTagsValidation(String[] lines) throws IOException {
+        boolean isValid;
+        isValid = false;
+        for (String line : lines) {
+            if (line.startsWith(START_BLOCKS)) {
+                isValid = true;
+            }
+        }
+        if (!isValid) {
+            throw new IOException(START_BLOCKS + " tag is missing or value is not valid");
+        }
+        isValid = false;
+        for (String line : lines) {
+            if (line.startsWith(END_BLOCKS)) {
+                isValid = true;
+            }
+        }
+        if (!isValid) {
+            throw new IOException(END_BLOCKS + " tag is missing or value is not valid");
+        }
     }
 
     /**
