@@ -18,6 +18,7 @@ public class MenuAnimation<T> implements Menu<T> {
     private List<String> menuKeys;
     private List<Boolean> isSub;
     private List<Menu> subMenus;
+    private boolean doingLevels = false;
 
 
     public MenuAnimation(String title, AnimationRunner runner, KeyboardSensor keyboard) {
@@ -75,8 +76,13 @@ public class MenuAnimation<T> implements Menu<T> {
         for (int i = 0; i < menuRetVals.size(); i++) {
             if (keyboard.isPressed(menuKeys.get(i))) {
                 if (!isSub.get(i)) {
-                    status = menuRetVals.get(i);
+                    if(!doingLevels) {
+                        //key is not belong to sub
+                        status = menuRetVals.get(i);
+                    }
                 } else {
+                    //is belong to sub
+                    doingLevels = true;
                     Menu sub = subMenus.get(i);
                     runner.run(sub);
                     status = (T) sub.getStatus();
