@@ -2,7 +2,7 @@
 
 START_LEVEL
 level_name:Alien
-ball_velocities:0,7 0,6 0,5 75,7 -75,7
+ball_velocities:0,7 0,6 0,5 75,7 75,7 -75,7 -75,7
 background:image(background_images/space.jpg)
 paddle_speed:10
 paddle_width:160
@@ -36,7 +36,7 @@ END_LEVEL
 
 START_LEVEL
 level_name:Ninja Turtle
-ball_velocities:0,7 75,7 -75,7
+ball_velocities:-50,7 -50,7 -50,7 -50,7 -50,7 -50,7 -50,7 -50,7
 background:image(background_images/ninja_turtle.jpg)
 paddle_speed:10
 paddle_width:160
@@ -65,7 +65,7 @@ END_LEVEL
 
 START_LEVEL
 level_name:Zig Zag
-ball_velocities:330,3 335,3 340,3 345,4 350,5 355,6 0,7 5,6 10,5 15,4 20,3 25,3 30,3 330,3 335,3 340,3 345,4 350,5 355,6 0,7 5,6 10,5 15,4 20,3 25,3 30,3 330,3 335,3 340,3 345,4 350,5 355,6 0,7 5,6 10,5 15,4 20,3 25,3 30,3
+ball_velocities:80,7 70,7 60,7 50,7 40,7 30,7 20,7 10,7 0,7 -10,7 -20,7 -30,7 -40,7 -50,7 -60,7 -70,7 -80,7 80,6 70,6 60,6 50,6 40,6 30,6 20,6 10,6 0,6 -10,6 -20,6 -30,6 -40,6 -50,6 -60,6 -70,6 -80,6 80,5 70,5 60,5 50,5 40,5 30,5 20,5 10,5 0,5 -10,5 -20,5 -30,5 -40,5 -50,5 -60,5 -70,5 -80,5
 background:image(background_images/spiral.jpg)
 paddle_speed:10
 paddle_width:160
