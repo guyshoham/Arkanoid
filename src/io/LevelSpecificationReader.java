@@ -117,15 +117,15 @@ public class LevelSpecificationReader implements LevelInformation {
                             currentLevel.setLevelName(value);
                             break;
                         case BALL_VELOCITIES:
-                            List<Velocity> velocities = new ArrayList<>();
+                            List<Velocity> tempVelocities = new ArrayList<>();
                             String[] split1 = value.split(" ");
                             for (String s : split1) {
                                 int angle = Integer.parseInt(s.substring(0, s.indexOf(",")));
                                 int speed = Integer.parseInt(s.substring(s.indexOf(",") + 1));
                                 Velocity v = Velocity.fromAngleAndSpeed(angle, speed);
-                                velocities.add(v);
+                                tempVelocities.add(v);
                             }
-                            currentLevel.setVelocities(velocities);
+                            currentLevel.setVelocities(tempVelocities);
                             break;
                         case BACKGROUND:
                             if (value.startsWith(RGB_PREFIX) && value.endsWith(RGB_POSTFIX)) {
