@@ -22,6 +22,11 @@ public class BlocksDefinitionReader {
     private static final String SDEF = "sdef";
     private static final String SYMBOL = "symbol";
     private static final String WIDTH = "width";
+    private static final String HEIGHT = "height";
+    private static final String HIT_POINTS = "hit_points";
+    private static final String FILL = "fill";
+    private static final String FILL_1 = "fill-1";
+
 
     /**
      * reading from a file and creating factory which we can creates blocks from.
@@ -68,6 +73,16 @@ public class BlocksDefinitionReader {
                             propertiesMap.putAll(map);
                             String symbol = getSymbol(propertiesMap);
 
+                            if (!propertiesMap.containsKey(HEIGHT) || !propertiesMap.containsKey(WIDTH)
+                                    || !propertiesMap.containsKey(HIT_POINTS)) {
+                                throw new IOException("one or more required properties is not defined."
+                                        + propertiesMap.toString());
+                            }
+                            if (!propertiesMap.containsKey(FILL) && !propertiesMap.containsKey(FILL_1)) {
+                                throw new IOException("one or more required properties is not defined."
+                                        + propertiesMap.toString());
+                            }
+
                             BlockCreator blockCreator = new BasicBlock();
 
                             for (Iterator i = propertiesMap.keySet().iterator(); i.hasNext(); i = i) {
@@ -78,7 +93,7 @@ public class BlocksDefinitionReader {
                         }
                     }
                 }
-            }
+            } //end of reading file
 
 
         } catch (IOException ex) {
