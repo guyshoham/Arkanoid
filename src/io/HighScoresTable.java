@@ -45,29 +45,9 @@ public class HighScoresTable implements Serializable {
      * @throws IOException exception
      */
     public static HighScoresTable loadFromFile(File filename) throws IOException {
-        //todo: use load() and than return retVal
-        HighScoresTable retVal = new HighScoresTable(5);
-        BufferedReader reader = null;
-        try {
-            reader = new BufferedReader(new FileReader(filename));
-            String line;
-            while ((line = reader.readLine()) != null) {
-                int delimiter = line.indexOf(":");
-                String name = line.substring(0, delimiter);
-                int score = Integer.parseInt(line.substring(delimiter + 1));
-                retVal.add(new ScoreInfo(name, score));
-            }
-        } catch (FileNotFoundException ex) {
-            throw new FileNotFoundException(ex.toString());
-        } catch (IOException ex) {
-            throw new IOException(ex);
-        } finally {
-            if (reader != null) {
-                reader.close();
-            }
-        }
-
-        return retVal;
+        HighScoresTable table = new HighScoresTable(5);
+        table.load(filename);
+        return table;
     }
 
     /**

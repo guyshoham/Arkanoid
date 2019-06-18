@@ -4,8 +4,10 @@ import backend.Sprite;
 import biuoop.DrawSurface;
 import biuoop.KeyboardSensor;
 
+import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 /**
  * interface MenuAnimation.
@@ -26,6 +28,11 @@ public class MenuAnimation<T> implements Menu<T> {
     private List<Menu> subMenus;
     private boolean doingLevels = false;
 
+    private static int posX = 300;
+    private static boolean moveRight = true;
+    private static Color titleColor;
+    private Random rnd = new Random();
+
 
     /**
      * Class constructor.
@@ -44,6 +51,7 @@ public class MenuAnimation<T> implements Menu<T> {
         this.isSub = new ArrayList();
         this.subMenus = new ArrayList();
         this.resetStatus();
+        changeTitleColor();
     }
 
     @Override
@@ -71,9 +79,27 @@ public class MenuAnimation<T> implements Menu<T> {
 
     @Override
     public void doOneFrame(DrawSurface d) {
-        d.drawText(300, 70, title, 40);
-        d.drawText(301, 71, title, 40);
+        if (moveRight) {
+            if (posX > 500) {
+                moveRight = false;
+                changeTitleColor();
+            }
+            d.setColor(titleColor);
+            d.drawText(posX, 70, title, 40);
+            posX++;
+
+        } else {
+            if (posX < 100) {
+                moveRight = true;
+                changeTitleColor();
+            }
+            d.setColor(titleColor);
+            d.drawText(posX, 70, title, 40);
+            posX--;
+        }
+
         for (int i = 0; i < 5; i++) {
+            d.setColor(Color.BLACK);
             d.drawLine(0, 80 + i, 800, 80 + i);
         }
 
@@ -121,5 +147,12 @@ public class MenuAnimation<T> implements Menu<T> {
     @Override
     public void resetStatus() {
         this.status = null;
+    }
+
+    public void changeTitleColor() {
+        int r = rnd.nextInt(255);
+        int g = rnd.nextInt(255);
+        int b = rnd.nextInt(255);
+        this.titleColor = new Color(r, g, b);
     }
 }

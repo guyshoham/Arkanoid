@@ -53,7 +53,6 @@ public class GameFlow {
      * @throws IOException exception
      */
     public GameFlow() throws IOException {
-        this.gui = new GUI(GAME_TITLE, GUI_WIDTH, GUI_HEIGHT);
         this.runner = new AnimationRunner(gui);
         this.keyboard = gui.getKeyboardSensor();
         this.dialog = gui.getDialogManager();
