@@ -22,7 +22,7 @@ public class MenuAnimation<T> implements Menu<T> {
     private static int ballPosX = 625;
     private static int ballPosY = 400;
     private static int ballSpeed = 1;
-    private static int RANDOM_BOUND = 20;
+    private static int randomBound = 20;
     private static boolean moveRight = true, ballDown = true;
     private static Color titleColor;
     private T status;
@@ -121,7 +121,7 @@ public class MenuAnimation<T> implements Menu<T> {
         int y;
 
         for (int i = 0; i < menuNames.size(); i++) {
-            if (rnd.nextInt(RANDOM_BOUND) == 7) {
+            if (rnd.nextInt(randomBound) == 7) {
                 int r = rnd.nextInt(255);
                 int g = rnd.nextInt(255);
                 int b = rnd.nextInt(255);

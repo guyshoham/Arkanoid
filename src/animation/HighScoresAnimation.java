@@ -15,7 +15,7 @@ import java.util.List;
  */
 public class HighScoresAnimation implements Animation {
 
-    private static int COUNT = 0;
+    private static int count = 0;
     private HighScoresTable scores;
 
 
@@ -55,13 +55,13 @@ public class HighScoresAnimation implements Animation {
             }
         }
 
-        if (COUNT / 50 % 2 == 0) {
+        if (count / 50 % 2 == 0) {
             d.drawText(250, 500, "Press Space to Continue", 30);
         }
-        COUNT++;
+        count++;
         //avoid reaching MAX_INT_VALUE
-        if (COUNT > 1000) {
-            COUNT = 0;
+        if (count > 1000) {
+            count = 0;
         }
     }
 
