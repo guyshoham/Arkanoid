@@ -1,9 +1,11 @@
 package animation;
 
 import biuoop.DrawSurface;
+import geometry.Rectangle;
 import io.HighScoresTable;
 import io.ScoreInfo;
 
+import java.awt.Color;
 import java.util.List;
 
 /**
@@ -13,7 +15,9 @@ import java.util.List;
  */
 public class HighScoresAnimation implements Animation {
 
+    private static int COUNT = 0;
     private HighScoresTable scores;
+
 
     /**
      * Class Constructor.
@@ -28,6 +32,11 @@ public class HighScoresAnimation implements Animation {
     public void doOneFrame(DrawSurface d) {
         List<ScoreInfo> scoreInfos = scores.getHighScores();
 
+        Rectangle background = new Rectangle(800, 600);
+        background.setColor(Color.BLACK);
+        background.drawOn(d);
+
+        d.setColor(Color.ORANGE);
         d.drawText(300, 70, "High Scores:", 40);
         d.drawText(301, 71, "High Scores:", 40);
         for (int i = 0; i < 5; i++) {
@@ -46,7 +55,14 @@ public class HighScoresAnimation implements Animation {
             }
         }
 
-        d.drawText(250, 500, "Press Space to Continue", 30);
+        if (COUNT / 50 % 2 == 0) {
+            d.drawText(250, 500, "Press Space to Continue", 30);
+        }
+        COUNT++;
+        //avoid reaching MAX_INT_VALUE
+        if (COUNT > 1000) {
+            COUNT = 0;
+        }
     }
 
     @Override

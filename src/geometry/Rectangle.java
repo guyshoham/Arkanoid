@@ -43,6 +43,17 @@ public class Rectangle implements Sprite {
     }
 
     /**
+     * Class Constructor.
+     * Creates a new rectangle with location (0,0) and width/height.
+     *
+     * @param width  the width of the rectangle.
+     * @param height the height of the rectangle.
+     */
+    public Rectangle(double width, double height) {
+        this(new Point(0, 0), width, height);
+    }
+
+    /**
      * draw the rectangle on the drawSurface.
      *
      * @param surface surface.

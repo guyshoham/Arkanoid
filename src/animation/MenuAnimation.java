@@ -3,6 +3,7 @@ package animation;
 import backend.Sprite;
 import biuoop.DrawSurface;
 import biuoop.KeyboardSensor;
+import geometry.Rectangle;
 
 import java.awt.Color;
 import java.util.ArrayList;
@@ -17,6 +18,13 @@ import java.util.Random;
  */
 public class MenuAnimation<T> implements Menu<T> {
 
+    private static int titlePosX = 300;
+    private static int ballPosX = 625;
+    private static int ballPosY = 400;
+    private static int ballSpeed = 1;
+    private static int RANDOM_BOUND = 20;
+    private static boolean moveRight = true, ballDown = true;
+    private static Color titleColor;
     private T status;
     private AnimationRunner runner;
     private KeyboardSensor keyboard;
@@ -24,13 +32,10 @@ public class MenuAnimation<T> implements Menu<T> {
     private List<T> menuRetVals;
     private List<String> menuNames;
     private List<String> menuKeys;
+    private List<Color> menuColors;
     private List<Boolean> isSub;
     private List<Menu> subMenus;
     private boolean doingLevels = false;
-
-    private static int posX = 300;
-    private static boolean moveRight = true;
-    private static Color titleColor;
     private Random rnd = new Random();
 
 
@@ -48,6 +53,7 @@ public class MenuAnimation<T> implements Menu<T> {
         this.menuKeys = new ArrayList();
         this.menuNames = new ArrayList();
         this.menuRetVals = new ArrayList();
+        this.menuColors = new ArrayList();
         this.isSub = new ArrayList();
         this.subMenus = new ArrayList();
         this.resetStatus();
@@ -61,6 +67,7 @@ public class MenuAnimation<T> implements Menu<T> {
         menuRetVals.add(returnVal);
         isSub.add(false);
         subMenus.add(null);
+        menuColors.add(Color.WHITE);
     }
 
     @Override
@@ -70,6 +77,7 @@ public class MenuAnimation<T> implements Menu<T> {
         menuRetVals.add(null);
         isSub.add(true);
         subMenus.add(subMenu);
+        menuColors.add(Color.WHITE);
     }
 
     @Override
@@ -79,38 +87,51 @@ public class MenuAnimation<T> implements Menu<T> {
 
     @Override
     public void doOneFrame(DrawSurface d) {
+        Rectangle background = new Rectangle(800, 600);
+        background.setColor(Color.BLACK);
+        background.drawOn(d);
+        //title animation
         if (moveRight) {
-            if (posX > 500) {
+            if (titlePosX > 500) {
                 moveRight = false;
                 changeTitleColor();
             }
             d.setColor(titleColor);
-            d.drawText(posX, 70, title, 40);
-            posX++;
+            d.drawText(titlePosX, 70, title, 40);
+            titlePosX++;
 
         } else {
-            if (posX < 100) {
+            if (titlePosX < 100) {
                 moveRight = true;
                 changeTitleColor();
             }
             d.setColor(titleColor);
-            d.drawText(posX, 70, title, 40);
-            posX--;
+            d.drawText(titlePosX, 70, title, 40);
+            titlePosX--;
         }
 
         for (int i = 0; i < 5; i++) {
-            d.setColor(Color.BLACK);
+            d.setColor(Color.WHITE);
             d.drawLine(0, 80 + i, 800, 80 + i);
         }
 
+        //menu
         int gap = 50;
         int tableStart = 200;
         int y;
 
         for (int i = 0; i < menuNames.size(); i++) {
+            if (rnd.nextInt(RANDOM_BOUND) == 7) {
+                int r = rnd.nextInt(255);
+                int g = rnd.nextInt(255);
+                int b = rnd.nextInt(255);
+                menuColors.set(i, new Color(r, g, b));
+            }
+            d.setColor(menuColors.get(i));
             y = tableStart + i * gap;
             d.drawText(30, y, "(" + menuKeys.get(i) + ") " + menuNames.get(i), 30);
         }
+
 
         for (int i = 0; i < menuRetVals.size(); i++) {
             if (keyboard.isPressed(menuKeys.get(i))) {
@@ -149,10 +170,13 @@ public class MenuAnimation<T> implements Menu<T> {
         this.status = null;
     }
 
+    /**
+     * change title color.
+     */
     public void changeTitleColor() {
         int r = rnd.nextInt(255);
         int g = rnd.nextInt(255);
         int b = rnd.nextInt(255);
-        this.titleColor = new Color(r, g, b);
+        titleColor = new Color(r, g, b);
     }
 }
