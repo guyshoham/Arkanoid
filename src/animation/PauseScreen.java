@@ -27,7 +27,7 @@ public class PauseScreen implements Animation {
     }
 
     /**
-     * set image of pause animation.
+     * set image of animation.
      */
     private void setImage() {
         InputStream stream =
