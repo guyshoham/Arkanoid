@@ -122,7 +122,7 @@ public class GameFlow {
             throw new RuntimeException("Failed loading level sets");
         }
 
-        Menu<Task<Void>> levelsMenu = new MenuAnimation<>("Pick Difficulty", runner, keyboard);
+        Menu<Task<Void>> levelsMenu = new MenuAnimation<>("Pick Level Set", runner, keyboard);
         List<LevelSet> list = levelSetsList.getLevelSetList();
         for (LevelSet set : list) {
             levelsMenu.addSelection(set.getKey(), set.getMessage(), new Task<Void>() {
